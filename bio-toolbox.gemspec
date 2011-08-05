@@ -1,5 +1,5 @@
 Gem::Specification.new do |s|
-  s.name              = "Bio-Toolbox"
+  s.name              = "bio-toolbox"
   s.version           = "0.0.1"
   s.platform          = Gem::Platform::RUBY
   s.authors           = ["Marc P. Hoeppner"]
