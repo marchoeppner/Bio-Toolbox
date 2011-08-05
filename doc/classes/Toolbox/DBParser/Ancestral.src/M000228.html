@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>regulation_hypothesis (Toolbox::DBParser::Ancestral)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/database_pipeline.rb, line 1158</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">regulation_hypothesis</span>(<span class="ruby-identifier">node</span>)
+        
+        <span class="ruby-identifier">node</span> = <span class="ruby-constant">ToolDB</span><span class="ruby-operator">::</span><span class="ruby-constant">TreeNode</span>.<span class="ruby-identifier">find_by_nr</span>(<span class="ruby-identifier">node</span>)
+        <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;Node not present in dataset&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">node</span>.<span class="ruby-identifier">nil?</span>
+        <span class="ruby-identifier">list_of_terms</span> = [ <span class="ruby-value str">&quot;regulation&quot;</span> ]
+        <span class="ruby-identifier">group_counter</span> = <span class="ruby-value">0</span>
+        <span class="ruby-identifier">group_counter_intronic</span> = <span class="ruby-value">0</span>
+        <span class="ruby-identifier">translation_counter</span> = <span class="ruby-value">0</span>
+        <span class="ruby-identifier">hostgene_counter</span> = <span class="ruby-value">0</span>
+        
+        <span class="ruby-identifier">groups</span> = <span class="ruby-constant">ToolDB</span><span class="ruby-operator">::</span><span class="ruby-constant">Grouping</span>.<span class="ruby-identifier">find_all_by_biotype</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">type</span>)
+        
+        <span class="ruby-identifier">hostgene_names</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-ivar">@matched_terms</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+        
+        <span class="ruby-identifier">groups</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">group</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">group_counter</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">group</span>.<span class="ruby-identifier">present_at?</span>(<span class="ruby-identifier">node</span>) <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">group</span>.<span class="ruby-identifier">is_intronic?</span>
+            <span class="ruby-identifier">group_counter_intronic</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+            <span class="ruby-identifier">hostgenes</span> = <span class="ruby-identifier">group</span>.<span class="ruby-identifier">fetch_hostgenes</span>
+            <span class="ruby-identifier">match_query</span> = <span class="ruby-keyword kw">false</span>
+            <span class="ruby-identifier">hostgenes</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">hostgene</span><span class="ruby-operator">|</span>
+              <span class="ruby-identifier">hostgene</span>.<span class="ruby-identifier">fetch_goterms</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">go_term</span><span class="ruby-operator">|</span>
+                <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">match_query</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">true</span>
+                  <span class="ruby-identifier">go</span> = <span class="ruby-constant">ToolDB</span><span class="ruby-operator">::</span><span class="ruby-constant">GoTerm</span>.<span class="ruby-identifier">find_by_term</span>(<span class="ruby-node">&quot;#{go_term.go_term}&quot;</span>)
+                  <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">go</span>.<span class="ruby-identifier">nil?</span>
+                    <span class="ruby-identifier">match_query</span> = <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">go</span>.<span class="ruby-identifier">check_terms</span>(<span class="ruby-identifier">list_of_terms</span>,<span class="ruby-ivar">@matched_terms</span>) <span class="ruby-operator">==</span> <span class="ruby-keyword kw">true</span>
+                  <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">end</span>
+              <span class="ruby-keyword kw">end</span>
+            <span class="ruby-keyword kw">end</span>
+            <span class="ruby-identifier">translation_counter</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">match_query</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">true</span>
+          <span class="ruby-keyword kw">end</span>
+          
+        <span class="ruby-keyword kw">end</span>
+        
+        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{@type} Groups in total #{group_counter} - of which #{group_counter_intronic} are intronic at node #{node.nr}&quot;</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot; of these #{group_counter_intronic} intronic groups, #{translation_counter} match the queries #{list_of_terms.join(&quot;,&quot;)}&quot;</span>
+        
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

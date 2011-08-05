@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>dollo_family_presence (Toolbox::DBParser::Ancestral)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/database_pipeline.rb, line 771</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">dollo_family_presence</span>(<span class="ruby-identifier">scope</span>)
+        
+        <span class="ruby-identifier">organisms</span> = <span class="ruby-constant">ToolDB</span><span class="ruby-operator">::</span><span class="ruby-constant">Organism</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:all</span>, <span class="ruby-identifier">:order</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;name&quot;</span>)
+        
+        <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;snoRNA&quot;</span>
+          <span class="ruby-identifier">ncrna_families</span> = <span class="ruby-constant">ToolDB</span><span class="ruby-operator">::</span><span class="ruby-constant">EnsemblNcrna</span>.<span class="ruby-identifier">find_all_by_biotype</span>(<span class="ruby-value str">&quot;snoRNA&quot;</span>).<span class="ruby-identifier">collect</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;#{n.external_id}&quot;</span>}.<span class="ruby-identifier">uniq</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>}.<span class="ruby-identifier">sort</span> 
+        <span class="ruby-keyword kw">elsif</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;miRNA&quot;</span>
+          <span class="ruby-identifier">ncrna_families</span> = <span class="ruby-constant">ToolDB</span><span class="ruby-operator">::</span><span class="ruby-constant">EnsemblNcrna</span>.<span class="ruby-identifier">find_all_by_biotype</span>(<span class="ruby-value str">&quot;miRNA&quot;</span>).<span class="ruby-identifier">collect</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;#{n.mirbase_family.downcase}&quot;</span> }.<span class="ruby-identifier">uniq</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>}.<span class="ruby-identifier">sort</span> <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;miRNA&quot;</span>
+        <span class="ruby-keyword kw">end</span>
+        
+        <span class="ruby-identifier">results</span> = {}
+        
+        <span class="ruby-identifier">organisms</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">organism</span><span class="ruby-operator">|</span>
+          
+          <span class="ruby-identifier">results</span>[<span class="ruby-node">&quot;#{organism.phylip_name}&quot;</span>] = <span class="ruby-value str">&quot;&quot;</span>
+          
+          <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;miRNA&quot;</span>
+            <span class="ruby-identifier">families</span> = <span class="ruby-constant">ToolDB</span><span class="ruby-operator">::</span><span class="ruby-constant">EnsemblNcrna</span>.<span class="ruby-identifier">find_all_by_biotype_and_organism_id</span>(<span class="ruby-node">&quot;#{self.type}&quot;</span>,<span class="ruby-identifier">organism</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">collect</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">nc</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;#{nc.mirbase_family.downcase}&quot;</span>}.<span class="ruby-identifier">uniq</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">scope</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;global&quot;</span>
+            <span class="ruby-identifier">families</span> = <span class="ruby-constant">ToolDB</span><span class="ruby-operator">::</span><span class="ruby-constant">EnsemblNcrna</span>.<span class="ruby-identifier">find_all_by_biotype_and_organism_id</span>(<span class="ruby-node">&quot;#{self.type}&quot;</span>,<span class="ruby-identifier">organism</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">has_group?</span>}.<span class="ruby-identifier">collect</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">nc</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;#{nc.mirbase_family.downcase}&quot;</span>}.<span class="ruby-identifier">uniq</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">scope</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;local&quot;</span>
+          <span class="ruby-keyword kw">else</span>
+            <span class="ruby-identifier">families</span> = <span class="ruby-constant">ToolDB</span><span class="ruby-operator">::</span><span class="ruby-constant">EnsemblNcrna</span>.<span class="ruby-identifier">find_all_by_biotype_and_organism_id</span>(<span class="ruby-node">&quot;#{self.type}&quot;</span>,<span class="ruby-identifier">organism</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">collect</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">nc</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;#{nc.external_id}&quot;</span>}.<span class="ruby-identifier">uniq</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">scope</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;global&quot;</span>
+            <span class="ruby-identifier">families</span> = <span class="ruby-constant">ToolDB</span><span class="ruby-operator">::</span><span class="ruby-constant">EnsemblNcrna</span>.<span class="ruby-identifier">find_all_by_biotype_and_organism_id</span>(<span class="ruby-node">&quot;#{self.type}&quot;</span>,<span class="ruby-identifier">organism</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">has_group?</span>}.<span class="ruby-identifier">collect</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">nc</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;#{nc.external_id}&quot;</span>}.<span class="ruby-identifier">uniq</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">scope</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;local&quot;</span>
+          <span class="ruby-keyword kw">end</span>
+          
+          <span class="ruby-identifier">ncrna_families</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">fam</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">families</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-node">&quot;#{fam}&quot;</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">state</span> = <span class="ruby-value">1</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">state</span> = <span class="ruby-value">0</span>
+            <span class="ruby-identifier">results</span>[<span class="ruby-node">&quot;#{organism.phylip_name}&quot;</span>] <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;#{state}&quot;</span>
+          <span class="ruby-keyword kw">end</span>
+          
+        <span class="ruby-keyword kw">end</span>
+        
+        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;\t#{results.keys.nitems}\t#{results.to_a[0][1].length}&quot;</span>
+        <span class="ruby-identifier">results</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">o</span>,<span class="ruby-identifier">states</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{o}\s#{states}&quot;</span>
+        <span class="ruby-keyword kw">end</span>
+        
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

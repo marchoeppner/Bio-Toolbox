@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>_dollo_count (Toolbox::NcRNA::Parser)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/parser.rb, line 230</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_dollo_count</span>(<span class="ruby-identifier">node</span>,<span class="ruby-identifier">results</span>,<span class="ruby-identifier">dollo</span>)
+        
+        <span class="ruby-identifier">states</span> = <span class="ruby-identifier">dollo</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-node">&quot;#{node.node}&quot;</span>)
+        <span class="ruby-identifier">results</span>[<span class="ruby-node">&quot;#{node.node}&quot;</span>] = []
+        <span class="ruby-identifier">count</span> = <span class="ruby-value">0</span>
+        <span class="ruby-identifier">states</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">state</span><span class="ruby-operator">|</span>
+          <span class="ruby-node">&quot;#{state}&quot;</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;.&quot;</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">this_state</span> = <span class="ruby-identifier">results</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-node">&quot;#{node.get_parent.node}&quot;</span>)[<span class="ruby-identifier">count</span>] <span class="ruby-operator">:</span> <span class="ruby-identifier">this_state</span> = <span class="ruby-identifier">state</span>
+          <span class="ruby-identifier">results</span>[<span class="ruby-node">&quot;#{node.node}&quot;</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">this_state</span>
+          <span class="ruby-identifier">count</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-identifier">total</span> = <span class="ruby-value">0</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{node.node},#{results.fetch(node.node).select {|s| s == &quot;1&quot;}.nitems}&quot;</span>
+        
+        <span class="ruby-identifier">node</span>.<span class="ruby-identifier">get_children</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> 
+          <span class="ruby-identifier">_dollo_count</span>(<span class="ruby-identifier">c</span>,<span class="ruby-identifier">results</span>,<span class="ruby-identifier">dollo</span>)
+        <span class="ruby-keyword kw">end</span>
+        
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

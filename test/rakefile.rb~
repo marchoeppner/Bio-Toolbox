@@ -1,0 +1,82 @@
+#!/usr/bin/ruby
+# HomologDB Unit tests
+
+require '/home/marc/scripts/tools/toolbox.rb'
+include Toolbox
+
+HomologDB::DBConnection.connect(56)
+
+namespace :homologdb do
+
+	desc "Get info of a homology member and the mapping of blast and infernal hits"
+	task :hmember_mapping do
+	
+		group = HomologDB::HomologyGroup.find(1553)
+		member = HomologDB::Member.find_by_stable_id("ENSECAG00000018894")
+
+		hmember = HomologDB::HomologyMember.find_by_member_id_and_homology_group_id(member.id,group.id)
+		puts "#{hmember.display_details}"
+		
+		hmember.member.organism.connect_to_genome
+		
+		transcript = hmember.member.get_alignment_transcript
+		introns = transcript.introns
+			
+		hmember.infernal_hits.each do |hit|
+		
+			puts "\tInfernal Hit: #{hit.display_details}"
+			
+			slice = Ensembl::Core::Slice.new(transcript.seq_region,hit.genomic_start,hit.genomic_stop,hit.genomic_strand)
+			
+			intronic = false
+				
+			introns.each do |intron|
+				intronic = true if slice.overlaps?(intron)
+			end
+				
+			if intronic
+				puts "\t\tWithin intron (#{slice.start}->#{slice.stop}) - processing"
+			else
+				puts "\t\tNot within intron (#{slice.start}<->#{slice.stop}), skipping"
+			end
+				
+			next unless intronic
+								
+			hit_pos = transcript.map_slice(slice)
+		
+			puts "\t\t> Hit position mapped to: #{hit_pos}"
+		
+		end
+	
+		hmember.blast_hits.each do |hit|
+		
+			puts "\tBlast Hit: #{hit.display_details}"
+			slice = Ensembl::Core::Slice.new(transcript.seq_region,hit.genomic_start,hit.genomic_stop,hit.genomic_strand)
+			
+			intronic = false
+				
+			introns.each do |intron|
+				intronic = true if slice.overlaps?(intron)
+			end
+				
+			if intronic
+				puts "\t\tWithin intron (#{slice.start}->#{slice.stop}) - processing"
+			else
+				puts "\t\tNot within intron (#{slice.start}<->#{slice.stop}), skipping"
+			end
+				
+			next unless intronic
+								
+			hit_pos = transcript.map_slice(slice)
+		
+			puts "\t\t> Hit position mapped to: #{hit_pos}"
+			
+		end
+	
+	
+	end
+
+end
+
+
+

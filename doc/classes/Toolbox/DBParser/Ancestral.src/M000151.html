@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>family_copies (Toolbox::DBParser::Ancestral)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/database_pipeline.rb, line 765</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">family_copies</span>(<span class="ruby-identifier">nodes</span>)
+        
+        <span class="ruby-identifier">families</span> = {}
+
+        <span class="ruby-constant">ToolDB</span><span class="ruby-operator">::</span><span class="ruby-constant">EnsemblNcrna</span>.<span class="ruby-identifier">find_all_by_biotype</span>(<span class="ruby-identifier">type</span>).<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">families</span>[<span class="ruby-node">&quot;#{n.external_id}&quot;</span>] = [ <span class="ruby-value">0</span>, <span class="ruby-value">0</span>, <span class="ruby-value">0</span>]} <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;snoRNA&quot;</span>
+
+        <span class="ruby-identifier">pos</span> = <span class="ruby-value">0</span>
+
+        <span class="ruby-identifier">nodes</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">node</span><span class="ruby-operator">|</span>
+
+          <span class="ruby-identifier">n</span> = <span class="ruby-constant">ToolDB</span><span class="ruby-operator">::</span><span class="ruby-constant">TreeNode</span>.<span class="ruby-identifier">find_by_nr</span>(<span class="ruby-identifier">node</span>)
+          <span class="ruby-identifier">puts</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">inspect</span>
+
+          <span class="ruby-identifier">groups</span> = <span class="ruby-constant">ToolDB</span><span class="ruby-operator">::</span><span class="ruby-constant">Grouping</span>.<span class="ruby-identifier">find_all_by_biotype</span>(<span class="ruby-identifier">type</span>).<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">g</span><span class="ruby-operator">|</span> <span class="ruby-identifier">g</span>.<span class="ruby-identifier">present_at?</span>(<span class="ruby-identifier">n</span>)}
+
+          <span class="ruby-identifier">groups</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">group</span><span class="ruby-operator">|</span>
+
+            <span class="ruby-identifier">families</span>[<span class="ruby-node">&quot;#{group.fetch_ncrna_group}&quot;</span>][<span class="ruby-identifier">pos</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+
+          <span class="ruby-keyword kw">end</span>
+
+          <span class="ruby-identifier">pos</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{type} family,#{nodes.join(&quot;,&quot;)}&quot;</span>
+        <span class="ruby-identifier">families</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">fam</span>,<span class="ruby-identifier">counts</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{fam},#{counts.join(&quot;,&quot;)}&quot;</span>
+        <span class="ruby-keyword kw">end</span>
+        
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

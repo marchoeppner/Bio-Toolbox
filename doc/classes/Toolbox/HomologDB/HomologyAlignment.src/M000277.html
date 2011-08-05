@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>get_mapper (Toolbox::HomologDB::HomologyAlignment)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/homolog_db.rb, line 838</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_mapper</span>(<span class="ruby-identifier">ncrna</span>)
+        
+        <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">analysis</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;ner&quot;</span> <span class="ruby-keyword kw">or</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">is_aligned?</span>(<span class="ruby-identifier">ncrna</span>) <span class="ruby-operator">==</span> <span class="ruby-keyword kw">false</span>
+        
+        <span class="ruby-identifier">internal_start</span> = <span class="ruby-identifier">ncrna</span>.<span class="ruby-identifier">hostgene_start</span>
+        <span class="ruby-identifier">internal_stop</span> = <span class="ruby-identifier">ncrna</span>.<span class="ruby-identifier">hostgene_stop</span>
+        
+        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;ncRNA #{ncrna.start}/#{ncrna.stop}/#{ncrna.strand}&quot;</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Host: #{ncrna.member.start}/#{ncrna.member.stop}/#{ncrna.member.strand}&quot;</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Internal: #{ncrna.hostgene_start}/#{ncrna.hostgene_stop}&quot;</span>
+        
+        <span class="ruby-identifier">aln</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">get_clustalw</span>
+        
+        <span class="ruby-identifier">aln</span>.<span class="ruby-identifier">each_pair</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>,<span class="ruby-identifier">seq</span><span class="ruby-operator">|</span>
+          
+          <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-node">&quot;#{name}&quot;</span> <span class="ruby-operator">==</span> <span class="ruby-node">&quot;#{self.target.stable_id}&quot;</span>
+          <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Matching names, starting mapping process...&quot;</span>
+          
+          <span class="ruby-identifier">count</span> = <span class="ruby-value">0</span>
+          <span class="ruby-identifier">start_count</span> = <span class="ruby-value">0</span>
+          <span class="ruby-identifier">stop_count</span> = <span class="ruby-value">0</span>
+          
+          <span class="ruby-keyword kw">until</span> <span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">internal_stop</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+            
+            <span class="ruby-identifier">char</span> = <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">downcase</span>.<span class="ruby-identifier">slice!</span>(<span class="ruby-regexp re">/^[a-z-]/</span>)
+            <span class="ruby-identifier">count</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-node">&quot;#{char}&quot;</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;-&quot;</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">char</span> =
+            <span class="ruby-identifier">start_count</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">count</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">internal_start</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">internal_start</span> <span class="ruby-operator">&lt;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">target_start</span>
+            <span class="ruby-identifier">stop_count</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+            
+          <span class="ruby-keyword kw">end</span>
+          
+          <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Returning coordinates [#{start_count} , #{stop_count}]&quot;</span>
+          <span class="ruby-keyword kw">return</span> [ <span class="ruby-identifier">start_count</span> , <span class="ruby-identifier">stop_count</span> ]
+          
+        <span class="ruby-keyword kw">end</span> 
+            
+        <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;IDs not matching... aborting mapping&quot;</span>
+        
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

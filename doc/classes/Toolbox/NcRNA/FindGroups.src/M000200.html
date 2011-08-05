@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>run_search (Toolbox::NcRNA::FindGroups)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/ncrna.rb, line 335</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run_search</span>(<span class="ruby-identifier">threshold</span>)
+        
+        <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;Must have a threshold specified&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">threshold</span>.<span class="ruby-identifier">nil?</span>
+        
+        <span class="ruby-identifier">round</span> = <span class="ruby-value">0</span>
+        <span class="ruby-ivar">@threshold</span> = <span class="ruby-identifier">threshold</span> 
+        
+        <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">curr_block</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+          <span class="ruby-identifier">output</span>(<span class="ruby-node">&quot;&lt;Analysis type='#{self.type}' id='#{self.dataset_id}' date='#{Date::today}'&gt;&quot;</span>)
+          <span class="ruby-identifier">output</span>(<span class="ruby-node">&quot;\s&lt;SearchSpace nitems='#{@organisms.nitems}'&gt;&quot;</span>)
+          <span class="ruby-ivar">@organisms</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">output</span>(<span class="ruby-node">&quot;\s\s&lt;Organism name='#{o}' /&gt;&quot;</span>)
+          <span class="ruby-keyword kw">end</span>
+          <span class="ruby-identifier">output</span>(<span class="ruby-value str">&quot;\s&lt;/SearchSpace&gt;&quot;</span>)
+        <span class="ruby-keyword kw">end</span>
+        
+        <span class="ruby-identifier">group_counter</span> = <span class="ruby-value">0</span>
+        <span class="ruby-identifier">final_group_nr</span> = <span class="ruby-value">0</span>
+        
+        <span class="ruby-ivar">@blocks</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">block_id</span><span class="ruby-operator">|</span>
+           
+          <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block_id</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">&lt;</span> <span class="ruby-ivar">@curr_block</span>
+          
+          <span class="ruby-ivar">@curr_block</span> = <span class="ruby-identifier">block_id</span>.<span class="ruby-identifier">to_i</span>
+          <span class="ruby-identifier">round</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+          <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{round}/#{@blocks.nitems}&quot;</span>
+      
+          <span class="ruby-constant">Ensembl</span><span class="ruby-operator">::</span><span class="ruby-constant">Compara</span><span class="ruby-operator">::</span><span class="ruby-constant">DBConnection</span>.<span class="ruby-identifier">connect</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">version</span>)              
+          
+          <span class="ruby-identifier">gal_block</span> = <span class="ruby-constant">Ensembl</span><span class="ruby-operator">::</span><span class="ruby-constant">Compara</span><span class="ruby-operator">::</span><span class="ruby-constant">GenomicAlignBlock</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">block_id</span>)
+          
+          <span class="ruby-comment cmt">#alignment = gal_block.get_clustalw</span>
+          
+          <span class="ruby-identifier">contigs</span> = <span class="ruby-identifier">gal_block</span>.<span class="ruby-identifier">genomic_aligns</span>
+
+          <span class="ruby-ivar">@ncrnas</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+          
+          <span class="ruby-identifier">contigs</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">contig</span><span class="ruby-operator">|</span>  <span class="ruby-comment cmt"># Find all the ncRNAs and determine the relative parameters...</span>
+            
+            <span class="ruby-constant">Ensembl</span><span class="ruby-operator">::</span><span class="ruby-constant">Compara</span><span class="ruby-operator">::</span><span class="ruby-constant">DBConnection</span>.<span class="ruby-identifier">connect</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">version</span>)              
+            
+            <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">contig</span>.<span class="ruby-identifier">find_organism</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;Ancestral sequences&quot;</span>               <span class="ruby-comment cmt"># if, for whatever reason, an aligned contig is empty or does not belong to a species.....</span>
+
+            <span class="ruby-identifier">contig</span>.<span class="ruby-identifier">get_slice</span>.<span class="ruby-identifier">genes</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">g</span><span class="ruby-operator">|</span> <span class="ruby-identifier">g</span>.<span class="ruby-identifier">biotype</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@type</span>}.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">gene</span><span class="ruby-operator">|</span>
+
+              <span class="ruby-identifier">contig</span>.<span class="ruby-identifier">dnafrag</span>.<span class="ruby-identifier">genome_db</span>.<span class="ruby-identifier">connect_to_genome</span>
+              
+              <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-ivar">@ncrnas</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-node">&quot;#{gene.stable_id}&quot;</span>) <span class="ruby-comment cmt"># gene is of the right type and has not been processed before...</span>
+                
+                <span class="ruby-identifier">s</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{base_name}_#{type}_sequences.sql&quot;</span>, <span class="ruby-value str">&quot;a&quot;</span>)
+                <span class="ruby-identifier">s</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;INSERT INTO ncrna_sequence (ensembl_ncrna_id,seq,strand) SELECT id,'#{gene.slice.seq}','#{gene.strand}' FROM ensembl_ncrna WHERE stable_id = '#{gene.stable_id}';&quot;</span>
+                <span class="ruby-identifier">s</span>.<span class="ruby-identifier">close</span>
+                  
+                <span class="ruby-identifier">organism</span> = <span class="ruby-node">&quot;#{contig.find_organism}&quot;</span>
+                  
+                <span class="ruby-identifier">stable_id</span> = <span class="ruby-node">&quot;#{gene.stable_id}&quot;</span>
+                <span class="ruby-identifier">ncrna_id</span> = <span class="ruby-node">&quot;#{gene.ncrna_id(@external_db)}&quot;</span>
+                <span class="ruby-identifier">ncrna_id</span> = <span class="ruby-value str">&quot;none&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">ncrna_id</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+                
+                <span class="ruby-identifier">length</span> = <span class="ruby-node">&quot;#{gene.slice.seq.length}&quot;</span>
+                <span class="ruby-identifier">rel_pos</span> = <span class="ruby-identifier">contig</span>.<span class="ruby-identifier">get_mapper</span>(<span class="ruby-identifier">gene</span>)                        <span class="ruby-comment cmt"># determines the position of the ncRNA gene in the alignment</span>
+
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">is_intronic?</span>
+                  <span class="ruby-identifier">intronic</span> = <span class="ruby-value str">&quot;true&quot;</span>
+                  <span class="ruby-identifier">hg</span> = <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">fetch_hostgene</span>
+                  <span class="ruby-identifier">hostgene</span> = <span class="ruby-node">&quot;#{hg.stable_id}&quot;</span>
+                  <span class="ruby-identifier">hg</span>.<span class="ruby-identifier">description</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-value">? </span><span class="ruby-identifier">hostgene_description</span> = <span class="ruby-value str">&quot;&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">hostgene_description</span> = <span class="ruby-node">&quot;#{hg.description[0..100].gsub(/\'/, '').gsub(/\//, '').gsub(/\\/, '').gsub(/\./, '').gsub(/\,/, '-')}&quot;</span> 
+                  <span class="ruby-identifier">goterms</span> = <span class="ruby-identifier">hg</span>.<span class="ruby-identifier">go_terms_with_evidence</span>
+                <span class="ruby-keyword kw">else</span>
+                  <span class="ruby-identifier">intronic</span> = <span class="ruby-value str">&quot;false&quot;</span>
+                  <span class="ruby-identifier">hostgene</span> = <span class="ruby-value str">&quot;nil&quot;</span>
+                  <span class="ruby-identifier">hostgene_description</span> = <span class="ruby-value str">&quot;nil&quot;</span>
+                  <span class="ruby-identifier">goterms</span> = []
+                <span class="ruby-keyword kw">end</span>
+                 
+                <span class="ruby-ivar">@ncrnas</span>.<span class="ruby-identifier">push</span>(<span class="ruby-constant">Toolbox</span><span class="ruby-operator">::</span><span class="ruby-constant">NcRNA</span><span class="ruby-operator">::</span><span class="ruby-constant">ConservationEntry</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">stable_id</span>,<span class="ruby-identifier">ncrna_id</span>,<span class="ruby-identifier">organism</span>,<span class="ruby-identifier">length</span>,<span class="ruby-identifier">rel_pos</span>,<span class="ruby-identifier">intronic</span>,<span class="ruby-identifier">hostgene</span>,<span class="ruby-identifier">hostgene_description</span>,<span class="ruby-identifier">goterms</span>))  
+              
+              <span class="ruby-keyword kw">end</span>
+            
+            <span class="ruby-keyword kw">end</span>
+          
+          <span class="ruby-keyword kw">end</span>
+          
+          <span class="ruby-identifier">groups</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+          
+          <span class="ruby-keyword kw">until</span> <span class="ruby-ivar">@ncrnas</span>.<span class="ruby-identifier">empty?</span>
+            
+            <span class="ruby-identifier">entry</span> = <span class="ruby-ivar">@ncrnas</span>.<span class="ruby-identifier">shift</span>
+            <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;processing #{entry.stable_id} | #{entry.rel_pos.join(&quot;,&quot;)}&quot;</span>
+            <span class="ruby-identifier">start</span> = <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">rel_pos</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">to_i</span>
+            <span class="ruby-identifier">stop</span> = <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">rel_pos</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">to_i</span>
+            <span class="ruby-identifier">add</span> = <span class="ruby-keyword kw">true</span>
+            <span class="ruby-identifier">groups</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">group</span><span class="ruby-operator">|</span>
+              <span class="ruby-keyword kw">break</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">add</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">false</span>
+              <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;\t checking group #{group.start}/#{group.stop}&quot;</span>
+              <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">start</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">group</span>.<span class="ruby-identifier">start</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">stop</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">group</span>.<span class="ruby-identifier">stop</span>
+                <span class="ruby-identifier">group</span>.<span class="ruby-identifier">stop</span> = <span class="ruby-identifier">stop</span>
+                <span class="ruby-identifier">group</span>.<span class="ruby-identifier">start</span> = <span class="ruby-identifier">start</span>
+                <span class="ruby-identifier">group</span>.<span class="ruby-identifier">members</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">entry</span>)
+                <span class="ruby-identifier">add</span> = <span class="ruby-keyword kw">false</span>
+              <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">stop</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">group</span>.<span class="ruby-identifier">start</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">stop</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">group</span>.<span class="ruby-identifier">stop</span>
+                <span class="ruby-identifier">group</span>.<span class="ruby-identifier">stop</span> = <span class="ruby-identifier">stop</span>
+                <span class="ruby-identifier">group</span>.<span class="ruby-identifier">members</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">entry</span>)
+                <span class="ruby-identifier">add</span> = <span class="ruby-keyword kw">false</span>
+              <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">start</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">group</span>.<span class="ruby-identifier">start</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">start</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">group</span>.<span class="ruby-identifier">stop</span>
+                <span class="ruby-identifier">group</span>.<span class="ruby-identifier">start</span> = <span class="ruby-identifier">start</span>
+                <span class="ruby-identifier">group</span>.<span class="ruby-identifier">members</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">entry</span>)
+                <span class="ruby-identifier">add</span> = <span class="ruby-keyword kw">false</span>
+              <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">start</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">group</span>.<span class="ruby-identifier">start</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">stop</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">group</span>.<span class="ruby-identifier">stop</span>
+                <span class="ruby-identifier">add</span> = <span class="ruby-keyword kw">false</span>
+                <span class="ruby-identifier">group</span>.<span class="ruby-identifier">members</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">entry</span>)
+              <span class="ruby-keyword kw">end</span>
+              
+            <span class="ruby-keyword kw">end</span>
+            <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;not part of above groups!&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">add</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">true</span>
+            <span class="ruby-identifier">groups</span>.<span class="ruby-identifier">push</span>(<span class="ruby-constant">Toolbox</span><span class="ruby-operator">::</span><span class="ruby-constant">NcRNA</span><span class="ruby-operator">::</span><span class="ruby-constant">ConservationGroup</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">start</span>,<span class="ruby-identifier">stop</span>,<span class="ruby-identifier">entry</span>)) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">add</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">true</span>
+            
+          <span class="ruby-keyword kw">end</span>
+          
+          <span class="ruby-identifier">groups</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">group</span><span class="ruby-operator">|</span>
+            
+            <span class="ruby-identifier">group_counter</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+                              
+            <span class="ruby-identifier">organism_check</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+            <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">organisms</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span> <span class="ruby-identifier">organism_check</span>[<span class="ruby-identifier">o</span>] = <span class="ruby-ivar">@missing</span> } <span class="ruby-comment cmt"># default assumption: no information for any of the genomes...</span>
+            
+            <span class="ruby-identifier">output</span>(<span class="ruby-node">&quot;\s&lt;Group nr='#{group_counter}' genomic_align_block_id='#{gal_block.genomic_align_block_id}' start='#{group.start}' stop='#{group.stop}' &gt;&quot;</span>)
+            
+            <span class="ruby-identifier">group</span>.<span class="ruby-identifier">members</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">member</span><span class="ruby-operator">|</span>
+              <span class="ruby-identifier">organism_check</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">member</span>.<span class="ruby-identifier">organism</span>)
+              <span class="ruby-identifier">output</span>(<span class="ruby-node">&quot;\s\s&lt;NcRNA stable_id='#{member.stable_id}' ncrna_id='#{member.ncrna_id}' organism='#{member.organism}' intronic='#{member.intronic}' comment='#{@present}' &gt;&quot;</span>)  
+              <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">member</span>.<span class="ruby-identifier">hostgene</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;nil&quot;</span>
+                <span class="ruby-identifier">output</span>(<span class="ruby-node">&quot;\s\s\s&lt;HostGene name='#{member.hostgene}' description='#{member.hostgene_description}'&gt;&quot;</span>)
+                <span class="ruby-identifier">member</span>.<span class="ruby-identifier">goterms</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">go</span><span class="ruby-operator">|</span>
+                  <span class="ruby-identifier">output</span>(<span class="ruby-node">&quot;\s\s\s\s&lt;GoId id='#{go.shift}' linkage='#{go.shift}' /&gt;&quot;</span>)
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-identifier">output</span>(<span class="ruby-value str">&quot;\s\s\s&lt;/HostGene&gt;&quot;</span>)
+              <span class="ruby-keyword kw">end</span>
+              <span class="ruby-identifier">output</span>(<span class="ruby-value str">&quot;\s\s&lt;/NcRNA&gt;&quot;</span>)
+            <span class="ruby-keyword kw">end</span>
+            
+            <span class="ruby-comment cmt"># check if the missing organisms have sequence data at that position,...</span>
+            
+            <span class="ruby-identifier">organism_check</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">org</span>,<span class="ruby-identifier">val</span><span class="ruby-operator">|</span>
+              <span class="ruby-identifier">contigs</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">contig</span><span class="ruby-operator">|</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">contig</span>.<span class="ruby-identifier">find_organism</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">org</span>
+                  <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">contig</span>.<span class="ruby-identifier">covers?</span>(<span class="ruby-identifier">group</span>.<span class="ruby-identifier">start</span>)
+                    <span class="ruby-identifier">organism_check</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-node">&quot;#{org}&quot;</span>)
+                    <span class="ruby-identifier">output</span>(<span class="ruby-node">&quot;\s\s&lt;NcRNA stable_id='nil' ncrna_id='nil' rel_start='nil' organism='#{org}' intronic='false' comment='#{@absent}' /&gt;&quot;</span>)
+                  <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">end</span>
+              <span class="ruby-keyword kw">end</span>
+            <span class="ruby-keyword kw">end</span>  
+            
+            <span class="ruby-comment cmt"># or else note that no sequence covers this part of the alignment (missing)</span>
+            <span class="ruby-identifier">organism_check</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">org</span>,<span class="ruby-identifier">val</span><span class="ruby-operator">|</span>
+              <span class="ruby-identifier">output</span>(<span class="ruby-node">&quot;\s\s&lt;NcRNA stable_id='nil' ncrna_id='nil' rel_start='nil' organism='#{org}' intronic='false' comment='#{@missing}' /&gt;&quot;</span>)
+            <span class="ruby-keyword kw">end</span>
+            
+            <span class="ruby-identifier">output</span>(<span class="ruby-value str">&quot;\s&lt;/Group&gt;&quot;</span>)
+          <span class="ruby-keyword kw">end</span>
+          
+        <span class="ruby-keyword kw">end</span>  
+        
+        <span class="ruby-identifier">output</span>(<span class="ruby-value str">&quot;&lt;/Analysis&gt;&quot;</span>)
+        
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>mirbase_targets_and_nodes (Toolbox::DBParser::Ancestral)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/database_pipeline.rb, line 1195</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">mirbase_targets_and_nodes</span>
+        
+        <span class="ruby-identifier">nodes</span> = <span class="ruby-constant">Toolbox</span><span class="ruby-operator">::</span><span class="ruby-constant">ToolDB</span><span class="ruby-operator">::</span><span class="ruby-constant">TreeNode</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:all</span>, <span class="ruby-identifier">:order</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;nr&quot;</span>)
+        <span class="ruby-identifier">mirnas</span> = []
+        <span class="ruby-constant">Toolbox</span><span class="ruby-operator">::</span><span class="ruby-constant">ToolDB</span><span class="ruby-operator">::</span><span class="ruby-constant">EnsemblNcrna</span>.<span class="ruby-identifier">find_all_by_biotype_and_organism_id</span>(<span class="ruby-value str">&quot;miRNA&quot;</span>,<span class="ruby-value">1</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">mirna</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">mirnas</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">mirna</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">mirna</span>.<span class="ruby-identifier">has_group?</span>
+        <span class="ruby-keyword kw">end</span>
+        
+        <span class="ruby-identifier">nodes</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">node</span><span class="ruby-operator">|</span>
+          
+          <span class="ruby-comment cmt">#f = File.new(&quot;#{base_name}_#{type}_mirbase_targets_#{node.nr}.csv&quot;, &quot;a&quot;)</span>
+          
+          <span class="ruby-identifier">mirnas</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">mirna</span><span class="ruby-operator">|</span>
+            <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">mirna</span>.<span class="ruby-identifier">present_at?</span>(<span class="ruby-identifier">node</span>)
+            
+            <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{mirna.stable_id},&quot;</span>
+            <span class="ruby-identifier">mirna</span>.<span class="ruby-identifier">xref_mirbase_ensembls</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">xref</span><span class="ruby-operator">|</span>
+              <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;\t#{xref.mirbase_product.name},#{xref.score},&quot;</span>
+              <span class="ruby-identifier">targets</span> = <span class="ruby-identifier">xref</span>.<span class="ruby-identifier">mirbase_product</span>.<span class="ruby-identifier">mirbase_targets</span>
+              <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;\t\t#{targets.nitems} targets&quot;</span>
+              <span class="ruby-constant">Ensembl</span><span class="ruby-operator">::</span><span class="ruby-constant">Core</span><span class="ruby-operator">::</span><span class="ruby-constant">DBConnection</span>.<span class="ruby-identifier">connect</span>(<span class="ruby-value str">'homo_sapiens'</span>)
+              <span class="ruby-identifier">go_list</span> = {}
+              <span class="ruby-identifier">targets</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">target</span><span class="ruby-operator">|</span>
+                <span class="ruby-identifier">transcript</span> = <span class="ruby-constant">Ensembl</span><span class="ruby-operator">::</span><span class="ruby-constant">Core</span><span class="ruby-operator">::</span><span class="ruby-constant">Transcript</span>.<span class="ruby-identifier">find_by_stable_id</span>(<span class="ruby-identifier">target</span>.<span class="ruby-identifier">target</span>)
+                <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">transcript</span>.<span class="ruby-identifier">nil?</span>
+                <span class="ruby-identifier">transcript</span>.<span class="ruby-identifier">gene</span>.<span class="ruby-identifier">go_terms</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">go</span><span class="ruby-operator">|</span>
+                  <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">go_list</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-node">&quot;#{go}&quot;</span>)
+                    <span class="ruby-identifier">go_list</span>[<span class="ruby-node">&quot;#{go}&quot;</span>] = <span class="ruby-identifier">go_list</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-node">&quot;#{go}&quot;</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+                  <span class="ruby-keyword kw">else</span>
+                    <span class="ruby-identifier">go_list</span>[<span class="ruby-node">&quot;#{go}&quot;</span>] = <span class="ruby-value">1</span>
+                  <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">end</span>
+              <span class="ruby-keyword kw">end</span>
+              <span class="ruby-identifier">go_list</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">term</span>,<span class="ruby-identifier">count</span><span class="ruby-operator">|</span>
+                <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;\t\t\t#{term}:#{count}&quot;</span>
+              <span class="ruby-keyword kw">end</span>
+                  
+            <span class="ruby-keyword kw">end</span>
+            
+          <span class="ruby-keyword kw">end</span>
+          
+        <span class="ruby-keyword kw">end</span>
+        
+        
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>softmasked_seq_to_html (String)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/extensions.rb, line 37</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">softmasked_seq_to_html</span>(<span class="ruby-identifier">window_size</span>)
+    <span class="ruby-identifier">seq</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">to_s</span>
+    <span class="ruby-identifier">exon</span> = <span class="ruby-value str">&quot;red&quot;</span>
+    <span class="ruby-identifier">intron</span> = <span class="ruby-value str">&quot;grey&quot;</span>
+
+    <span class="ruby-identifier">answer</span> = []
+
+    <span class="ruby-identifier">answer</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;&lt;table width='#{window_size}px' cellspacing='1px' height='10px'&gt;\n&lt;tr&gt;\n&quot;</span>
+    <span class="ruby-identifier">answer</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;&lt;td width='#{window_size/2-1}px'&gt;&lt;/td&gt;&lt;td width='2px' bgcolor='blue'&gt;&lt;/td&gt;&lt;td width='#{window_size/2-1}px'&gt;&lt;/td&gt;\n&lt;/tr&gt;\n&lt;tr&gt;\n&lt;/table&gt;&quot;</span>
+    <span class="ruby-identifier">answer</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;&lt;table width='#{window_size}px' cellspacing='0px' height='10px'&gt;\n&lt;tr&gt;\n&quot;</span>
+
+    <span class="ruby-keyword kw">until</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">seq</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">0</span>].<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/[A-Z]/</span>)
+        <span class="ruby-identifier">this_seq</span> = <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">slice!</span>(<span class="ruby-regexp re">/^[A-Z]*/</span>)
+        <span class="ruby-identifier">answer</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;&lt;td width='#{this_seq.length}px' bgcolor='#{exon}'&gt;&lt;/td&gt;\n&quot;</span>
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">this_seq</span> = <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">slice!</span>(<span class="ruby-regexp re">/^[a-z]*/</span>)
+        <span class="ruby-identifier">answer</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;&lt;td width='#{this_seq.length}px' bgcolor='#{intron}'&gt;&lt;/td&gt;\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+    <span class="ruby-identifier">answer</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;\n&lt;/tr&gt;\n&lt;/table&gt;&quot;</span>
+
+    <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">join</span>
+
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

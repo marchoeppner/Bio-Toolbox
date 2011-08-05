@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>do_local_align (Toolbox::HomologDB::HomologyAlignment)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/homolog_db.rb, line 754</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">do_local_align</span>(<span class="ruby-identifier">start</span>=<span class="ruby-value">0</span>,<span class="ruby-identifier">stop</span>=<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">alignment_length</span>)
+        
+        <span class="ruby-identifier">cigar</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">cigar_line</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">&quot;,&quot;</span>)
+
+        <span class="ruby-identifier">answer</span> = []
+        
+        <span class="ruby-identifier">target</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">target</span>.<span class="ruby-identifier">seq</span>.<span class="ruby-identifier">downcase</span>[<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">target_start</span><span class="ruby-operator">..</span><span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">target_stop</span>]
+        <span class="ruby-identifier">query</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">query</span>.<span class="ruby-identifier">seq</span>.<span class="ruby-identifier">downcase</span>[<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">query_start</span><span class="ruby-operator">..</span><span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">query_stop</span>]
+        
+        <span class="ruby-comment cmt">#puts &quot;#{target[0..50]} | #{self.target_strand} / #{self.target.strand}&quot;</span>
+        <span class="ruby-comment cmt">#puts &quot;#{query[0..50]} | #{self.query_strand} / #{self.query.strand}&quot;</span>
+        
+        <span class="ruby-identifier">gapped_target</span> = <span class="ruby-value str">&quot;&quot;</span>
+        <span class="ruby-identifier">gapped_query</span> = <span class="ruby-value str">&quot;&quot;</span>
+        
+        <span class="ruby-identifier">gapped_start</span> = <span class="ruby-value">0</span>
+        <span class="ruby-identifier">gapped_stop</span> = <span class="ruby-value">0</span>
+        <span class="ruby-identifier">curr_count</span> = <span class="ruby-value">0</span>
+        
+        <span class="ruby-identifier">cigar</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+          
+          <span class="ruby-identifier">operation</span> = <span class="ruby-identifier">c</span>.<span class="ruby-identifier">slice!</span>(<span class="ruby-regexp re">/^[A-Z]/</span>)
+          <span class="ruby-identifier">count</span> = <span class="ruby-identifier">c</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">slice</span>(<span class="ruby-regexp re">/[0-9]*/</span>).<span class="ruby-identifier">to_i</span>
+
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">operation</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;M&quot;</span>
+            
+            <span class="ruby-identifier">count</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword kw">do</span>
+              <span class="ruby-identifier">curr_count</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+              <span class="ruby-identifier">gapped_target</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">target</span>.<span class="ruby-identifier">slice!</span>(<span class="ruby-regexp re">/^[a-z]/</span>)
+              <span class="ruby-identifier">gapped_query</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">query</span>.<span class="ruby-identifier">slice!</span>(<span class="ruby-regexp re">/^[a-z]/</span>)
+            <span class="ruby-keyword kw">end</span>
+            
+          <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">operation</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;I&quot;</span>
+            
+            <span class="ruby-identifier">count</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword kw">do</span>
+              <span class="ruby-identifier">gapped_start</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">curr_count</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">start</span>
+              <span class="ruby-identifier">gapped_stop</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">curr_count</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">stop</span>
+              <span class="ruby-identifier">gapped_target</span> <span class="ruby-operator">+=</span> <span class="ruby-value str">&quot;-&quot;</span>
+              <span class="ruby-identifier">gapped_query</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">query</span>.<span class="ruby-identifier">slice!</span>(<span class="ruby-regexp re">/^[a-z]/</span>)
+            <span class="ruby-keyword kw">end</span>
+            
+          <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">operation</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;D&quot;</span>
+            
+            <span class="ruby-identifier">count</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword kw">do</span> 
+              <span class="ruby-identifier">curr_count</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+              <span class="ruby-identifier">gapped_target</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">target</span>.<span class="ruby-identifier">slice!</span>(<span class="ruby-regexp re">/^[a-z]/</span>)
+              <span class="ruby-identifier">gapped_query</span> <span class="ruby-operator">+=</span> <span class="ruby-value str">&quot;-&quot;</span>
+            <span class="ruby-keyword kw">end</span>
+          
+          <span class="ruby-keyword kw">else</span>
+            <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Unknown operation: #{operation}!&quot;</span>
+          <span class="ruby-keyword kw">end</span>
+          
+          
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">start</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+          
+          <span class="ruby-identifier">answer</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">FastaFormat</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">gapped_target</span>).<span class="ruby-identifier">to_fasta</span>(<span class="ruby-node">&quot;#{self.target.stable_id}&quot;</span>))
+          <span class="ruby-identifier">answer</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">FastaFormat</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">gapped_query</span>).<span class="ruby-identifier">to_fasta</span>(<span class="ruby-node">&quot;#{self.query.stable_id}&quot;</span>))
+          <span class="ruby-keyword kw">return</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Alignment</span><span class="ruby-operator">::</span><span class="ruby-constant">OriginalAlignment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">answer</span>)
+        
+        <span class="ruby-keyword kw">else</span>
+          
+          <span class="ruby-identifier">gapped_start</span> = <span class="ruby-identifier">gapped_start</span><span class="ruby-operator">-</span><span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">target_start</span><span class="ruby-operator">+</span><span class="ruby-identifier">start</span>
+          <span class="ruby-identifier">gapped_stop</span> = <span class="ruby-identifier">gapped_stop</span><span class="ruby-operator">-</span><span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">target_start</span><span class="ruby-operator">+</span><span class="ruby-identifier">stop</span>
+
+          <span class="ruby-identifier">answer</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">FastaFormat</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">gapped_target</span>[<span class="ruby-identifier">gapped_start</span><span class="ruby-operator">..</span><span class="ruby-identifier">gapped_stop</span>]).<span class="ruby-identifier">to_fasta</span>(<span class="ruby-node">&quot;#{self.target.stable_id}&quot;</span>))
+          <span class="ruby-identifier">answer</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">FastaFormat</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">gapped_query</span>[<span class="ruby-identifier">gapped_start</span><span class="ruby-operator">..</span><span class="ruby-identifier">gapped_stop</span>]).<span class="ruby-identifier">to_fasta</span>(<span class="ruby-node">&quot;#{self.query.stable_id}&quot;</span>))
+          <span class="ruby-keyword kw">return</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Alignment</span><span class="ruby-operator">::</span><span class="ruby-constant">OriginalAlignment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">answer</span>)
+          
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

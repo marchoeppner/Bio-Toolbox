@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>all_xml_to_sql (Toolbox::NcRNA::Parser)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/parser.rb, line 83</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">all_xml_to_sql</span>(<span class="ruby-identifier">type</span>)
+        
+        <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;Must have a type&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">type</span>.<span class="ruby-identifier">nil?</span>
+        
+        <span class="ruby-identifier">input</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">infile</span>
+        
+        <span class="ruby-identifier">o</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{self.infile}_to_sql.txt&quot;</span>, <span class="ruby-value str">&quot;a&quot;</span>)
+        
+        <span class="ruby-constant">ToolDB</span><span class="ruby-operator">::</span><span class="ruby-constant">DBConnection</span>.<span class="ruby-identifier">connect</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">version</span>) 
+
+        <span class="ruby-identifier">infile</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">input</span>, <span class="ruby-value str">&quot;r&quot;</span>)
+        <span class="ruby-identifier">doc</span> = <span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">infile</span>
+        
+        <span class="ruby-constant">XPath</span>.<span class="ruby-identifier">each</span>( <span class="ruby-identifier">doc</span>, <span class="ruby-value str">&quot;//Organism&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">organism</span><span class="ruby-operator">|</span>
+          
+          <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{organism.attributes[&quot;name&quot;]}&quot;</span>
+          
+          <span class="ruby-identifier">organism_id</span> = <span class="ruby-constant">ToolDB</span><span class="ruby-operator">::</span><span class="ruby-constant">Organism</span>.<span class="ruby-identifier">find_by_name</span>(<span class="ruby-node">&quot;#{organism.attributes[&quot;name&quot;]}&quot;</span>).<span class="ruby-identifier">id</span>
+          <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;Organism not reckognized!&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">organism_id</span>.<span class="ruby-identifier">nil?</span>
+          
+          <span class="ruby-identifier">organism</span>.<span class="ruby-identifier">elements</span>.<span class="ruby-identifier">each</span>(<span class="ruby-value str">&quot;NcRNA&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ncrna</span><span class="ruby-operator">|</span>
+            
+            <span class="ruby-identifier">o</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;INSERT INTO ensembl_ncrna(stable_id,organism_id,external_id,biotype) VALUES('#{ncrna.attributes[&quot;stable_id&quot;]}',#{organism_id},'#{ncrna.attributes[&quot;external_id&quot;]}','#{type}');&quot;</span>
+            
+            <span class="ruby-identifier">ncrna</span>.<span class="ruby-identifier">elements</span>.<span class="ruby-identifier">each</span>(<span class="ruby-value str">&quot;HostGene&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">hostgene</span><span class="ruby-operator">|</span>
+              
+              <span class="ruby-identifier">o</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;INSERT INTO ensembl_hostgene(stable_id,organism_id,description) VALUES('#{hostgene.attributes[&quot;stable_id&quot;]}',#{organism_id},'#{hostgene.attributes[&quot;description&quot;]}');&quot;</span>
+              
+              <span class="ruby-identifier">o</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;INSERT INTO xref_ncrna_hostgene (ensembl_ncrna_id,ensembl_hostgene_id) VALUES((SELECT id FROM ensembl_ncrna WHERE stable_id = '#{ncrna.attributes[&quot;stable_id&quot;]}'),(SELECT id FROM ensembl_hostgene WHERE stable_id = '#{hostgene.attributes[&quot;stable_id&quot;]}'));&quot;</span>
+              
+              <span class="ruby-identifier">hostgene</span>.<span class="ruby-identifier">elements</span>.<span class="ruby-identifier">each</span>(<span class="ruby-value str">&quot;GoId&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">go</span><span class="ruby-operator">|</span>
+                
+                <span class="ruby-identifier">o</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;INSERT INTO hostgene_goterm (ensembl_hostgene_id,go_term,linkage) SELECT id,'#{go.attributes[&quot;id&quot;]}','#{go.attributes[&quot;linkage&quot;]}' FROM ensembl_hostgene WHERE stable_id = '#{hostgene.attributes[&quot;stable_id&quot;]}';&quot;</span>
+                
+              <span class="ruby-keyword kw">end</span>
+              
+            <span class="ruby-keyword kw">end</span>
+            
+          <span class="ruby-keyword kw">end</span>
+          
+        <span class="ruby-keyword kw">end</span>
+        
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

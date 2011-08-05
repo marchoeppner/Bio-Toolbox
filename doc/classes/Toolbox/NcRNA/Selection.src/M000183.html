@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>run_search (Toolbox::NcRNA::Selection)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/ncrna.rb, line 45</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run_search</span>
+        
+        <span class="ruby-ivar">@blocks</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">block</span><span class="ruby-operator">|</span>
+          
+          <span class="ruby-constant">Ensembl</span><span class="ruby-operator">::</span><span class="ruby-constant">Compara</span><span class="ruby-operator">::</span><span class="ruby-constant">DBConnection</span>.<span class="ruby-identifier">connect</span>
+          <span class="ruby-identifier">gab</span> = <span class="ruby-constant">Ensembl</span><span class="ruby-operator">::</span><span class="ruby-constant">Compara</span><span class="ruby-operator">::</span><span class="ruby-constant">GenomicAlignBlock</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">block</span>)
+          
+          <span class="ruby-ivar">@entries</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+          <span class="ruby-ivar">@entries</span>[<span class="ruby-value str">&quot;intron&quot;</span>] = []
+          
+          <span class="ruby-identifier">gab</span>.<span class="ruby-identifier">genomic_aligns</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">contig</span><span class="ruby-operator">|</span>
+            <span class="ruby-constant">Ensembl</span><span class="ruby-operator">::</span><span class="ruby-constant">Compara</span><span class="ruby-operator">::</span><span class="ruby-constant">DBConnection</span>.<span class="ruby-identifier">connect</span>
+            <span class="ruby-identifier">organism</span> = <span class="ruby-identifier">contig</span>.<span class="ruby-identifier">find_organism</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/\s/</span>, <span class="ruby-value str">'_'</span>)
+            <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Checking contig #{contig.genomic_align_id} (#{organism})&quot;</span>
+            <span class="ruby-identifier">contig</span>.<span class="ruby-identifier">get_slice</span>.<span class="ruby-identifier">genes</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">gene</span><span class="ruby-operator">|</span>
+              
+              <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{organism}:#{gene.stable_id}&quot;</span>
+              
+              <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">biotype</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;protein_coding&quot;</span> <span class="ruby-comment cmt"># introns and exons are only relevant for protein-coding genes...</span>
+                <span class="ruby-identifier">nc</span> = <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">fetch_noncoding</span>         <span class="ruby-comment cmt"># gets the non-coding parts of the gene  </span>
+                <span class="ruby-identifier">con_slice</span> = <span class="ruby-identifier">contig</span>.<span class="ruby-identifier">get_slice</span>
+                <span class="ruby-identifier">nc</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">intron</span><span class="ruby-operator">|</span>
+                  <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">intron</span>.<span class="ruby-identifier">within?</span>(<span class="ruby-identifier">con_slice</span>)
+                    <span class="ruby-identifier">pos</span> = <span class="ruby-identifier">contig</span>.<span class="ruby-identifier">aligned_positions</span>(<span class="ruby-identifier">intron</span>)
+                    <span class="ruby-ivar">@entries</span>[<span class="ruby-value str">&quot;intron&quot;</span>] = <span class="ruby-ivar">@entries</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value str">&quot;intron&quot;</span>).<span class="ruby-identifier">push</span>(<span class="ruby-constant">Toolbox</span><span class="ruby-operator">::</span><span class="ruby-constant">NcRNA</span><span class="ruby-operator">::</span><span class="ruby-constant">Entry</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{organism}&quot;</span>,<span class="ruby-identifier">intron</span>,<span class="ruby-identifier">pos</span>[<span class="ruby-value">0</span>],<span class="ruby-identifier">pos</span>[<span class="ruby-value">1</span>],<span class="ruby-identifier">contig</span>,<span class="ruby-value str">&quot;intron&quot;</span>,<span class="ruby-node">&quot;#{gene.stable_id}&quot;</span>))
+                  <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">end</span>
+                                
+              <span class="ruby-comment cmt">#else</span>
+              <span class="ruby-comment cmt">#  unless @entries.has_key?(gene.biotype)</span>
+              <span class="ruby-comment cmt">#    @entries[gene.biotype] = []</span>
+              <span class="ruby-comment cmt">#  end</span>
+              <span class="ruby-comment cmt">#  pos = contig.aligned_positions(gene)</span>
+              <span class="ruby-comment cmt">#  @entries[gene.biotype] = @entries.fetch(gene.biotype).push(Toolbox::NcRNA::Entry.new(&quot;#{organism}&quot;,gene.slice,pos[0],pos[1],contig,&quot;#{gene.biotype}&quot;,&quot;#{gene.stable_id}&quot;))</span>
+              
+              <span class="ruby-keyword kw">end</span>
+              
+            <span class="ruby-keyword kw">end</span>
+          <span class="ruby-keyword kw">end</span>
+          
+          <span class="ruby-ivar">@entries</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">type</span>,<span class="ruby-identifier">entries</span><span class="ruby-operator">|</span>   <span class="ruby-comment cmt"># iterates over all types of features (introns, ncRNAs, etc)</span>
+            
+            <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot; ...creating groups of positionally conserved features (#{type})&quot;</span>
+            
+            <span class="ruby-ivar">@groups</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+            <span class="ruby-ivar">@ranges</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+            <span class="ruby-ivar">@counter</span> = <span class="ruby-value">0</span>
+            
+            <span class="ruby-identifier">entries</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">entry</span><span class="ruby-operator">|</span>         <span class="ruby-comment cmt"># all objects belonging to a given type of feature (introns, ncRNAs, etc)</span>
+            
+              <span class="ruby-identifier">member</span> = <span class="ruby-keyword kw">nil</span>
+            
+              <span class="ruby-ivar">@ranges</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">group</span>,<span class="ruby-identifier">range</span><span class="ruby-operator">|</span>
+            
+                <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">rel_start</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">range</span>[<span class="ruby-value">1</span>] <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">rel_stop</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">range</span>[<span class="ruby-value">0</span>]  <span class="ruby-comment cmt"># only if the features overlap</span>
+                  <span class="ruby-identifier">member</span> = <span class="ruby-identifier">group</span>
+                <span class="ruby-keyword kw">end</span>
+              
+              <span class="ruby-keyword kw">end</span>
+            
+              <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">member</span>.<span class="ruby-identifier">nil?</span>                <span class="ruby-comment cmt"># features didn't overlap, creates a new group</span>
+                <span class="ruby-ivar">@counter</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+                <span class="ruby-ivar">@ranges</span>[<span class="ruby-node">&quot;#{@counter}&quot;</span>] = [ <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">rel_start</span>, <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">rel_stop</span> ]
+                <span class="ruby-ivar">@groups</span>[<span class="ruby-node">&quot;#{@counter}&quot;</span>] = [ <span class="ruby-identifier">entry</span> ]
+              <span class="ruby-keyword kw">else</span>                          <span class="ruby-comment cmt"># features overlap, added to existing group</span>
+                <span class="ruby-ivar">@groups</span>[<span class="ruby-node">&quot;#{member}&quot;</span>] = <span class="ruby-ivar">@groups</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-node">&quot;#{member}&quot;</span>).<span class="ruby-identifier">push</span>(<span class="ruby-identifier">entry</span>) 
+              <span class="ruby-keyword kw">end</span>
+          
+            <span class="ruby-keyword kw">end</span>
+          
+            <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Summary for #{type}s&quot;</span>
+            
+            <span class="ruby-ivar">@groups</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">group</span>,<span class="ruby-identifier">members</span><span class="ruby-operator">|</span> <span class="ruby-comment cmt"># iterates over all groups within a given type of feature to get alignment</span>
+              
+              <span class="ruby-ivar">@organisms</span> = []
+              <span class="ruby-ivar">@min_range</span> = []
+              <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot; Group #{group}&quot;</span>
+              <span class="ruby-identifier">members</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">member</span><span class="ruby-operator">|</span>
+                
+                <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;  #{member.organism}|#{member.biotype}|#{member.rel_start}|#{member.rel_stop}&quot;</span>
+                
+                <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@organisms</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">member</span>.<span class="ruby-identifier">organism</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/_/</span>, <span class="ruby-value str">' '</span>))
+                  <span class="ruby-ivar">@organisms</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">member</span>.<span class="ruby-identifier">organism</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/_/</span>, <span class="ruby-value str">' '</span>))
+                <span class="ruby-keyword kw">end</span>
+                
+                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@min_range</span>.<span class="ruby-identifier">empty?</span>
+                  <span class="ruby-ivar">@min_range</span> = [ <span class="ruby-identifier">member</span>.<span class="ruby-identifier">rel_start</span>, <span class="ruby-identifier">member</span>.<span class="ruby-identifier">rel_stop</span> ]
+                <span class="ruby-keyword kw">else</span>
+                  <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">member</span>.<span class="ruby-identifier">rel_start</span> <span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@min_range</span>[<span class="ruby-value">0</span>]
+                    <span class="ruby-ivar">@min_range</span>[<span class="ruby-value">0</span>] = <span class="ruby-identifier">member</span>.<span class="ruby-identifier">rel_start</span>
+                  <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">member</span>.<span class="ruby-identifier">rel_stop</span> <span class="ruby-operator">&lt;</span> <span class="ruby-ivar">@min_range</span>[<span class="ruby-value">1</span>]
+                    <span class="ruby-ivar">@min_range</span>[<span class="ruby-value">1</span>] = <span class="ruby-identifier">member</span>.<span class="ruby-identifier">rel_stop</span>
+                  <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">end</span>
+                
+              <span class="ruby-keyword kw">end</span>
+              
+              <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;  minimal range covered by this group: #{@min_range[0]}/#{@min_range[1]}&quot;</span>
+              
+              <span class="ruby-identifier">f</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{gab.genomic_align_block_id}|#{group}_#{type}.fas&quot;</span>, <span class="ruby-value str">&quot;a&quot;</span>)
+              
+              <span class="ruby-identifier">gab</span>.<span class="ruby-identifier">fetch_aligned_sequences</span>(<span class="ruby-ivar">@min_range</span>[<span class="ruby-value">0</span>],<span class="ruby-ivar">@min_range</span>[<span class="ruby-value">1</span>],<span class="ruby-ivar">@organisms</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span>
+                <span class="ruby-identifier">f</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;&gt;#{a.definition}&quot;</span>
+                <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{a.definition}&quot;</span>
+                <span class="ruby-identifier">f</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{a.naseq}&quot;</span>
+              <span class="ruby-keyword kw">end</span>
+
+              <span class="ruby-identifier">f</span>.<span class="ruby-identifier">close</span>
+            <span class="ruby-keyword kw">end</span>
+            
+          <span class="ruby-keyword kw">end</span>
+          
+        <span class="ruby-keyword kw">end</span>
+        
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

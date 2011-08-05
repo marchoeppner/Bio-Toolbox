@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>xml_to_sql (Toolbox::NcRNA::Parser)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/parser.rb, line 35</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">xml_to_sql</span>
+       
+        <span class="ruby-identifier">input</span> = <span class="ruby-node">&quot;#{self.infile}_conservation.xml&quot;</span>
+
+        <span class="ruby-constant">ToolDB</span><span class="ruby-operator">::</span><span class="ruby-constant">DBConnection</span>.<span class="ruby-identifier">connect</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">version</span>) 
+                                
+        <span class="ruby-identifier">infile</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">input</span>, <span class="ruby-value str">&quot;r&quot;</span>)
+        <span class="ruby-identifier">doc</span> = <span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">infile</span>
+
+        <span class="ruby-constant">XPath</span>.<span class="ruby-identifier">each</span>( <span class="ruby-identifier">doc</span>, <span class="ruby-value str">&quot;//Group&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">group</span><span class="ruby-operator">|</span>
+
+          <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;INSERT INTO grouping (nr,biotype) VALUES (#{group.attributes[&quot;nr&quot;]},'#{group.attributes[&quot;type&quot;]}');&quot;</span>
+          <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;INSERT INTO genomic_align_block (ensembl_galblock_id) VALUES (#{group.attributes[&quot;genomic_align_block_id&quot;]});&quot;</span>
+          <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;INSERT INTO xref_grouping_genomic_align_block (grouping_id,genomic_align_block_id,start,stop) VALUES((SELECT id FROM grouping WHERE nr = #{group.attributes[&quot;nr&quot;]} and biotype = '#{type}'),(SELECT id from genomic_align_block WHERE ensembl_galblock_id = #{group.attributes[&quot;genomic_align_block_id&quot;]}),#{group.attributes[&quot;start&quot;]},#{group.attributes[&quot;stop&quot;]});&quot;</span>
+
+          <span class="ruby-identifier">group</span>.<span class="ruby-identifier">elements</span>.<span class="ruby-identifier">each</span>(<span class="ruby-value str">&quot;NcRNA&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ncrna</span><span class="ruby-operator">|</span>
+
+            <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">ncrna</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-value str">&quot;stable_id&quot;</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;nil&quot;</span>
+
+            <span class="ruby-identifier">organism_id</span> = <span class="ruby-constant">ToolDB</span><span class="ruby-operator">::</span><span class="ruby-constant">Organism</span>.<span class="ruby-identifier">find_by_name</span>(<span class="ruby-node">&quot;#{ncrna.attributes[&quot;organism&quot;]}&quot;</span>).<span class="ruby-identifier">id</span>
+
+            <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;INSERT INTO ensembl_ncrna (stable_id,organism_id,external_id,biotype) VALUES ('#{ncrna.attributes[&quot;stable_id&quot;]}',#{organism_id},'#{ncrna.attributes[&quot;ncrna_id&quot;]}','#{type}');&quot;</span>
+
+            <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;INSERT INTO ncrna_group (grouping_id,ensembl_ncrna_id) VALUES((SELECT id FROM grouping WHERE nr = '#{group.attributes[&quot;nr&quot;]}' AND biotype = '#{type}'),(SELECT id FROM ensembl_ncrna WHERE stable_id = '#{ncrna.attributes[&quot;stable_id&quot;]}'));&quot;</span>
+
+            <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">ncrna</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-value str">&quot;intronic&quot;</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;true&quot;</span>
+
+            <span class="ruby-identifier">ncrna</span>.<span class="ruby-identifier">elements</span>.<span class="ruby-identifier">each</span>(<span class="ruby-value str">&quot;HostGene&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">gene</span><span class="ruby-operator">|</span>
+
+              <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;INSERT INTO ensembl_hostgene (stable_id,organism_id,description) VALUES('#{gene.attributes[&quot;name&quot;]}',#{organism_id},'#{gene.attributes[&quot;description&quot;]}');&quot;</span>
+
+              <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;INSERT INTO xref_ncrna_hostgene (ensembl_ncrna_id,ensembl_hostgene_id) VALUES((SELECT id FROM ensembl_ncrna WHERE stable_id = '#{ncrna.attributes[&quot;stable_id&quot;]}'),(SELECT id FROM ensembl_hostgene WHERE stable_id = '#{gene.attributes[&quot;name&quot;]}'));&quot;</span>
+
+              <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">elements</span>.<span class="ruby-identifier">each</span>(<span class="ruby-value str">&quot;GoId&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">go</span><span class="ruby-operator">|</span>
+                <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;INSERT INTO hostgene_goterm (ensembl_hostgene_id,go_term,linkage) VALUES((SELECT id FROM ensembl_hostgene WHERE stable_id = '#{gene.attributes[&quot;name&quot;]}'),'#{go.attributes[&quot;id&quot;]}','#{go.attributes[&quot;linkage&quot;]}');&quot;</span>
+              <span class="ruby-keyword kw">end</span>
+
+            <span class="ruby-keyword kw">end</span>
+
+          <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-keyword kw">end</span>
+        
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

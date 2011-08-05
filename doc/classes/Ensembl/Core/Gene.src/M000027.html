@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>go_terms_with_evidence (Ensembl::Core::Gene)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/extensions.rb, line 117</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">go_terms_with_evidence</span>
+        
+        <span class="ruby-identifier">answer</span> = []
+        <span class="ruby-identifier">go_db_id</span> = <span class="ruby-constant">Ensembl</span><span class="ruby-operator">::</span><span class="ruby-constant">ExternalDb</span>.<span class="ruby-identifier">find_by_db_name</span>(<span class="ruby-value str">&quot;GO&quot;</span>).<span class="ruby-identifier">external_db_id</span>
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">transcripts</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">translation</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">false</span> }.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">transcript</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">transcript</span>.<span class="ruby-identifier">translation</span>.<span class="ruby-identifier">object_xrefs</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">xref</span>.<span class="ruby-identifier">external_db_id</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">go_db_id</span>}.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">oxref</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>([<span class="ruby-node">&quot;#{oxref.xref.dbprimary_acc}&quot;</span> , <span class="ruby-node">&quot;#{oxref.go_xref.linkage_type}&quot;</span>])
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+        
+        <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">answer</span>  
+        
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

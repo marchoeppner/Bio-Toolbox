@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>region_is_aligned? (Toolbox::HomologDB::HomologyMember)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/homolog_db.rb, line 545</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">region_is_aligned?</span>(<span class="ruby-identifier">hit</span>)
+        <span class="ruby-identifier">hit_coords</span> = [ <span class="ruby-identifier">hit</span>.<span class="ruby-identifier">target_start</span>.<span class="ruby-identifier">to_i</span> , <span class="ruby-identifier">hit</span>.<span class="ruby-identifier">target_end</span>.<span class="ruby-identifier">to_i</span> ].<span class="ruby-identifier">sort</span>
+        <span class="ruby-identifier">hit_start</span> = <span class="ruby-identifier">hit_coords</span>.<span class="ruby-identifier">shift</span>
+        <span class="ruby-identifier">hit_stop</span> = <span class="ruby-identifier">hit_coords</span>.<span class="ruby-identifier">shift</span>
+        
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">homology_alignments</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">align</span><span class="ruby-operator">|</span>
+          <span class="ruby-comment cmt">#puts align.inspect</span>
+          
+          <span class="ruby-comment cmt">#puts &quot;Checking for overlap #{align.query.stable_id} (#{hit.target_def})&quot;</span>
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">hit_start</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">align</span>.<span class="ruby-identifier">query_start</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">hit_stop</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">align</span>.<span class="ruby-identifier">query_stop</span>
+           <span class="ruby-comment cmt"># puts &quot;#{align.query_start}/#{hit_start} - #{align.query_stop}/#{hit_stop}&quot;</span>
+            <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+        
+        <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
+        
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

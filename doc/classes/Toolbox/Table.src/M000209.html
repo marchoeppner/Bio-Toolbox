@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>create_table (Toolbox::Table)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/graphics.rb, line 46</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create_table</span>
+      
+      <span class="ruby-identifier">answer</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+      
+      <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;&lt;table class='sample'&gt;&quot;</span>)
+      <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;\t&lt;tr&gt;&quot;</span>)
+      <span class="ruby-identifier">header</span> = <span class="ruby-value str">&quot;&quot;</span>
+      <span class="ruby-ivar">@header</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">h</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">header</span> = <span class="ruby-identifier">header</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot;&lt;td&gt;#{h}&lt;/td&gt;&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;\t\t&lt;td&gt;&lt;/td&gt;#{header}&quot;</span>)
+      <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;\t&lt;/tr&gt;&quot;</span>)
+      <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">row</span>,<span class="ruby-identifier">values</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;\t&lt;tr&gt;&quot;</span>)
+        <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;\t\t&lt;td&gt;#{row}&lt;/td&gt;&quot;</span>)
+        <span class="ruby-identifier">values</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;\t\t&lt;td bgcolor='#{get_color(value)}'&gt;#{value}&lt;/td&gt;&quot;</span>)
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;\t&lt;/tr&gt;&quot;</span>)
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;\n&quot;</span>)
+      
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

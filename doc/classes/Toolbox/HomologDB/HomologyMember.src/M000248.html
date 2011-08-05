@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>get_aligned_track (Toolbox::HomologDB::HomologyMember)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/homolog_db.rb, line 248</span>
+                        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_aligned_track</span>(<span class="ruby-identifier">my_panel</span>)
+                                
+                                <span class="ruby-identifier">track</span> = <span class="ruby-identifier">my_panel</span>.<span class="ruby-identifier">add_track</span>(<span class="ruby-node">&quot;#{self.stable_id} (#{self.organism_name}]&quot;</span>, <span class="ruby-identifier">:label</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>, <span class="ruby-identifier">:glyph</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value str">'gap'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:box</span>, <span class="ruby-value str">'aln'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:generic</span>}, <span class="ruby-identifier">:colour</span> =<span class="ruby-operator">&gt;</span>  [<span class="ruby-value">0</span>,<span class="ruby-value">0</span>,<span class="ruby-value">1</span>])
+                                
+                                <span class="ruby-identifier">coordinates</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">biograph_coordinates</span>(<span class="ruby-identifier">type</span>=<span class="ruby-value str">&quot;peptide&quot;</span>)
+                                <span class="ruby-identifier">coordinates</span>.<span class="ruby-identifier">unshift</span>(<span class="ruby-value str">&quot;0..1&quot;</span>)
+                                <span class="ruby-identifier">features</span> = []
+                                <span class="ruby-identifier">gap_starts</span> = []
+                                <span class="ruby-identifier">gap_stops</span> = []
+                                
+                                <span class="ruby-identifier">first</span> = <span class="ruby-identifier">coordinates</span>.<span class="ruby-identifier">shift</span>
+                                <span class="ruby-identifier">features</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Feature</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">'aln'</span>, <span class="ruby-node">&quot;#{first}&quot;</span>)
+                                
+                                <span class="ruby-identifier">intron_start</span> = <span class="ruby-identifier">first</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">&quot;..&quot;</span>)[<span class="ruby-value">1</span>]
+                                
+                                <span class="ruby-identifier">coordinates</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">coord</span><span class="ruby-operator">|</span>
+                                        <span class="ruby-identifier">intron_stop</span> = <span class="ruby-identifier">coord</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">&quot;..&quot;</span>)[<span class="ruby-value">0</span>]
+                                        <span class="ruby-identifier">features</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Feature</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">'gap'</span>,<span class="ruby-node">&quot;#{intron_start}..#{intron_stop}&quot;</span>)
+                                        <span class="ruby-identifier">features</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Feature</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">'aln'</span>, <span class="ruby-node">&quot;#{coord}&quot;</span>)
+                                <span class="ruby-keyword kw">end</span>
+                                
+                                <span class="ruby-identifier">composite</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Feature</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">'aln'</span>, <span class="ruby-node">&quot;join(#{coordinates.join(',')})&quot;</span>, [], <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">features</span>)
+                                
+                                <span class="ruby-identifier">track</span>.<span class="ruby-identifier">add_feature</span>(<span class="ruby-identifier">composite</span>, <span class="ruby-identifier">:label</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;composite&quot;</span>)
+                                
+                                <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">my_panel</span>
+                                
+                        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

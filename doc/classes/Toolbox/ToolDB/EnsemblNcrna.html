@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: Toolbox::ToolDB::EnsemblNcrna</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">Toolbox::ToolDB::EnsemblNcrna</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../../files/lib/tool_db_rb.html">
+                lib/tool_db.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                <a href="DBConnection.html">
+                DBConnection
+               </a>
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000106">best_mirbase_match</a>&nbsp;&nbsp;
+      <a href="#M000094">fetch_all_targets</a>&nbsp;&nbsp;
+      <a href="#M000082">fetch_conserved</a>&nbsp;&nbsp;
+      <a href="#M000088">fetch_ensembl_gene</a>&nbsp;&nbsp;
+      <a href="#M000089">fetch_ensembl_member</a>&nbsp;&nbsp;
+      <a href="#M000099">fetch_group_members</a>&nbsp;&nbsp;
+      <a href="#M000095">fetch_hostgene</a>&nbsp;&nbsp;
+      <a href="#M000100">fetch_node_presence</a>&nbsp;&nbsp;
+      <a href="#M000101">fetch_nodes</a>&nbsp;&nbsp;
+      <a href="#M000085">find_external_id</a>&nbsp;&nbsp;
+      <a href="#M000098">group</a>&nbsp;&nbsp;
+      <a href="#M000097">has_group?</a>&nbsp;&nbsp;
+      <a href="#M000104">has_hostgene?</a>&nbsp;&nbsp;
+      <a href="#M000103">is_intronic?</a>&nbsp;&nbsp;
+      <a href="#M000087">is_sense?</a>&nbsp;&nbsp;
+      <a href="#M000091">mirbase_acc</a>&nbsp;&nbsp;
+      <a href="#M000093">mirbase_family</a>&nbsp;&nbsp;
+      <a href="#M000086">naseq</a>&nbsp;&nbsp;
+      <a href="#M000102">overlaps_exon?</a>&nbsp;&nbsp;
+      <a href="#M000096">present_at?</a>&nbsp;&nbsp;
+      <a href="#M000092">rfam_description</a>&nbsp;&nbsp;
+      <a href="#M000084">seq</a>&nbsp;&nbsp;
+      <a href="#M000083">strand</a>&nbsp;&nbsp;
+      <a href="#M000105">targets_hostgene?</a>&nbsp;&nbsp;
+      <a href="#M000090">to_fasta</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000082" class="method-detail">
+        <a name="M000082"></a>
+
+        <div class="method-heading">
+          <a href="EnsemblNcrna.src/M000082.html" target="Code" class="method-signature"
+            onclick="popupCode('EnsemblNcrna.src/M000082.html');return false;">
+          <span class="method-name">fetch_conserved</span><span class="method-args">(biotype)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h1>DESCRIPTION</h1>
+<p>
+Returns only npcRNAs located in the genome alignment.
+</p>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000106" class="method-detail">
+        <a name="M000106"></a>
+
+        <div class="method-heading">
+          <a href="EnsemblNcrna.src/M000106.html" target="Code" class="method-signature"
+            onclick="popupCode('EnsemblNcrna.src/M000106.html');return false;">
+          <span class="method-name">best_mirbase_match</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000094" class="method-detail">
+        <a name="M000094"></a>
+
+        <div class="method-heading">
+          <a href="EnsemblNcrna.src/M000094.html" target="Code" class="method-signature"
+            onclick="popupCode('EnsemblNcrna.src/M000094.html');return false;">
+          <span class="method-name">fetch_all_targets</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000088" class="method-detail">
+        <a name="M000088"></a>
+
+        <div class="method-heading">
+          <a href="EnsemblNcrna.src/M000088.html" target="Code" class="method-signature"
+            onclick="popupCode('EnsemblNcrna.src/M000088.html');return false;">
+          <span class="method-name">fetch_ensembl_gene</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h1>DESCRIPTION</h1>
+<p>
+Returns the <a href="../../Ensembl/Core/Gene.html">Ensembl::Core::Gene</a>
+object for this ncRNA.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000089" class="method-detail">
+        <a name="M000089"></a>
+
+        <div class="method-heading">
+          <a href="EnsemblNcrna.src/M000089.html" target="Code" class="method-signature"
+            onclick="popupCode('EnsemblNcrna.src/M000089.html');return false;">
+          <span class="method-name">fetch_ensembl_member</span><span class="method-args">(version=54)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h1>DESCRIPTION</h1>
+<p>
+Returns the <a
+href="../../Ensembl/Compara/Member.html">Ensembl::Compara::Member</a>
+object for a protein-coding host gene. Used to retrieve homologs.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000099" class="method-detail">
+        <a name="M000099"></a>
+
+        <div class="method-heading">
+          <a href="EnsemblNcrna.src/M000099.html" target="Code" class="method-signature"
+            onclick="popupCode('EnsemblNcrna.src/M000099.html');return false;">
+          <span class="method-name">fetch_group_members</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000095" class="method-detail">
+        <a name="M000095"></a>
+
+        <div class="method-heading">
+          <a href="EnsemblNcrna.src/M000095.html" target="Code" class="method-signature"
+            onclick="popupCode('EnsemblNcrna.src/M000095.html');return false;">
+          <span class="method-name">fetch_hostgene</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000100" class="method-detail">
+        <a name="M000100"></a>
+
+        <div class="method-heading">
+          <a href="EnsemblNcrna.src/M000100.html" target="Code" class="method-signature"
+            onclick="popupCode('EnsemblNcrna.src/M000100.html');return false;">
+          <span class="method-name">fetch_node_presence</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000101" class="method-detail">
+        <a name="M000101"></a>
+
+        <div class="method-heading">
+          <a href="EnsemblNcrna.src/M000101.html" target="Code" class="method-signature"
+            onclick="popupCode('EnsemblNcrna.src/M000101.html');return false;">
+          <span class="method-name">fetch_nodes</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000085" class="method-detail">
+        <a name="M000085"></a>
+
+        <div class="method-heading">
+          <a href="EnsemblNcrna.src/M000085.html" target="Code" class="method-signature"
+            onclick="popupCode('EnsemblNcrna.src/M000085.html');return false;">
+          <span class="method-name">find_external_id</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000098" class="method-detail">
+        <a name="M000098"></a>
+
+        <div class="method-heading">
+          <a href="EnsemblNcrna.src/M000098.html" target="Code" class="method-signature"
+            onclick="popupCode('EnsemblNcrna.src/M000098.html');return false;">
+          <span class="method-name">group</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000097" class="method-detail">
+        <a name="M000097"></a>
+
+        <div class="method-heading">
+          <a href="EnsemblNcrna.src/M000097.html" target="Code" class="method-signature"
+            onclick="popupCode('EnsemblNcrna.src/M000097.html');return false;">
+          <span class="method-name">has_group?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000104" class="method-detail">
+        <a name="M000104"></a>
+
+        <div class="method-heading">
+          <a href="EnsemblNcrna.src/M000104.html" target="Code" class="method-signature"
+            onclick="popupCode('EnsemblNcrna.src/M000104.html');return false;">
+          <span class="method-name">has_hostgene?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000103" class="method-detail">
+        <a name="M000103"></a>
+
+        <div class="method-heading">
+          <a href="EnsemblNcrna.src/M000103.html" target="Code" class="method-signature"
+            onclick="popupCode('EnsemblNcrna.src/M000103.html');return false;">
+          <span class="method-name">is_intronic?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000087" class="method-detail">
+        <a name="M000087"></a>
+
+        <div class="method-heading">
+          <a href="EnsemblNcrna.src/M000087.html" target="Code" class="method-signature"
+            onclick="popupCode('EnsemblNcrna.src/M000087.html');return false;">
+          <span class="method-name">is_sense?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h1>DESCRIPTION</h1>
+<p>
+Checks whether this ncRNA is sense or anti sense to it&#8216;s host gene
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000091" class="method-detail">
+        <a name="M000091"></a>
+
+        <div class="method-heading">
+          <a href="EnsemblNcrna.src/M000091.html" target="Code" class="method-signature"
+            onclick="popupCode('EnsemblNcrna.src/M000091.html');return false;">
+          <span class="method-name">mirbase_acc</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000093" class="method-detail">
+        <a name="M000093"></a>
+
+        <div class="method-heading">
+          <a href="EnsemblNcrna.src/M000093.html" target="Code" class="method-signature"
+            onclick="popupCode('EnsemblNcrna.src/M000093.html');return false;">
+          <span class="method-name">mirbase_family</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000086" class="method-detail">
+        <a name="M000086"></a>
+
+        <div class="method-heading">
+          <a href="EnsemblNcrna.src/M000086.html" target="Code" class="method-signature"
+            onclick="popupCode('EnsemblNcrna.src/M000086.html');return false;">
+          <span class="method-name">naseq</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000102" class="method-detail">
+        <a name="M000102"></a>
+
+        <div class="method-heading">
+          <a href="EnsemblNcrna.src/M000102.html" target="Code" class="method-signature"
+            onclick="popupCode('EnsemblNcrna.src/M000102.html');return false;">
+          <span class="method-name">overlaps_exon?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000096" class="method-detail">
+        <a name="M000096"></a>
+
+        <div class="method-heading">
+          <a href="EnsemblNcrna.src/M000096.html" target="Code" class="method-signature"
+            onclick="popupCode('EnsemblNcrna.src/M000096.html');return false;">
+          <span class="method-name">present_at?</span><span class="method-args">(node)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000092" class="method-detail">
+        <a name="M000092"></a>
+
+        <div class="method-heading">
+          <a href="EnsemblNcrna.src/M000092.html" target="Code" class="method-signature"
+            onclick="popupCode('EnsemblNcrna.src/M000092.html');return false;">
+          <span class="method-name">rfam_description</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000084" class="method-detail">
+        <a name="M000084"></a>
+
+        <div class="method-heading">
+          <a href="EnsemblNcrna.src/M000084.html" target="Code" class="method-signature"
+            onclick="popupCode('EnsemblNcrna.src/M000084.html');return false;">
+          <span class="method-name">seq</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h1>DESCRIPTION</h1>
+<p>
+Returns the corresponding sequencing from ncrna_sequence
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000083" class="method-detail">
+        <a name="M000083"></a>
+
+        <div class="method-heading">
+          <a href="EnsemblNcrna.src/M000083.html" target="Code" class="method-signature"
+            onclick="popupCode('EnsemblNcrna.src/M000083.html');return false;">
+          <span class="method-name">strand</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h1>DESCRIPTION</h1>
+<p>
+Returns the <a href="EnsemblNcrna.html#M000083">strand</a> of the ncRNA
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000105" class="method-detail">
+        <a name="M000105"></a>
+
+        <div class="method-heading">
+          <a href="EnsemblNcrna.src/M000105.html" target="Code" class="method-signature"
+            onclick="popupCode('EnsemblNcrna.src/M000105.html');return false;">
+          <span class="method-name">targets_hostgene?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000090" class="method-detail">
+        <a name="M000090"></a>
+
+        <div class="method-heading">
+          <a href="EnsemblNcrna.src/M000090.html" target="Code" class="method-signature"
+            onclick="popupCode('EnsemblNcrna.src/M000090.html');return false;">
+          <span class="method-name">to_fasta</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

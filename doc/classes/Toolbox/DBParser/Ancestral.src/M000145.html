@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>ncrnas_per_node (Toolbox::DBParser::Ancestral)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/database_pipeline.rb, line 417</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">ncrnas_per_node</span>
+        
+        <span class="ruby-identifier">groups</span> = <span class="ruby-constant">ToolDB</span><span class="ruby-operator">::</span><span class="ruby-constant">Grouping</span>.<span class="ruby-identifier">find_all_by_biotype</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">type</span>)
+        <span class="ruby-identifier">nodes</span> = <span class="ruby-constant">ToolDB</span><span class="ruby-operator">::</span><span class="ruby-constant">TreeNode</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:all</span>, <span class="ruby-identifier">:order</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;nr&quot;</span>)
+        <span class="ruby-identifier">organisms</span> = <span class="ruby-constant">ToolDB</span><span class="ruby-operator">::</span><span class="ruby-constant">Organism</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:all</span>, <span class="ruby-identifier">:order</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;name&quot;</span>)
+        
+        <span class="ruby-identifier">nodes</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">node</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">f</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{@base_name}_node_#{node.nr}.csv&quot;</span>, <span class="ruby-value str">&quot;a&quot;</span>)
+          <span class="ruby-identifier">f</span>.<span class="ruby-identifier">print</span> <span class="ruby-value str">&quot;,&quot;</span>
+          <span class="ruby-identifier">organisms</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">organism</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">print</span> <span class="ruby-node">&quot;,#{organism.name}&quot;</span>}
+          <span class="ruby-identifier">f</span>.<span class="ruby-identifier">print</span> <span class="ruby-value str">&quot;\n&quot;</span>
+          <span class="ruby-identifier">f</span>.<span class="ruby-identifier">close</span>
+        <span class="ruby-keyword kw">end</span>
+          
+        <span class="ruby-identifier">groups</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">group</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">nodes</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">node</span><span class="ruby-operator">|</span>
+            <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">group</span>.<span class="ruby-identifier">present_at?</span>(<span class="ruby-identifier">node</span>)
+              <span class="ruby-identifier">ncrnas</span> = <span class="ruby-identifier">group</span>.<span class="ruby-identifier">fetch_ncrnas</span>
+              <span class="ruby-identifier">f</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{@base_name}_node_#{node.nr}.csv&quot;</span>, <span class="ruby-value str">&quot;a&quot;</span>)
+              <span class="ruby-identifier">ncrna_group</span> = <span class="ruby-node">&quot;#{group.fetch_ncrna_group}&quot;</span>
+              <span class="ruby-identifier">f</span>.<span class="ruby-identifier">print</span> <span class="ruby-node">&quot;#{group.nr},#{ncrna_group}&quot;</span>
+              <span class="ruby-identifier">organisms</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">organism</span><span class="ruby-operator">|</span>
+                <span class="ruby-identifier">state</span> = <span class="ruby-value str">&quot;0&quot;</span>
+                 <span class="ruby-identifier">ncrnas</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ncrna</span><span class="ruby-operator">|</span>
+                   <span class="ruby-identifier">state</span> = <span class="ruby-value str">&quot;X&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">ncrna</span>.<span class="ruby-identifier">organism</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">organism</span>.<span class="ruby-identifier">name</span>
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-identifier">f</span>.<span class="ruby-identifier">print</span> <span class="ruby-node">&quot;,#{state}&quot;</span>
+              <span class="ruby-keyword kw">end</span>
+              <span class="ruby-identifier">f</span>.<span class="ruby-identifier">print</span> <span class="ruby-value str">&quot;,intronic,&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">group</span>.<span class="ruby-identifier">is_intronic?</span>
+              <span class="ruby-identifier">f</span>.<span class="ruby-identifier">print</span> <span class="ruby-value str">&quot;,intergenic,&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">group</span>.<span class="ruby-identifier">is_intronic?</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">false</span>
+              <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;miRNA&quot;</span>
+                <span class="ruby-identifier">f</span>.<span class="ruby-identifier">print</span> <span class="ruby-node">&quot;#{ncrna_group}&quot;</span>
+              <span class="ruby-keyword kw">else</span>
+                <span class="ruby-identifier">rfam</span> = <span class="ruby-constant">ToolDB</span><span class="ruby-operator">::</span><span class="ruby-constant">Rfam</span>.<span class="ruby-identifier">find_by_acc</span>(<span class="ruby-node">&quot;#{ncrna_group}&quot;</span>)
+                <span class="ruby-identifier">f</span>.<span class="ruby-identifier">print</span> <span class="ruby-node">&quot;#{rfam.name},#{rfam.family},#{rfam.targets},&quot;</span>
+              <span class="ruby-keyword kw">end</span>
+              <span class="ruby-identifier">ncrnas</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ncrna</span><span class="ruby-operator">|</span>
+                <span class="ruby-identifier">hostgene</span> = <span class="ruby-identifier">ncrna</span>.<span class="ruby-identifier">fetch_hostgene</span>
+                <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">hostgene</span>.<span class="ruby-identifier">nil?</span>
+                <span class="ruby-identifier">f</span>.<span class="ruby-identifier">print</span> <span class="ruby-node">&quot;#{hostgene.stable_id}|#{hostgene.genbank_id}|#{hostgene.description.gsub(/\,/, ' ').strip},&quot;</span> 
+              <span class="ruby-keyword kw">end</span>
+              <span class="ruby-identifier">f</span>.<span class="ruby-identifier">print</span> <span class="ruby-value str">&quot;\n&quot;</span>
+              <span class="ruby-identifier">f</span>.<span class="ruby-identifier">close</span>
+              
+            <span class="ruby-keyword kw">end</span>
+          <span class="ruby-keyword kw">end</span>  
+        <span class="ruby-keyword kw">end</span>  
+          
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>
