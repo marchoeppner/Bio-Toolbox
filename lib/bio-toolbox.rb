@@ -11,3 +11,5 @@ require 'ensembl'
 require File.dirname(__FILE__) + '/files/ensembl_compara_connection.rb'
 require File.dirname(__FILE__) + '/files/ensembl_compara.rb'
 
+require File.dirname(__FILE__) + '/files/bioruby_extensions.rb'
+
