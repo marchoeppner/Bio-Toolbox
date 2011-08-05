@@ -1,6 +1,7 @@
 # Marc's Bioinformatics Toolbox...
 
 require 'rubygems'
+require 'composite_primary_keys'
 
 gem 'ruby-ensembl-api', '>=0.9.6'
 require 'ensembl'
