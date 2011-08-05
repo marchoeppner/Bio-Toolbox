@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>ffd_codons (Bio::Alignment::OriginalAlignment)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/extensions.rb, line 863</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">ffd_codons</span>
+        
+        <span class="ruby-identifier">ffd</span> = [ <span class="ruby-value str">&quot;TC&quot;</span>, <span class="ruby-value str">&quot;CT&quot;</span>, <span class="ruby-value str">&quot;CC&quot;</span>, <span class="ruby-value str">&quot;CG&quot;</span>, <span class="ruby-value str">&quot;AC&quot;</span>, <span class="ruby-value str">&quot;GT&quot;</span>, <span class="ruby-value str">&quot;GC&quot;</span>, <span class="ruby-value str">&quot;GG&quot;</span> ]
+        
+        <span class="ruby-identifier">keys</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sequence_names</span>
+        
+        <span class="ruby-identifier">count</span> = <span class="ruby-value">0</span>
+        <span class="ruby-identifier">sites</span> = []    <span class="ruby-comment cmt"># groups 3 sites </span>
+        <span class="ruby-identifier">codons</span> = []    <span class="ruby-comment cmt"># ... into one codon</span>
+        <span class="ruby-identifier">ffd_codons</span> = []   <span class="ruby-comment cmt"># holds all ffd codons</span>
+        
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">each_site</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">site</span><span class="ruby-operator">|</span>
+          
+          <span class="ruby-identifier">count</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+          <span class="ruby-identifier">sites</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">site</span>)
+          
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">3</span>
+            <span class="ruby-identifier">codons</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+            <span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
+              <span class="ruby-identifier">one</span> = <span class="ruby-identifier">sites</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">shift</span>
+              <span class="ruby-identifier">two</span> = <span class="ruby-identifier">sites</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">shift</span>
+              <span class="ruby-identifier">three</span> = <span class="ruby-identifier">sites</span>[<span class="ruby-value">2</span>].<span class="ruby-identifier">shift</span>
+              <span class="ruby-identifier">codons</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;#{one}#{two}#{three}&quot;</span>)
+            <span class="ruby-keyword kw">end</span>
+            <span class="ruby-identifier">add</span> = <span class="ruby-keyword kw">true</span>
+            <span class="ruby-identifier">codons</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">codon</span><span class="ruby-operator">|</span>
+              <span class="ruby-identifier">add</span> = <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">ffd</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">codon</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">1</span>].<span class="ruby-identifier">upcase</span>) <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">codon</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-value str">&quot;-&quot;</span>)
+            <span class="ruby-keyword kw">end</span>
+            <span class="ruby-identifier">ffd_codons</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">codons</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">add</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">true</span>
+            <span class="ruby-identifier">count</span> = <span class="ruby-value">0</span> 
+            <span class="ruby-identifier">sites</span>.<span class="ruby-identifier">clear</span>
+          <span class="ruby-keyword kw">end</span>
+          
+        <span class="ruby-keyword kw">end</span>
+        
+        <span class="ruby-identifier">answer</span> = []
+        <span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">seq</span> = <span class="ruby-value str">&quot;&quot;</span>
+          <span class="ruby-identifier">ffd_codons</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">site</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">seq</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">shift</span>.<span class="ruby-identifier">slice</span>(<span class="ruby-value">2</span><span class="ruby-operator">..</span><span class="ruby-value">2</span>)
+          <span class="ruby-keyword kw">end</span>
+          <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">FastaFormat</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">seq</span>).<span class="ruby-identifier">to_fasta</span>(<span class="ruby-identifier">k</span>)))
+        <span class="ruby-keyword kw">end</span>
+        
+        <span class="ruby-keyword kw">return</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Alignment</span><span class="ruby-operator">::</span><span class="ruby-constant">OriginalAlignment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">answer</span>)
+        
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

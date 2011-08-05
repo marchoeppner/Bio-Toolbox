@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>go_stat (Toolbox::DBParser::Ancestral)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/database_pipeline.rb, line 1432</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">go_stat</span>(<span class="ruby-identifier">organism_id</span>,<span class="ruby-identifier">default_node</span>,<span class="ruby-identifier">sub_node</span> = <span class="ruby-keyword kw">nil</span>,<span class="ruby-identifier">seqtype</span>=<span class="ruby-value str">&quot;gene&quot;</span>,<span class="ruby-identifier">ensembl_version</span>=<span class="ruby-value">54</span>)
+        
+        <span class="ruby-identifier">def_node</span> = <span class="ruby-constant">ToolDB</span><span class="ruby-operator">::</span><span class="ruby-constant">TreeNode</span>.<span class="ruby-identifier">find_by_nr</span>(<span class="ruby-identifier">default_node</span>)
+        <span class="ruby-identifier">sub_node</span> = <span class="ruby-constant">ToolDB</span><span class="ruby-operator">::</span><span class="ruby-constant">TreeNode</span>.<span class="ruby-identifier">find_by_nr</span>(<span class="ruby-identifier">sub_node</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">sub_node</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">sub_node</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">default_node</span>
+        
+        <span class="ruby-identifier">genes</span> = <span class="ruby-constant">ToolDB</span><span class="ruby-operator">::</span><span class="ruby-constant">EnsemblHostgene</span>.<span class="ruby-identifier">find_all_by_organism_id</span>(<span class="ruby-value">1</span>)
+        <span class="ruby-identifier">genes</span> = <span class="ruby-identifier">genes</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">g</span><span class="ruby-operator">|</span> <span class="ruby-identifier">g</span>.<span class="ruby-identifier">present_at?</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">type</span>,<span class="ruby-identifier">def_node</span>)}
+        <span class="ruby-identifier">genes</span> = <span class="ruby-identifier">genes</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">g</span><span class="ruby-operator">|</span> <span class="ruby-identifier">g</span>.<span class="ruby-identifier">present_at?</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">type</span>,<span class="ruby-identifier">sub_node</span>) <span class="ruby-operator">==</span> <span class="ruby-keyword kw">false</span> } <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">sub_node</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">sub_node</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">default_node</span>
+
+        <span class="ruby-identifier">genes</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">gene</span><span class="ruby-operator">|</span>
+          
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">seqtype</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;gene&quot;</span>
+            
+            <span class="ruby-comment cmt">#puts gene.stable_id</span>
+            <span class="ruby-identifier">puts</span> <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">fetch_ensembl_gene</span>.<span class="ruby-identifier">uniprot_id</span>
+            
+          <span class="ruby-keyword kw">else</span>
+            
+            <span class="ruby-identifier">e</span> = <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">fetch_ensembl_gene</span>
+
+            <span class="ruby-identifier">answer</span> = []
+          
+            <span class="ruby-identifier">e</span>.<span class="ruby-identifier">transcripts</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
+              <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">translation</span>.<span class="ruby-identifier">nil?</span>
+              <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">t</span>.<span class="ruby-identifier">translation</span>.<span class="ruby-identifier">stable_id</span>)
+            <span class="ruby-keyword kw">end</span>
+            <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">compact!</span>
+            <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">nil?</span>
+          
+            <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{answer.shift}&quot;</span>
+          <span class="ruby-keyword kw">end</span>
+          
+        <span class="ruby-keyword kw">end</span>
+        
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

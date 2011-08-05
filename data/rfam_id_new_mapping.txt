@@ -1,0 +1,1372 @@
+RF00002,5.8S ribosomal RNA,
+RF00003,U1 spliceosomal RNA,
+RF00004,U2 spliceosomal RNA,
+RF00005,tRNA,
+RF00006,Vault RNA,
+RF00007,U12 minor spliceosomal RNA,
+RF00008,Hammerhead ribozyme (type III),
+RF00009,Nuclear RNase P,
+RF00010,Bacterial RNase P class A,
+RF00011,Bacterial RNase P class B,
+RF00012,Small nucleolar RNA U3,
+RF00013,6S / SsrS RNA,
+RF00014,DsrA RNA,
+RF00015,U4 spliceosomal RNA,
+RF00016,Small nucleolar RNA SNORD14,C/D
+RF00017,Eukaryotic type signal recognition particle RNA,
+RF00018,CsrB/RsmB RNA family,,
+RF00019,Y RNA,,
+RF00020,U5 spliceosomal RNA,,
+RF00021,Spot 42 RNA,,
+RF00022,GcvB RNA,,
+RF00023,tmRNA,,
+RF00024,Vertebrate telomerase RNA,,
+RF00025,Ciliate telomerase RNA,,
+RF00026,U6 spliceosomal RNA,,
+RF00027,let-7 microRNA precursor,let-7,MIPF0000002
+RF00028,Group I catalytic intron,,
+RF00029,Group II catalytic intron,,
+RF00030,RNase MRP,,
+RF00031,Selenocysteine insertion sequence,,
+RF00032,Histone 3' UTR stem-loop,,
+RF00033,MicF RNA,,
+RF00034,RprA RNA,,
+RF00035,OxyS RNA,,
+RF00036,HIV Rev response element,,
+RF00037,Iron response element,,
+RF00038,PrfA thermoregulator UTR,,
+RF00039,DicF RNA,,
+RF00040,RNase E 5' UTR element,,
+RF00041,Enteroviral 3' UTR element,,
+RF00042,CopA-like RNA,,
+RF00043,R1162-like plasmid antisense RNA,,
+RF00044,Bacteriophage pRNA,,
+RF00045,Small nucleolar RNA SNORA73 family,H/ACA,
+RF00046,Small nucleolar RNA R30/Z108,C/D,
+RF00047,mir-2 microRNA precursor,mir-2,MIPF0000049
+RF00048,Enterovirus cis-acting replication element,,
+RF00049,Small nucleolar RNA SNORD36,C/D,
+RF00050,FMN riboswitch (RFN element),,
+RF00051,mir-17 microRNA precursor family,mir-17,
+RF00052,lin-4 microRNA precursor,lin-4,MIPF0000303
+RF00053,mir-7 microRNA precursor,mir-7,MIPF0000022
+RF00054,Small nucleolar RNA SNORD25,C/D,
+RF00055,Small nucleolar RNA SNORD96 family,C/D,
+RF00056,Small nucleolar RNA SNORA71,H/ACA,
+RF00057,RyhB RNA,,
+RF00058,HgcF RNA,,
+RF00059,TPP riboswitch (THI element),,
+RF00060,HgcE RNA,,
+RF00061,Hepatitis C virus internal ribosome entry site,,
+RF00062,HgcC family RNA,,
+RF00063,SscA RNA,,
+RF00064,HgcG RNA,,
+RF00065,Small nucleolar RNA snoR9,C/D,
+RF00066,U7 small nuclear RNA,,
+RF00067,Small nucleolar RNA SNORD15,C/D,
+RF00068,Small nucleolar RNA SNORD21,C/D,
+RF00069,Small nucleolar RNA SNORD24,C/D,
+RF00070,Small nucleolar RNA SNORD29,C/D,
+RF00071,Small nucleolar RNA SNORD73,C/D,
+RF00072,Small nucleolar RNA SNORA75,H/ACA,
+RF00073,mir-156 microRNA precursor,mir-156,MIPF0000008
+RF00074,mir-29  microRNA precursor,mir-29,MIPF0000009
+RF00075,mir-166 microRNA precursor,mir-166,MIPF0000004
+RF00076,mir-181 microRNA precursor,mir-181,MIPF0000007
+RF00077,SraB RNA,,
+RF00078,SraD RNA,,
+RF00079,SraE_OmrA_OmrB family RNA,,
+RF00080,yybP-ykoY leader,,
+RF00081,SraH RNA,,
+RF00082,SraG RNA,,
+RF00083,GlmZ RNA activator of glmS mRNA,,
+RF00084,CsrC RNA family,,
+RF00085,Small nucleolar RNA SNORD28,C/D,
+RF00086,Small nucleolar RNA SNORD27,C/D,
+RF00087,Small nucleolar RNA SNORD26,C/D,
+RF00088,Small nucleolar RNA SNORD30,C/D,
+RF00089,Small nucleolar RNA SNORD31,C/D,
+RF00090,Small nucleolar RNA SNORA74,H/ACA,
+RF00091,Small nucleolar RNA SNORA62/SNORA6 family,H/ACA,
+RF00092,Small nucleolar RNA SNORA63,H/ACA,
+RF00093,Small nucleolar RNA SNORD18,C/D,
+RF00094,Hepatitis delta virus ribozyme,,
+RF00095,Pyrococcus C/D box small nucleolar RNA,,
+RF00096,U8 small nucleolar RNA,C/D,5.8S/28S
+RF00097,Plant small nucleolar RNA R71,C/D,
+RF00098,Snake H/ACA box small nucleolar RNA,H/ACA,
+RF00099,Small nucleolar RNA SNORD22,C/D,
+RF00100,7SK RNA,,
+RF00101,SraC/RyeA RNA,,
+RF00102,VA RNA,,
+RF00103,mir-1 microRNA precursor family,mir-1,
+RF00104,mir-10 microRNA precursor family,mir-10,MIPF0000033/MIPF0000025/MIPF0000268/MIPF0000271
+RF00105,Small nucleolar RNA SNORD115,C/D,
+RF00106,RNAI,,
+RF00107,FinP,,
+RF00108,Small nucleolar RNA SNORD116,C/D,"PWS, brain-specific"
+RF00109,Vimentin 3' UTR protein-binding region,,
+RF00110,RybB RNA,,
+RF00111,RyeB RNA,,
+RF00112,CyaR/Rye RNA,,
+RF00113,QUAD RNA,,
+RF00114,Ribosomal S15 leader,,
+RF00115,IS061 RNA,,
+RF00116,C0465 RNA,,
+RF00117,C0719 RNA,,
+RF00118,rydB RNA,,
+RF00119,C0299 RNA,,
+RF00120,C0343 RNA,,
+RF00121,MicC RNA,,
+RF00122,GadY,,
+RF00124,IS102 RNA,,
+RF00125,IS128 RNA,,
+RF00126,ryfA RNA,,
+RF00127,t44 RNA,,
+RF00128,Glm Y RNA activator of glmS mRNA,,
+RF00129,mir-103/107 microRNA precursor,mir-103,MIPF0000024
+RF00130,mir-192/215 microRNA precursor,mir-192,MIPF0000063
+RF00131,mir-30 microRNA precursor,mir-30,
+RF00132,Small nucleolar RNA R24,C/D,
+RF00133,Small nucleolar RNA Z195/SNORD33/SNORD32 family,C/D,18S
+RF00134,Small nucleolar RNA Z196/R39/R59 family,C/D,
+RF00135,Small nucleolar RNA Z223,C/D,
+RF00136,Small nucleolar RNA SNORD81,C/D,
+RF00137,Small nucleolar RNA SNORD83,C/D,
+RF00138,Small nucleolar RNA SNORD16,C/D,
+RF00139,Small nucleolar RNA SNORA72,H/ACA,5.8S
+RF00140,Alpha operon ribosome binding site,,
+RF00142,Small nucleolar RNA Z118/Z121/Z120,C/D,
+RF00143,mir-6 microRNA precursor,mir-6,
+RF00144,mir-199 microRNA precursor,mir-199,
+RF00145,Small nucleolar RNA Z105,C/D,
+RF00147,Small nucleolar RNA SNORD34,C/D,25S
+RF00149,Small nucleolar RNA Z103,C/D,
+RF00150,Small nucleolar RNA SNORD42,C/D,18S (U116)
+RF00151,Small nucleolar RNA SNORD58,C/D,28S (G4198)
+RF00152,Small nucleolar RNA SNORD79,C/D,28S (A3809)
+RF00153,Small nucleolar RNA SNORD62,C/D,18S (A590)
+RF00154,Small nucleolar RNA SNORD63,C/D,28S (A4531)
+RF00155,Small nucleolar RNA SNORA66,H/ACA,18S (U119)
+RF00156,Small nucleolar RNA SNORA70,H/ACA,18S (U1692)
+RF00157,Small nucleolar RNA SNORD55/SNORD39,C/D,28S (C2791)
+RF00158,Small nucleolar RNA SNORD82,C/D,18S (A1678)
+RF00159,Small nucleolar RNA Z168/Z174,C/D,
+RF00160,Small nucleolar RNA Z159/U59,C/D,
+RF00161,Nanos 3' UTR translation control element,,
+RF00162,SAM riboswitch (S box leader),,
+RF00163,Hammerhead ribozyme (type I),,
+RF00164,Coronavirus 3' stem-loop II-like motif (s2m),,
+RF00165,Coronavirus 3' UTR pseudoknot,,
+RF00166,PrrB/RsmZ RNA family,,
+RF00167,Purine riboswitch,,
+RF00168,Lysine riboswitch,,
+RF00169,Bacterial signal recognition particle RNA,,
+RF00170,Retron msr RNA,,
+RF00171,Tombusvirus 5' UTR,,
+RF00172,ctgf/hcs24 CAESAR,,
+RF00173,Hairpin ribozyme,,
+RF00174,Cobalamin riboswitch,,
+RF00175,Human immunodeficiency virus type 1 dimerisation initiation site,,
+RF00176,Tombusvirus 3' UTR region IV,,
+RF00177,Small subunit ribosomal RNA,,
+RF00178,mir-24 microRNA precursor family,mir-24,MIPF0000041/Redution of ALK4/Regulation of DHFR
+RF00179,GAIT element,,
+RF00180,Renin stability regulatory element (REN-SRE),,
+RF00181,Small nucleolar RNA SNORD113/SNORD114 family,C/D,no known targets
+RF00182,Coronavirus packaging signal,,
+RF00183,G-CSF factor stem-loop destabilising element (SLDE),,
+RF00184,Potato virus X cis-acting regulatory element,,
+RF00185,Flavivirus 3' UTR cis-acting replication element (CRE),,
+RF00186,Small nucleolar RNA SNORD101,C/D,
+RF00187,Small nucleolar RNA SNORD102,C/D,28S (G4020)
+RF00188,Small nucleolar RNA SNORD103/SNORD85,C/D,18S (G601)
+RF00189,Small nucleolar RNA SNORD95,C/D,28S (A2802 and C2811)
+RF00190,Small nucleolar RNA SNORA16B/SNORA16A family,H/ACA,
+RF00191,Small nucleolar RNA SNORA57,H/ACA,18S (U1004)
+RF00192,Bovine leukaemia virus RNA packaging signal,,
+RF00193,Citrus tristeza virus replication signal,,
+RF00194,Rubella virus 3' cis-acting element,,
+RF00195,RsmY RNA family,,
+RF00196,Alfalfa mosaic virus RNA 1 5' UTR stem-loop,,
+RF00198,SL1 RNA,,
+RF00199,SL2 RNA,,
+RF00200,Small nucleolar RNA Z199,C/D,18S/25S
+RF00201,Small nucleolar RNA Z278,C/D,
+RF00202,Small nucleolar RNA R66,C/D,18S
+RF00203,Small nucleolar RNA R160,C/D,25S
+RF00204,Small nucleolar RNA R12,C/D,25S
+RF00205,Small nucleolar RNA R41,C/D,18S/25S
+RF00206,Small nucleolar RNA U54,C/D,
+RF00207,K10 transport/localisation element (TLS),,
+RF00208,Small nucleolar RNA R72,C/D,25S
+RF00209,Pestivirus internal ribosome entry site (IRES),,
+RF00210,Aphthovirus internal ribosome entry site (IRES),,
+RF00211,Small nucleolar RNA SNORD35,C/D,28S (C4506)
+RF00212,Small nucleolar RNA SNORD38,C/D,28S
+RF00213,Small nucleolar RNA R38,C/D,28S
+RF00214,Retrovirus direct repeat 1 (dr1),,
+RF00215,Tombus virus defective interfering (DI) RNA region 3,,
+RF00216,c-myc internal ribosome entry site (IRES),,
+RF00217,Small nucleolar RNA SNORD20,C/D,18S (U1804)
+RF00218,Small nucleolar RNA SNORD46,C/D,28S
+RF00220,Human rhinovirus internal cis-acting regulatory element (CRE),,
+RF00221,Small nucleolar RNA SNORD43,C/D,18S
+RF00222,Bag-1 internal ribosome entry site (IRES),,
+RF00223,bip internal ribosome entry site (IRES),,
+RF00224,FGF-2 internal ribosome entry site (IRES),,
+RF00225,Tobamovirus internal ribosome entry site (IRES),,
+RF00226,n-myc internal ribosome entry site (IRES),,
+RF00227,FIE3 (ftz instability element 3') element,,
+RF00228,Hepatitis A virus internal ribosome entry site (IRES),,
+RF00229,Picornavirus internal ribosome entry site (IRES),,
+RF00230,T-box leader,,
+RF00231,Small Cajal body specific RNA 13,,
+RF00232,Spi-1 (PU.1) 5' UTR regulatory element,,
+RF00233,Tymovirus/Pomovirus tRNA-like 3' UTR element,,
+RF00234,glmS glucosamine-6-phosphate activated ribozyme,,
+RF00235,Plasmid RNAIII,,
+RF00236,ctRNA,,
+RF00237,mir-9/mir-79 microRNA precursor family,mir-9/mir-79,MI0000466/cancer-related
+RF00238,ctRNA,,
+RF00239,mir-124 microRNA precursor family,mir-124,MI0000443/targets anti-neural function protein SCP1
+RF00240,RNA-OUT,,
+RF00241,mir-8/mir-141/mir-200 microRNA precursor family,mir-8/mir-141/mir-200,MIPF0000019
+RF00242,ctRNA,,
+RF00243,traJ 5' UTR,,
+RF00244,mir-26 microRNA precursor family,mir-26,MIPF0000043/expressed in neuronal tissue/low oxygen
+RF00245,mir-19 microRNA precursor family,mir-19,MIPF0000011
+RF00246,mir-135 microRNA precursor family,mir-135,MIPF0000028/targets the 3' untranslated region of the APC gene
+RF00247,mir-160 microRNA precursor family,mir-160,MIPF0000032/targets auxin response factor genes
+RF00248,mir-148/mir-152 microRNA precursor family,mir-148/mir-152,MI0000253/down regulates Dnmt3b
+RF00249,mir-46/mir-47/mir-281 microRNA precursor family,mir-46/mir-47/mir-281,MI0000017
+RF00250,Trans-activation response element (TAR),,
+RF00251,mir-219 microRNA precursor family,mir-219,MIPF0000044
+RF00252,Alfalfa mosaic virus coat protein binding (CPB) RNA,,
+RF00253,mir-101 microRNA precursor family,mir-101,MIPF0000046
+RF00254,mir-16 microRNA precursor family,mir-16,MIPF0000006
+RF00255,mir-218 microRNA precursor family,mir-218,MIPF0000026
+RF00256,mir-196 microRNA precursor family,mir-196,MIPF0000031
+RF00257,mir-194 microRNA precursor family,mir-194,MIPF0000055
+RF00258,mir-130 microRNA precursor family,mir-130,MIPF0000034/upregulated in a type of cancer called hepatocellular carcinoma
+RF00259,Interferon gamma 5' UTR regulatory element,,
+RF00260,Hepatitis C virus (HCV) cis-acting replication element (CRE),,
+RF00261,L-myc internal ribosome entry site (IRES),,
+RF00262,sar RNA,,
+RF00263,Small nucleolar RNA SNORA68,H/ACA,28S (U4393)
+RF00264,Small nucleolar RNA SNORA64/SNORA10 family,H/ACA,28S (U4491 and U4331)/ 18S (U210)
+RF00265,Small nucleolar RNA SNORA69,H/ACA,5.8S/18S
+RF00266,Small nucleolar RNA Z17,C/D,18S (U121)
+RF00267,Small nucleolar RNA R64/Z200 family,C/D,
+RF00268,Small nucleolar RNA snoZ7/snoR77,C/D,25S (A1372)
+RF00270,Small nucleolar RNA SNORD61,C/D,18S (U1442)
+RF00271,Small nucleolar RNA SNORD60,C/D,
+RF00272,Small nucleolar RNA SNORA67,H/ACA,18S (U1445)
+RF00273,Small nucleolar RNA SNORD59,C/D,18S (A1031)
+RF00274,Small nucleolar RNA SNORD57,C/D,18S (A99)
+RF00275,Small nucleolar RNA SNORD56,C/D,18S (C517)
+RF00276,Small nucleolar RNA SNORD52,C/D,28S (U3904)
+RF00277,Small nucleolar RNA SNORD49,C/D,28S (C4426)
+RF00278,Small nucleolar RNA SNORD50,C/D,possibly involved in cancer
+RF00279,Small nucleolar RNA SNORD45,C/D,
+RF00280,Small nucleolar RNA SNORD51,C/D,28S (A1511)
+RF00281,Small nucleolar RNA SNORD47,C/D,28S (C3866)
+RF00282,Small nucleolar RNA SNORD48,C/D,28S (C2279)
+RF00283,small Cajal body-specific RNA 18,,
+RF00284,Small nucleolar RNA SNORD74,C/D,
+RF00285,Z6 small nucleolar RNA,C/D,snRNA modification
+RF00286,Small Cajal body specific RNA 8,,
+RF00287,Small nucleolar RNA SNORD44,C/D,28S (A166)
+RF00288,Z30 small nucleolar RNA,C/D,
+RF00289,Small nucleolar RNA SNORD104,C/D,
+RF00290,Bamboo mosaic potexvirus (BaMV) cis-regulatory element,,
+RF00291,Small nucleolar RNA snoR639/H1,H/ACA,
+RF00292,Small nucleolar RNA TBR5,C/D,
+RF00293,Small nucleolar RNA snoM1,H/ACA,
+RF00294,Small nucleolar RNA TBR17,C/D,
+RF00295,Small nucleolar RNA TBR7,C/D,
+RF00296,Small nucleolar RNA R16,C/D,
+RF00300,Small nucleolar RNA Z221,C/D,
+RF00301,Small nucleolar RNA Z256,C/D,
+RF00302,Small nucleolar RNA SNORA65,H/ACA,28S (U4373 and U4427)
+RF00303,Small nucleolar RNA snoR86,H/ACA,snRNA modification
+RF00304,Small nucleolar RNA Z279/snoR105/snoR108,C/D,snRNA modification
+RF00305,Small nucleolar RNA Z248,C/D,
+RF00306,Small nucleolar RNA Z178,C/D,
+RF00307,Small nucleolar RNA snoR98,H/ACA,snRNA modification
+RF00309,Small nucleolar RNA snR60/Z15/Z230/Z193/J17,C/D,snRNA modification
+RF00310,Small nucleolar RNA Z165,C/D,snRNA modification
+RF00311,Small nucleolar RNA Z188,C/D,snRNA modification
+RF00312,Small nucleolar RNA Z206,C/D,snRNA modification
+RF00313,Small nucleolar RNA Z173,C/D,snRNA modification
+RF00314,Small nucleolar RNA Z182,C/D,snRNA modification
+RF00315,Small nucleolar RNA J33,C/D,snRNA modification
+RF00316,Small nucleolar RNA R43,C/D,snRNA modification
+RF00317,Small nucleolar RNA Z163/Z177 family,C/D,snRNA modification
+RF00318,Small nucleolar RNA Z175,C/D,snRNA modification
+RF00319,Small nucleolar RNA SNORA23,H/ACA,snRNA modification
+RF00320,Small nucleolar RNA Z185,C/D,snRNA modification
+RF00321,Small nucleolar RNA Z247,C/D,snRNA modification
+RF00322,Small nucleolar RNA SNORA31,H/ACA,snRNA modification
+RF00323,Small nucleolar RNA R79,C/D,snRNA modification
+RF00324,Small nucleolar RNA MBII-202,C/D,snRNA modification
+RF00325,Small nucleolar RNA SNORD53,C/D,28S (C3848)
+RF00326,Small nucleolar RNA Z155,C/D,snRNA modification
+RF00327,Small nucleolar RNA Z194,C/D,snRNA modification
+RF00328,Small nucleolar RNA Z161/Z228,C/D,snRNA modification
+RF00329,Small nucleolar RNA Z162,C/D,snRNA modification
+RF00330,Small nucleolar RNA Z43,C/D,snRNA modification
+RF00331,Small nucleolar RNA Z169,C/D,snRNA modification
+RF00332,Small nucleolar RNA Z266,C/D,snRNA modification
+RF00333,Small nucleolar RNA Z157/R69/R10,C/D,snRNA modification
+RF00334,Small nucleolar RNA SNORA3/SNORA45 family,H/ACA,snRNA modification
+RF00335,Small nucleolar RNA Z13/snr52,C/D,snRNA modification
+RF00336,Small nucleolar RNA J26,C/D,snRNA modification
+RF00337,Small nucleolar RNA Z112,C/D,snRNA modification
+RF00338,Small nucleolar RNA snR53,C/D,snRNA modification
+RF00339,Small nucleolar RNA snoR60,C/D,snRNA modification
+RF00340,Small nucleolar RNA SNORA36 family,H/ACA,snRNA modification
+RF00341,Small nucleolar RNA Z39,C/D,snRNA modification
+RF00342,Small nucleolar RNA Z40,C/D,snRNA modification
+RF00343,Small nucleolar RNA Z122,C/D,snRNA modification
+RF00344,Small nucleolar RNA Z267,C/D,snRNA modification
+RF00345,Small nucleolar RNA snoR1,C/D,snRNA modification
+RF00348,Small nucleolar RNA snoR9,C/D,
+RF00349,Small nucleolar RNA R11/Z151,C/D,snRNA modification
+RF00350,Small nucleolar RNA Z152/R70/R12/,C/D,snRNA modification
+RF00351,Small nucleolar RNA R20,C/D,snRNA modification
+RF00352,Small nucleolar RNA R21,C/D,snRNA modification
+RF00353,Small nucleolar RNA snoR31/Z110/Z27,C/D,snRNA modification
+RF00355,Small nucleolar RNA snoR28,C/D,snRNA modification
+RF00356,Small nucleolar RNA R32/R81/Z41,C/D,snRNA modification
+RF00357,Small nucleolar RNA R44/J54/Z268 family,C/D,snRNA modification
+RF00358,Small nucleolar RNA Z101,C/D,snRNA modification
+RF00359,Small nucleolar RNA Z102/R77,C/D,snRNA modification
+RF00360,Small nucleolar RNA Z107/R87,C/D,snRNA modification
+RF00361,Small nucleolar RNA Z119,C/D,snRNA modification
+RF00362,Pospiviroid RY motif stem loop,,
+RF00363,mir-BART1 microRNA precursor family,mir-BART1,
+RF00364,mir-BART2 microRNA precursor family,mir-BART2,
+RF00365,mir-BHRF1-1 microRNA precursor family,mir-BHRF1-1,
+RF00366,mir-BHRF1-2 microRNA precursor family,mir-BHRF1-2,
+RF00367,mir-BHRF1-3 microRNA precursor family,mir-BHRF1-3,
+RF00368,sroB RNA,,
+RF00369,sroC RNA,,
+RF00370,sroD RNA,,
+RF00371,sroE RNA,,
+RF00372,sroH RNA,,
+RF00373,Archaeal RNase P,,
+RF00374,Gammaretrovirus core encapsidation signal,,
+RF00375,HIV primer binding site (PBS),,
+RF00376,HIV gag stem loop 3 (GSL3),,
+RF00377,Small nucleolar RNA U6-53/MBII-28,C/D,snRNA modification (U6)
+RF00378,Qrr RNA,,
+RF00379,ydaO/yuaA leader,,
+RF00380,ykoK leader,,
+RF00381,Antizyme RNA frameshifting stimulation element,,
+RF00382,DnaX ribosomal frameshifting element,,
+RF00383,Insertion sequence IS1222 ribosomal frameshifting element,,
+RF00384,Poxvirus AX element late mRNA cis-regulatory element,
+RF00385,Infectious bronchitis virus D-RNA,
+RF00386,Enterovirus 5' cloverleaf cis-acting replication element,
+RF00387,FGF-1 internal ribosome entry site (IRES),
+RF00388,Qa RNA,
+RF00389,Bamboo mosaic virus satellite RNA cis-regulatory element,
+RF00390,UPSK RNA,
+RF00391,RtT RNA,
+RF00392,Small nucleolar RNA SNORA5,H/ACA
+RF00393,Small nucleolar RNA SNORA8,H/ACA
+RF00394,Small nucleolar RNA SNORA4,H/ACA
+RF00396,Small nucleolar RNA SNORA13,H/ACA
+RF00397,Small nucleolar RNA SNORA14,H/ACA
+RF00398,Small nucleolar RNA SNORA15,H/ACA
+RF00399,Small nucleolar RNA SNORA24,H/ACA
+RF00400,Small nucleolar RNA SNORA28,H/ACA
+RF00401,Small nucleolar RNA SNORA20,H/ACA
+RF00402,Small nucleolar RNA SNORA25,H/ACA
+RF00403,Small nucleolar RNA SNORA41,H/ACA
+RF00404,Small nucleolar RNA SNORA46,H/ACA
+RF00405,Small nucleolar RNA SNORA44,H/ACA
+RF00406,Small nucleolar RNA SNORA42/SNORA80 family,H/ACA
+RF00407,Small nucleolar RNA SNORA50,H/ACA
+RF00408,Small nucleolar RNA SNORA1,H/ACA
+RF00409,Small nucleolar RNA SNORA7,H/ACA
+RF00410,Small nucleolar RNA SNORA2/SNORA34 family,H/ACA
+RF00411,Small nucleolar RNA SNORA9,H/ACA
+RF00412,Small nucleolar RNA SNORA21,H/ACA
+RF00413,Small nucleolar RNA SNORA19,H/ACA
+RF00414,Small nucleolar RNA SNORA22,H/ACA
+RF00415,Small nucleolar RNA SNORA30/SNORA37 family,H/ACA
+RF00416,Small nucleolar RNA SNORA43,H/ACA
+RF00417,Small nucleolar RNA SNORA56,H/ACA
+RF00418,Small nucleolar RNA SNORA58,H/ACA
+RF00419,Small nucleolar RNA SNORA52,H/ACA
+RF00420,Small nucleolar RNA SNORA61,H/ACA
+RF00421,Small nucleolar RNA SNORA32,H/ACA
+RF00422,Small Cajal body specific RNA 24,
+RF00423,Small Cajal body specific RNA 4,
+RF00424,Small Cajal body specific RNA 16,
+RF00425,Small nucleolar RNA SNORA18,H/ACA
+RF00426,Small Cajal body specific RNA 15,
+RF00427,Small Cajal body specific RNA 23,
+RF00428,Small nucleolar RNA SNORA38,H/ACA
+RF00429,Small nucleolar RNA SNORA29,H/ACA
+RF00430,Small nucleolar RNA SNORA54,H/ACA
+RF00431,Small nucleolar RNA SNORA55,H/ACA
+RF00432,Small nucleolar RNA SNORA51,H/ACA
+RF00433,Hsp90 cis-regulatory element,,
+RF00434,Luteovirus cap-independent translation element (BTE),,
+RF00435,Repression of heat shock gene expression (ROSE) element,,
+RF00436,UnaL2 LINE 3' element,,
+RF00437,Hairy RNA localisation element (HLE),,
+RF00438,Small nucleolar RNA SNORA33,H/ACA,
+RF00439,Small nucleolar RNA SNORD87,C/D,
+RF00440,Small nucleolar RNA SNORD37,C/D,
+RF00441,Small nucleolar RNA Z242,C/D,snRNA modification
+RF00442,ykkC-yxkD leader,,
+RF00443,Small nucleolar RNA SNORA27,H/ACA,
+RF00444,PrrF RNA,,
+RF00445,mir-399 microRNA precursor family,mir-399,MIPF0000015/targets mRNAs coding for a phosphatase transporter
+RF00446,mir-133 microRNA precursor family,mir-133,voltage gated K+ channel KCNQ1 is a target/neuronal polypyrimidine tract-binding protein
+RF00447,Voltage-gated potassium-channel Kv1.4 IRES,,
+RF00448,Epstein-Barr virus nuclear antigen (EBNA) IRES,,
+RF00449,HIF-1 alpha IRES,,
+RF00451,mir-395 microRNA precursor family,mir-395,MIPF0000016/targets ATP sulphurylases
+RF00452,mir-172 microRNA precursor family,mir-172,MIPF0000035/targets APETALA2-like transcription factors
+RF00453,Cardiovirus cis-acting replication element (CRE),,
+RF00454,p27 cis-regulatory element,,
+RF00455,mir-15 microRNA precursor family,mir-15,MIPF0000006
+RF00456,mir-34 microRNA precursor family,mir-34,MIPF0000039
+RF00457,Mnt IRES,,
+RF00458,Cripavirus internal ribosome entry site (IRES),,
+RF00459,Mason-Pfizer monkey virus packaging signal,,
+RF00460,U1A polyadenylation inhibition element (PIE),,
+RF00461,Vascular endothelial growth factor (VEGF) IRES A,,
+RF00462,APC internal ribosome entry site (IRES),,
+RF00463,Apolipoprotein B (apoB) 5' UTR cis-regulatory element,,
+RF00464,mir-92 microRNA precursor family,mir-92,
+RF00465,Japanese encephalitis virus (JEV) hairpin structure,,
+RF00467,Rous sarcoma virus (RSV) primer binding site (PBS),,
+RF00468,Hepatitis C virus stem-loop VII,,
+RF00469,Hepatitis C stem-loop IV,,
+RF00470,Togavirus 5' plus strand cis-regulatory element,,
+RF00471,Small nucleolar RNA snR48,C/D,28S (Gm2788 and Gm2790)
+RF00472,Small nucleolar RNA snR55/Z10,C/D,snRNA modification
+RF00473,Small nucleolar RNA snR54,C/D,18S
+RF00474,Small nucleolar RNA snR57,C/D,
+RF00475,Small nucleolar RNA snR69,C/D,
+RF00476,Small nucleolar RNA snR61/Z1/Z11,C/D,snRNA modification
+RF00477,Small nucleolar RNA snR66,C/D,snRNA modification
+RF00478,Small Cajal body specific RNA 6,,
+RF00479,Small nucleolar RNA snR71,C/D,snRNA modification
+RF00480,HIV Ribosomal frameshift signal,,
+RF00481,Hepatitis C virus 3'X element,,
+RF00482,Small nucleolar RNA F1/F2/snoR5a,H/ACA,snRNA modification
+RF00483,Insulin-like growth factor II IRES,,
+RF00484,Connexin-32 internal ribosome entry site (IRES),,
+RF00485,Potassium channel RNA editing signal,,
+RF00486,mir-129 microRNA precursor family,mir-129,MIPF0000073
+RF00487,Connexin-43 internal ribosome entry site (IRES),,
+RF00488,Yeast U1 spliceosomal RNA,,
+RF00489,ctRNA,,
+RF00490,S-element,,
+RF00491,Simian virus 40 late polyadenylation signal (SVLPA),,
+RF00492,small Cajal body-specific RNA 17,,
+RF00493,Small nucleolar RNA U2-30,C/D,snRNA modification (U2)
+RF00494,Small nucleolar RNA U2-19,C/D,snRNA modification (U2)
+RF00495,Heat shock protein 70 (Hsp70) internal ribosome entry site (IRES),,
+RF00496,Coronavirus SL-III cis-acting replication element (CRE),,
+RF00498,Equine arteritis virus leader TRS hairpin (LTH),,
+RF00499,Human parechovirus 1 (HPeV1) cis regulatory element (CRE),,
+RF00500,Turnip crinkle virus (TCV) repressor of minus strand synthesis H5
+RF00501,Rotavirus cis-acting replication element (CRE)
+RF00502,Turnip crinkle virus (TCV) core promoter hairpin (Pr)
+RF00503,RNAIII
+RF00504,Glycine riboswitch
+RF00505,RydC RNA
+RF00506,Threonine operon leader
+RF00507,Coronavirus frameshifting stimulation element
+RF00509,Small nucleolar RNA snR64
+RF00510,Tombusvirus internal replication element (IRE)
+RF00511,Kaposi's sarcoma-associated herpesvirus internal ribosome entry site (IRES)
+RF00512,Leucine operon leader
+RF00513,Tryptophan operon leader
+RF00514,Histidine operon leader
+RF00515,PyrR binding site
+RF00516,ylbH leader
+RF00517,serC leader,,
+RF00518,speF leader,,
+RF00519,suhB,,
+RF00520,ybhL leader,,
+RF00521,SAM riboswitch (alpha-proteobacteria),,
+RF00522,PreQ1 riboswitch,,
+RF00523,Prion pseudoknot,,
+RF00524,R2 RNA element,,
+RF00525,Flavivirus DB element,,
+RF00526,Small nucleolar RNA Me28S-U3344,C/D,28S (U3344)
+RF00527,Small nucleolar RNA Me28S-Gm3255,C/D,28S (Gm3255)
+RF00528,Small nucleolar RNA Me28S-Gm1083,C/D,28S (Gm1083)
+RF00529,Small nucleolar RNA Me28S-Am2589,C/D,28S (Am2589)
+RF00530,Small nucleolar RNA Me28S-Cm2645,C/D,28S (Cm2645)
+RF00531,Small nucleolar RNA Me28S-Gm3113,C/D,28S (Gm3113)
+RF00532,Small nucleolar RNA Me18S-Um1356,C/D,28S (U1356)
+RF00533,Small nucleolar RNA Me18S-Gm1358,,
+RF00534,SgrS RNA,,
+RF00535,Small nucleolar RNA Me28S-Am982,C/D,28S (Am982)
+RF00536,Small nucleolar RNA Me28S-Cm3227,C/D,28S (Cm3227)
+RF00537,Small nucleolar RNA Me28S-Am2634,C/D,28S (Am2634)
+RF00538,Small nucleolar RNA CD11,,
+RF00539,Small nucleolar RNA Me28S-Cm788,C/D,28S (Cm788)
+RF00540,Small nucleolar RNA psi18S-1854,H/ACA,18S (U1854 and U1937)
+RF00541,Small nucleolar RNA psi28S-2876,H/ACA,28S (U2876 and 2956)
+RF00542,Small nucleolar RNA psi28S-1192,H/ACA,28S (U1192)
+RF00543,Small nucleolar RNA psi18S-1377,H/ACA,18S (U1377 and U1279)
+RF00544,Small nucleolar RNA psi28S-3327,H/ACA,28S (U3327)/18S (U1920)
+RF00545,Small nucleolar RNA psi18S-841/snoR66,H/ACA,18S (U841)
+RF00546,Small nucleolar RNA psi28S-3316,H/ACA,28S (U3316)
+RF00547,TrkB IRES,,
+RF00548,U11 spliceosomal RNA,,
+RF00549,c-sis internal ribosome entry site (IRES),,
+RF00550,Hepatitis E virus cis-reactive element,,
+RF00551,Bicoid 3'-UTR regulatory element,,
+RF00552,rncO,,
+RF00553,Small Cajal body specific RNA 1,,
+RF00554,Small nucleolar RNA SNORA48,H/ACA,28S (U3797)
+RF00555,Ribosomal protein L13 leader,,
+RF00556,Ribosomal protein L19 leader,,
+RF00557,Ribosomal protein L10 leader,,
+RF00558,Ribosomal protein L20 leader,,
+RF00559,Ribosomal protein L21 leader,,
+RF00560,Small nucleolar RNA SNORA17,H/ACA,28S (U4659 and U4598)
+RF00561,Small nucleolar RNA SNORA40,H/ACA,28S (U4546) / 18S (U1174)
+RF00562,Small nucleolar RNA SNORA49,H/ACA,
+RF00563,Small nucleolar RNA SNORA53,H/ACA,
+RF00564,Small Cajal body specific RNA 11,,
+RF00565,Small Cajal body specific RNA 3,,
+RF00566,Small nucleolar RNA SNORA35,H/ACA,"brain-specific, targets mRNA"
+RF00567,Small nucleolar RNA SNORD17,C/D,28S (U3797)
+RF00568,Small nucleolar RNA SNORA26,H/ACA,28S (U4522)
+RF00569,Small nucleolar RNA SNORD19,C/D,18S (G683)
+RF00570,Small Nucleolar RNA SNORD64,C/D,paternally expressed
+RF00571,Small nucleolar RNA SNORD65,C/D,18S (U627)
+RF00572,Small nucleolar RNA SNORD66,C/D,18S (C1272)
+RF00573,Small nucleolar RNA SNORD67,C/D,U6 (C60)
+RF00574,Small nucleolar RNA SNORD69,C/D,28S (G4464)
+RF00575,Small nucleolar RNA SNORD70,C/D,18S (A512)
+RF00576,Small nucleolar RNA SNORD71,C/D,5.8S (U14)
+RF00577,Small nucleolar RNA SNORD72,C/D,28S (U4590)
+RF00578,Small nucleolar RNA SNORD89,C/D,
+RF00579,Small nucleolar RNA SNORD90,C/D,
+RF00580,Small nucleolar RNA SNORD91 family,C/D,28S (G4588)
+RF00581,Small nucleolar SNORD12/SNORD106,C/D,28S (G3878)
+RF00582,Small Cajal body specific RNA 14,,
+RF00584,Small nucleolar RNA SNORD105,C/D,18S (U799)
+RF00586,Small nucleolar RNA SNORA12,H/ACA,28S (U372)
+RF00588,Small nucleolar RNA SNORD41,C/D,28S (U4276)
+RF00591,Small nucleolar RNA SNORD77,C/D,28S (A1521)
+RF00592,Small nucleolar RNA SNORD78,C/D,28S (G4593)
+RF00593,Small nucleolar RNA U83B,C/D,
+RF00594,Small nucleolar RNA SNORD86,C/D,
+RF00598,Small nucleolar RNA SNORA76,H/ACA,18S (U34 and U105)
+RF00599,Small nucleolar RNA SNORA77,H/ACA,18S (U814)
+RF00600,Small nucleolar RNA SNORA79,H/ACA,U6 (U31)
+RF00601,Small Cajal body specific RNA 20,,
+RF00602,Small Cajal body specific RNA 21,,
+RF00603,Small nucleolar RNA SNORD23,C/D,
+RF00604,Small nucleolar RNA SNORD88,C/D,28S (C3680)
+RF00605,Small nucleolar RNA SNORD92,C/D,28S (A3846)
+RF00606,Small Nucleolar RNA SNORD93,C/D,18S (A576)
+RF00607,Small Nucleolar RNA SNORD98,C/D,18S (G867)
+RF00608,Small Nucleolar RNA SNORD99,C/D,28S (A2774)
+RF00609,Small Nucleolar RNA SNORD100,C/D,18S (G436)
+RF00610,Small Nucleolar RNA SNORD110,C/D,18S (U1288)
+RF00611,Small Nucleolar RNA SNORD111,C/D,28S (G3923)
+RF00612,Small nucleolar RNA SNORD75,C/D,28S (C4032)
+RF00613,Small Nucleolar RNA SNORD94,C/D,U6 (C62)
+RF00614,Small nucleolar RNA SNORA11,H/ACA,snRNA modification
+RF00615,Listeria Hfq binding LhrA,,
+RF00616,Listeria Hfq binding LhrC,,
+RF00617,flavivirus capsid hairpin cHP,,
+RF00618,U4atac minor spliceosomal RNA,,
+RF00619,U6atac minor spliceosomal RNA,,
+RF00620,Hepatitis C alternative reading frame stem-loop,,
+RF00621,Beta-globin co-transcriptional cleavage ribozyme,,
+RF00622,Mammalian CPEB3 ribozyme,,
+RF00623,Pseudomonas sRNA P1,,
+RF00624,Pseudomonas sRNA P9,,
+RF00625,Pseudomonas sRNA P11,,
+RF00626,Gurken localisation signal,,
+RF00627,Pseudomonas sRNA P15,,
+RF00628,Pseudomonas sRNA P16,,
+RF00629,Pseudomonas sRNA P24,,
+RF00630,Pseudomonas sRNA P26,,
+RF00632,sxy 5' UTR element,,
+RF00634,S-adenosyl methionine (SAM) riboswitch,,
+RF00635,Human accelerated region 1F,,
+RF00636,ncRNA Repressor of NFAT (nuclear factor of activated T cells),,
+RF00637,microRNA mir-276,mir-276,MIPF0000124
+RF00638,microRNA MIR159,mir-159,MIPF0000010
+RF00639,microRNA mir-515,mir-515,MIPF0000020
+RF00640,microRNA MIR167_1,mir-167_1,MIPF0000023
+RF00641,microRNA mir-154,mir-154,MIPF0000018
+RF00642,microRNA mir-23,mir-23,MIPF0000027
+RF00643,microRNA MIR171_1,mir-171_1,MIPF0000030
+RF00644,microRNA mir-27,mir-27,MIPF0000036
+RF00645,microRNA MIR169_2,mir-169_2,MIPF0000037
+RF00646,microRNA mir-204,mir-204,MIPF0000042
+RF00647,microRNA MIR164,mir-164,MIPF0000045
+RF00648,microRNA MIR396,mir-396,MIPF0000047
+RF00649,microRNA mir-128,mir-128,MIPF0000048
+RF00650,microRNA mir-153,mir-153,MIPF0000050
+RF00651,microRNA mir-221,mir-221,MIPF0000051
+RF00652,microRNA MIR478,mir-478,MIPF0000052
+RF00653,microRNA mir-22,mir-22,MIPF0000053
+RF00654,microRNA mir-216,mir-216,MIPF0000054
+RF00655,microRNA mir-28,mir-28,MIPF0000057
+RF00656,microRNA mir-205,mir-205,MIPF0000058
+RF00657,microRNA mir-184,mir-184,MIPF0000059
+RF00658,microRNA mir-21,mir-21,MIPF0000060
+RF00659,microRNA mir-365,mir-365,MIPF0000061
+RF00660,microRNA mir-214,mir-214,MIPF0000062
+RF00661,microRNA mir-31,mir-31,MIPF0000064
+RF00662,microRNA mir-132,mir-132,MIPF0000065
+RF00663,microRNA mir-183,mir-183,MIPF0000066
+RF00664,microRNA mir-223,mir-223,MIPF0000067
+RF00665,microRNA mir-290,mir-290,MIPF0000068
+RF00666,microRNA mir-32,mir-32,MIPF0000069
+RF00667,microRNA mir-33,mir-33,MIPF0000070
+RF00668,microRNA mir-302,mir-302,MIPF0000071
+RF00669,microRNA mir-96,mir-96,MIPF0000072
+RF00670,microRNA mir-105,mir-105,MIPF0000074
+RF00671,microRNA mir-138,mir-138,MIPF0000075
+RF00672,microRNA mir-190,mir-190,MIPF0000076
+RF00673,microRNA mir-217,mir-217,MIPF0000077
+RF00674,microRNA mir-187,mir-187,MIPF0000078
+RF00675,microRNA mir-145,mir-145,MIPF0000079
+RF00676,microRNA mir-127,mir-127,MIPF0000080
+RF00677,microRNA MIR168,mir-168,MIPF0000081
+RF00678,microRNA mir-140,mir-140,MIPF0000085
+RF00679,microRNA mir-210,mir-210,MIPF0000086
+RF00680,microRNA mir-224,mir-224,MIPF0000088
+RF00681,microRNA mir-198,mir-198,MIPF0000090
+RF00682,microRNA mir-144,mir-144,MIPF0000093
+RF00683,microRNA mir-143,mir-143,MIPF0000094
+RF00684,mir-122 microRNA precursor,mir-122,MIPF0000095
+RF00685,microRNA mir-36,mir-36,MIPF0000096
+RF00686,microRNA mir-338,mir-338,MIPF0000097
+RF00687,microRNA mir-136,mir-136,MIPF0000099
+RF00688,microRNA MIR394,mir-394,MIPF0000100
+RF00689,microRNA MIR390,mir-390,MIPF0000101
+RF00690,microRNA MIR408,mir-408,MIPF0000102
+RF00691,microRNA mir-146,mir-146,MIPF0000103
+RF00692,microRNA MIR171_2,mir-171_2,MIPF0000104
+RF00693,microRNA mir-147,mir-147,MIPF0000105
+RF00694,microRNA mir-137,mir-137,MIPF0000106
+RF00695,microRNA MIR398,mir-398,MIPF0000107
+RF00696,microRNA mir-203,mir-203,MIPF0000108
+RF00697,microRNA mir-186,mir-186,MIPF0000109
+RF00698,microRNA mir-489,mir-489,MIPF0000111
+RF00699,microRNA mir-134,mir-134,MIPF0000112
+RF00700,microRNA mir-375,mir-375,MIPF0000114
+RF00701,microRNA mir-126,mir-126,MIPF0000115
+RF00702,microRNA mir-182,mir-182,MIPF0000116
+RF00703,microRNA mir-139,mir-139,MIPF0000117
+RF00704,microRNA MIR397,mir-397,MIPF0000120
+RF00705,microRNA mir-202,mir-202,MIPF0000121
+RF00706,microRNA mir-263,mir-263,MIPF0000122
+RF00707,microRNA mir-197,mir-197,MIPF0000123
+RF00708,microRNA mir-450,mir-450,MIPF0000128
+RF00709,microRNA mir-455,mir-455,MIPF0000129
+RF00710,microRNA mir-44,mir-44,MIPF0000132
+RF00711,microRNA mir-449,mir-449,MIPF0000133
+RF00712,microRNA mir-460,mir-460,MIPF0000134
+RF00713,microRNA mir-239,mir-239,MIPF0000135
+RF00714,microRNA MIR535,mir-535,MIPF0000136
+RF00715,microRNA mir-383,mir-383,MIPF0000137
+RF00716,microRNA mir-3,mir-3,MIPF0000140
+RF00717,microRNA mir-315,mir-315,MIPF0000141
+RF00718,microRNA mir-431,mir-431,MIPF0000142
+RF00719,microRNA mir-326,mir-326,MIPF0000143
+RF00720,microRNA mir-317,mir-317,MIPF0000144
+RF00721,microRNA MIR475,mir-475,MIPF0000145
+RF00722,microRNA mir-451,mir-451,MIPF0000148
+RF00723,microRNA mir-448,mir-448,MIPF0000149
+RF00724,microRNA mir-282,mir-282,MIPF0000150
+RF00725,microRNA mir-iab-4,mir-,MIPF0000151
+RF00726,microRNA mir-87,mir-87,MIPF0000152
+RF00727,microRNA bantam,bantam,MIPF0000153
+RF00728,microRNA mir-81,mir-81,MIPF0000154
+RF00729,microRNA mir-278,mir-278,MIPF0000155
+RF00730,microRNA mir-277,mir-277,MIPF0000156
+RF00731,microRNA mir-155,mir-155,MIPF0000157
+RF00732,microRNA mir-305,mir-305,MIPF0000158
+RF00733,microRNA mir-296,mir-296,MIPF0000159
+RF00734,microRNA mir-52,mir-52,MIPF0000160
+RF00735,microRNA mir-367,mir-367,MIPF0000162
+RF00736,microRNA mir-320,mir-320,MIPF0000163
+RF00737,microRNA mir-322,mir-322,MIPF0000164
+RF00739,microRNA MIR476,mir-476,MIPF0000166
+RF00740,microRNA mir-370,mir-370,MIPF0000167
+RF00741,microRNA mir-378,mir-378,MIPF0000168
+RF00742,microRNA MIR162_2,mir-162_2,MIPF0000169
+RF00743,microRNA mir-308,mir-308,MIPF0000171
+RF00744,microRNA mir-361,mir-361,MIPF0000172
+RF00745,microRNA mir-499,mir-499,MIPF0000173
+RF00746,microRNA mir-454,mir-454,MIPF0000174
+RF00747,microRNA mir-283,mir-283,MIPF0000175
+RF00748,microRNA mir-433,mir-433,MIPF0000177
+RF00749,microRNA mir-208,mir-208,MIPF0000178
+RF00750,microRNA mir-458,mir-458,MIPF0000179
+RF00751,microRNA mir-12,mir-12,MIPF0000181
+RF00752,microRNA mir-14,mir-14,MIPF0000182
+RF00753,microRNA mir-503,mir-503,MIPF0000183
+RF00754,microRNA mir-279,mir-279,MIPF0000184
+RF00755,microRNA mir-542,mir-542,MIPF0000185
+RF00756,microRNA mir-299,mir-299,MIPF0000186
+RF00757,microRNA mir-275,mir-275,MIPF0000187
+RF00758,microRNA mir-346,mir-346,MIPF0000188
+RF00760,microRNA mir-342,mir-342,MIPF0000190
+RF00761,microRNA mir-340,mir-340,MIPF0000191
+RF00762,microRNA mir-412,mir-412,MIPF0000192
+RF00763,microRNA mir-339,mir-339,MIPF0000193
+RF00764,microRNA mir-191,mir-191,MIPF0000194
+RF00765,microRNA mir-337,mir-337,MIPF0000195
+RF00766,microRNA mir-335,mir-335,MIPF0000196
+RF00767,microRNA mir-150,mir-150,MIPF0000197
+RF00768,microRNA MIR405,mir-405,MIPF0000198
+RF00769,microRNA mir-331,mir-331,MIPF0000199
+RF00770,microRNA mir-330,mir-330,MIPF0000200
+RF00771,microRNA mir-185,mir-185,MIPF0000202
+RF00772,microRNA mir-328,mir-328,MIPF0000203
+RF00773,microRNA mir-298,mir-298,MIPF0000206
+RF00774,microRNA mir-360,mir-360,MIPF0000210
+RF00775,microRNA mir-432,mir-432,MIPF0000211
+RF00776,microRNA mir-540,mir-540,MIPF0000212
+RF00777,microRNA mir-541,mir-541,MIPF0000213
+RF00778,microRNA MIR473,mir-473,MIPF0000214
+RF00779,microRNA MIR474,mir-474,MIPF0000215
+RF00780,microRNA MIR477,mir-477,MIPF0000216
+RF00781,microRNA mir-505,mir-505,MIPF0000217
+RF00782,microRNA MIR480,mir-480,MIPF0000218
+RF00783,microRNA mir-484,mir-484,MIPF0000219
+RF00784,microRNA mir-486,mir-486,MIPF0000220
+RF00785,microRNA mir-90,mir-90,MIPF0000221
+RF00786,microRNA mir-289,mir-289,MIPF0000222
+RF00787,microRNA mir-288,mir-288,MIPF0000223
+RF00788,microRNA mir-287,mir-287,MIPF0000224
+RF00789,microRNA mir-286,mir-286,MIPF0000225
+RF00790,microRNA mir-358,mir-358,MIPF0000226
+RF00791,microRNA mir-357,mir-357,MIPF0000227
+RF00792,microRNA mir-490,mir-490,MIPF0000229
+RF00793,microRNA mir-497,mir-497,MIPF0000231
+RF00794,microRNA mir-42,mir-42,MIPF0000233
+RF00795,microRNA mir-43,mir-43,MIPF0000234
+RF00796,microRNA mir-48,mir-48,MIPF0000235
+RF00797,microRNA mir-355,mir-355,MIPF0000236
+RF00798,microRNA mir-49,mir-49,MIPF0000237
+RF00799,microRNA mir-354,mir-354,MIPF0000238
+RF00800,microRNA mir-353,mir-353,MIPF0000239
+RF00801,microRNA mir-280,mir-280,MIPF0000240
+RF00802,microRNA mir-207,mir-207,MIPF0000241
+RF00803,microRNA mir-425,mir-425,MIPF0000242
+RF00804,microRNA mir-240,mir-240,MIPF0000243
+RF00805,microRNA mir-351,mir-351,MIPF0000244
+RF00806,microRNA mir-350,mir-350,MIPF0000245
+RF00807,microRNA mir-314,mir-314,MIPF0000246
+RF00808,microRNA mir-86,mir-86,MIPF0000247
+RF00809,microRNA mir-241,mir-241,MIPF0000248
+RF00810,microRNA mir-85,mir-85,MIPF0000249
+RF00811,microRNA mir-84,mir-84,MIPF0000250
+RF00812,microRNA mir-83,mir-83,MIPF0000251
+RF00813,microRNA mir-11,mir-11,MIPF0000252
+RF00814,microRNA mir-316,mir-316,MIPF0000254
+RF00815,microRNA mir-244,mir-244,MIPF0000256
+RF00816,microRNA mir-245,mir-245,MIPF0000257
+RF00817,microRNA mir-80,mir-80,MIPF0000258
+RF00818,microRNA mir-318,mir-318,MIPF0000259
+RF00819,microRNA mir-246,mir-246,MIPF0000260
+RF00820,microRNA mir-248,mir-248,MIPF0000262
+RF00821,microRNA mir-249,mir-249,MIPF0000263
+RF00822,microRNA mir-274,mir-274,MIPF0000264
+RF00823,microRNA lsy-6,lys-6,MIPF0000265
+RF00824,microRNA mir-50,mir-50,MIPF0000266
+RF00825,microRNA mir-344,mir-344,MIPF0000267
+RF00826,microRNA mir-55,mir-55,MIPF0000270
+RF00827,microRNA mir-77,mir-77,MIPF0000272
+RF00828,microRNA mir-75,mir-75,MIPF0000273
+RF00829,microRNA mir-149,mir-149,MIPF0000274
+RF00830,microRNA mir-74,mir-74,MIPF0000275
+RF00831,microRNA mir-73,mir-73,MIPF0000276
+RF00832,microRNA mir-71,mir-71,MIPF0000278
+RF00833,microRNA mir-70,mir-70,MIPF0000279
+RF00834,microRNA mir-268,mir-268,MIPF0000280
+RF00835,microRNA mir-58,mir-58,MIPF0000282
+RF00836,microRNA mir-250,mir-250,MIPF0000283
+RF00837,microRNA mir-251,mir-251,MIPF0000284
+RF00838,microRNA mir-252,mir-252,MIPF0000285
+RF00839,microRNA mir-452,mir-452,MIPF0000287
+RF00840,microRNA mir-374,mir-374,MIPF0000288
+RF00841,microRNA mir-384,mir-384,MIPF0000289
+RF00842,microRNA MIR403,mir-403,MIPF0000290
+RF00843,microRNA mir-228,mir-228,MIPF0000292
+RF00844,microRNA mir-67,mir-67,MIPF0000293
+RF00845,microRNA MIR158,mir-158,MIPF0000294
+RF00846,microRNA mir-64,mir-64,MIPF0000295
+RF00847,microRNA mir-62,mir-62,MIPF0000296
+RF00848,microRNA mir-61,mir-61,MIPF0000297
+RF00849,microRNA mir-60,mir-60,MIPF0000298
+RF00850,microRNA mir-259,mir-259,MIPF0000299
+RF00851,microRNA mir-230,mir-230,MIPF0000306
+RF00852,microRNA mir-231,mir-231,MIPF0000307
+RF00853,microRNA mir-304,mir-304,MIPF0000308
+RF00854,microRNA mir-5,mir-5,MIPF0000309
+RF00855,microRNA mir-254,mir-254,MIPF0000310
+RF00856,microRNA mir-232,mir-232,MIPF0000311
+RF00857,microRNA mir-233,mir-233,MIPF0000312
+RF00858,microRNA mir-306,mir-306,MIPF0000313
+RF00859,microRNA mir-234,mir-234,MIPF0000315
+RF00861,microRNA mir-488,mir-488,MIPF0000318
+RF00862,microRNA mir-491,mir-491,MIPF0000319
+RF00863,microRNA mir-BART17,mir-BART17,MIPF0000321
+RF00864,microRNA mir-BART20,mir-BART20,MIPF0000322
+RF00865,microRNA MIR169_5,mir-196_5,MIPF0000323
+RF00866,microRNA mir-BART3,mir-BART3,MIPF0000324
+RF00867,microRNA mir-BART5,mir-BART5,MIPF0000326
+RF00868,microRNA mir-BART15,mir-BART15,MIPF0000327
+RF00869,microRNA mir-BART7,mir-BART17,MIPF0000328
+RF00870,microRNA mir-423,mir-423,MIPF0000329
+RF00871,microRNA mir-689,mir-689,MIPF0000330
+RF00872,microRNA mir-652,mir-652,MIPF0000333
+RF00873,microRNA mir-550,mir-550,MIPF0000334
+RF00874,microRNA mir-BART12,mir-BART12,MIPF0000335
+RF00875,microRNA mir-692,mir-692,MIPF0000336
+RF00876,microRNA mir-684,mir-684,MIPF0000337
+RF00877,microRNA mir-592,mir-592,MIPF0000340
+RF00878,microRNA mir-456,mir-456,MIPF0000341
+RF00879,microRNA mir-615,mir-615,MIPF0000342
+RF00882,microRNA MIR811,mir-811,MIPF0000347
+RF00883,microRNA MIR820,mir-820,MIPF0000348
+RF00884,microRNA MIR815,mir-815,MIPF0000349
+RF00885,microRNA MIR821,mir-821,MIPF0000350
+RF00886,microRNA MIR807,mir-807,MIPF0000352
+RF00887,microRNA mir-802,mir-802,MIPF0000353
+RF00888,microRNA mir-770,mir-770,MIPF0000355
+RF00889,microRNA MIR533,mir-533,MIPF0000356
+RF00890,microRNA mir-668,mir-668,MIPF0000357
+RF00891,microRNA mir-671,mir-671,MIPF0000358
+RF00892,microRNA mir-551,mir-551,MIPF0000360
+RF00893,microRNA MIR854,mir-854,MIPF0000361
+RF00894,microRNA mir-790,mir-790,MIPF0000362
+RF00895,microRNA mir-786,mir-786,MIPF0000363
+RF00896,microRNA mir-787,mir-787,MIPF0000364
+RF00897,microRNA mir-675,mir-675,MIPF0000365
+RF00898,microRNA mir-242,mir-242,MIPF0000366
+RF00899,microRNA mir-235,mir-235,MIPF0000367
+RF00900,microRNA mir-255,mir-255,MIPF0000368
+RF00901,microRNA MIR845_1,mir-845_1,MIPF0000369
+RF00902,microRNA mir-791,mir-791,MIPF0000370
+RF00903,microRNA mir-359,mir-359,MIPF0000371
+RF00904,microRNA mir-392,mir-392,MIPF0000372
+RF00905,microRNA mir-789,mir-789,MIPF0000373
+RF00906,microRNA MIR1122,mir-1122,MIPF0000382
+RF00907,microRNA mir-941,mir-941,MIPF0000387
+RF00908,microRNA MIR529,mir-529,MIPF0000388
+RF00909,microRNA mir-883,mir-883,MIPF0000389
+RF00910,microRNA mir-873,mir-873,MIPF0000390
+RF00911,microRNA mir-672,mir-672,MIPF0000391
+RF00912,microRNA mir-877,mir-877,MIPF0000392
+RF00914,microRNA mir-674,mir-674,MIPF0000394
+RF00915,microRNA mir-760,mir-760,MIPF0000395
+RF00917,microRNA mir-708,mir-708,MIPF0000397
+RF00918,microRNA mir-872,mir-872,MIPF0000399
+RF00919,microRNA mir-874,mir-874,MIPF0000401
+RF00920,microRNA MIR444,mir-444,MIPF0000402
+RF00921,microRNA mir-665,mir-665,MIPF0000404
+RF00922,microRNA mir-673,mir-673,MIPF0000405
+RF00924,microRNA mir-343,mir-343,MIPF0000411
+RF00925,microRNA MIR1027,mir-1027,MIPF0000414
+RF00926,microRNA MIR1151,mir-1151,MIPF0000415
+RF00927,microRNA mir-582,mir-582,MIPF0000417
+RF00928,microRNA mir-590,mir-590,MIPF0000418
+RF00929,microRNA mir-574,mir-574,MIPF0000419
+RF00931,microRNA mir-879,mir-879,MIPF0000421
+RF00932,microRNA mir-471,mir-471,MIPF0000423
+RF00933,microRNA mir-875,mir-875,MIPF0000424
+RF00934,microRNA mir-463,mir-463,MIPF0000425
+RF00935,microRNA mir-876,mir-876,MIPF0000430
+RF00936,microRNA mir-744,mir-744,MIPF0000431
+RF00937,microRNA mir-653,mir-653,MIPF0000435
+RF00939,microRNA mir-504,mir-504,MIPF0000437
+RF00940,microRNA mir-327,mir-327,MIPF0000438
+RF00941,microRNA mir-434,mir-434,MIPF0000439
+RF00942,microRNA mir-1224,mir-1224,MIPF0000440
+RF00943,microRNA MIR824,mir-824,MIPF0000442
+RF00944,microRNA MIR1120,mir-1120,MIPF0000443
+RF00945,microRNA mir-1226,mir-1226,MIPF0000444
+RF00946,microRNA mir-1225,mir-1225,MIPF0000445
+RF00947,microRNA mir-929,mir-929,MIPF0000447
+RF00948,microRNA mir-996,mir-996,MIPF0000449
+RF00949,microRNA mir-983,mir-983,MIPF0000450
+RF00950,microRNA mir-927,mir-927,MIPF0000452
+RF00951,microRNA mir-1302,mir-1302,MIPF0000456
+RF00952,microRNA mir-650,mir-650,MIPF0000457
+RF00953,microRNA mir-1497,mir-1497,MIPF0000458
+RF00954,microRNA MIR1446,mir-1446,MIPF0000459
+RF00955,microRNA mir-1829,mir-1829,MIPF0000460
+RF00956,microRNA MIR1444,mir-1444,MIPF0000461
+RF00957,microRNA mir-663,mir-663,MIPF0000462
+RF00958,microRNA mir-498,mir-498,MIPF0000463
+RF00959,microRNA mir-612,mir-612,MIPF0000464
+RF00960,microRNA mir-661,mir-661,MIPF0000465
+RF00961,microRNA mir-581,mir-581,MIPF0000466
+RF00962,microRNA mir-586,mir-586,MIPF0000467
+RF00963,microRNA mir-642,mir-642,MIPF0000468
+RF00964,microRNA mir-938,mir-938,MIPF0000469
+RF00965,microRNA mir-549,mir-549,MIPF0000470
+RF00966,microRNA mir-676,mir-676,MIPF0000471
+RF00967,microRNA mir-281,mir-281,MIPF0000472
+RF00968,microRNA mir-626,mir-626,MIPF0000474
+RF00969,microRNA mir-556,mir-556,MIPF0000475
+RF00970,microRNA mir-648,mir-648,MIPF0000476
+RF00971,microRNA mir-578,mir-578,MIPF0000477
+RF00972,microRNA mir-651,mir-651,MIPF0000478
+RF00973,microRNA mir-597,mir-597,MIPF0000479
+RF00974,microRNA mir-607,mir-607,MIPF0000480
+RF00975,microRNA MIR845_2,mir-845_2,MIPF0000481
+RF00976,microRNA mir-583,mir-583,MIPF0000482
+RF00977,microRNA mir-600,mir-600,MIPF0000484
+RF00978,microRNA mir-638,mir-638,MIPF0000486
+RF00979,microRNA mir-553,mir-553,MIPF0000487
+RF00980,microRNA mir-643,mir-643,MIPF0000488
+RF00981,microRNA mir-939,mir-939,MIPF0000490
+RF00982,microRNA mir-200,mir-200,MIPF0000491
+RF00983,microRNA mir-662,mir-662,MIPF0000492
+RF00984,microRNA mir-576,mir-576,MIPF0000493
+RF00985,microRNA mir-640,mir-640,MIPF0000494
+RF00986,microRNA mir-920,mir-920,MIPF0000495
+RF00987,microRNA mir-589,mir-589,MIPF0000496
+RF00988,microRNA mir-657,mir-657,MIPF0000498
+RF00989,microRNA mir-492,mir-492,MIPF0000499
+RF00990,microRNA mir-552,mir-552,MIPF0000501
+RF00991,microRNA mir-599,mir-599,MIPF0000502
+RF00992,microRNA mir-593,mir-593,MIPF0000503
+RF00993,microRNA mir-1473,mir-1473,MIPF0000504
+RF00994,microRNA mir-1255,mir-1255,MIPF0000506
+RF00995,microRNA mir-616,mir-616,MIPF0000507
+RF00996,microRNA mir-631,mir-631,MIPF0000508
+RF00997,microRNA mir-942,mir-942,MIPF0000511
+RF00998,microRNA mir-562,mir-562,MIPF0000512
+RF00999,microRNA mir-924,mir-924,MIPF0000513
+RF01000,microRNA mir-580,mir-580,MIPF0000515
+RF01001,microRNA mir-609,mir-609,MIPF0000516
+RF01002,microRNA mir-936,mir-936,MIPF0000517
+RF01003,microRNA mir-563,mir-563,MIPF0000519
+RF01004,microRNA mir-557,mir-557,MIPF0000520
+RF01005,microRNA MIR530,mir-530,MIPF0000521
+RF01006,microRNA mir-601,mir-601,MIPF0000522
+RF01007,microRNA mir-624,mir-624,MIPF0000523
+RF01008,microRNA mir-636,mir-636,MIPF0000524
+RF01009,microRNA mir-M7,mir-M7,MIPF0000526
+RF01010,microRNA mir-632,mir-632,MIPF0000527
+RF01011,microRNA mir-605,mir-605,MIPF0000528
+RF01012,microRNA mir-628,mir-628,MIPF0000529
+RF01013,microRNA mir-577,mir-577,MIPF0000530
+RF01014,microRNA mir-1306,mir-1306,MIPF0000531
+RF01015,microRNA mir-885,mir-885,MIPF0000532
+RF01016,microRNA mir-584,mir-584,MIPF0000533
+RF01017,microRNA mir-625,mir-625,MIPF0000534
+RF01018,microRNA mir-569,mir-569,MIPF0000535
+RF01019,microRNA mir-922,mir-922,MIPF0000536
+RF01020,microRNA mir-572,mir-572,MIPF0000537
+RF01021,microRNA mir-558,mir-558,MIPF0000538
+RF01022,microRNA mir-611,mir-611,MIPF0000539
+RF01023,microRNA mir-940,mir-940,MIPF0000540
+RF01024,microRNA mir-944,mir-944,MIPF0000541
+RF01025,microRNA mir-934,mir-934,MIPF0000542
+RF01026,microRNA MIR828,mir-828,MIPF0000544
+RF01027,microRNA mir-765,mir-765,MIPF0000545
+RF01028,microRNA mir-633,mir-633,MIPF0000546
+RF01029,microRNA mir-649,mir-649,MIPF0000547
+RF01030,microRNA mir-422,mir-422,MIPF0000548
+RF01031,microRNA mir-639,mir-639,MIPF0000549
+RF01032,microRNA mir-554,mir-554,MIPF0000551
+RF01033,microRNA mir-767,mir-767,MIPF0000552
+RF01034,microRNA mir-618,mir-618,MIPF0000553
+RF01035,microRNA mir-887,mir-887,MIPF0000554
+RF01036,microRNA mir-567,mir-567,MIPF0000555
+RF01037,microRNA mir-644,mir-644,MIPF0000556
+RF01038,microRNA mir-1307,mir-1307,MIPF0000558
+RF01039,microRNA mir-937,mir-937,MIPF0000560
+RF01040,microRNA mir-573,mir-573,MIPF0000561
+RF01041,microRNA mir-604,mir-604,MIPF0000562
+RF01042,microRNA mir-891,mir-891,MIPF0000420
+RF01043,microRNA MIR1023,mir-1023,MIPF0000396
+RF01044,microRNA mir-345,mir-345,MIPF0000189
+RF01045,microRNA mir-544,mir-544,MIPF0000436
+RF01046,Wingless localisation element 3 (WLE3),,
+RF01047,HBV RNA encapsidation signal epsilon,,
+RF01049,Class B pyrococcus HACA sRNA,,
+RF01050,Saccharomyces telomerase,,
+RF01051,GEMM cis-regulatory element,,
+RF01052,Arthropod 7SK RNA,,
+RF01053,Deinococcus radiodurans Y RNA,,
+RF01054,preQ1-II (pre queuosine) riboswitch,,
+RF01055,Moco (molybdenum cofactor) riboswitch,,
+RF01056,Magnesium Sensor,,
+RF01057,S-adenosyl-L-homocysteine riboswitch,,
+RF01058,microRNA MIR806,mir-806,MIPF0000343
+RF01059,microRNA mir-598,mir-598,MIPF0000393
+RF01060,microRNA mir-568,mir-568,MIPF0000408
+RF01061,microRNA mir-548,mir-548,MIPF0000317
+RF01062,microRNA MIR812,mir-812,MIPF0000345
+RF01063,microRNA mir-324,mir-324,MIPF0000165
+RF01064,microRNA mir-253,mir-253,MIPF0000286
+RF01065,23S methyl RNA motif,,
+RF01066,6C RNA
+RF01067,ATPC RNA motif
+RF01068,mini-ykkC RNA motif
+RF01069,purD RNA motif
+RF01070,SucA RNA motif
+RF01071,Ornate Large Extremophilic RNA
+RF01072,Pseudoknot of upstream pseudoknot domain (UPD) of the 3'UTR
+RF01073,Gag/pol translational readthrough site
+RF01074,Putative RNA-dependent RNA polymerase ribosomal frameshift site
+RF01075,Pseudoknot of tRNA-like structure
+RF01076,Polymerase ribosomal frameshift site
+RF01077,Pseudoknot of tRNA-like structure
+RF01078,3'-terminal pseudoknot in PYVV
+RF01079,Putative RNA-dependent RNA polymerase ribosomal frameshift site
+RF01080,Pseudoknot of upstream pseudoknot domain (UPD) of the 3'UTR
+RF01081,Pseudoknot of upstream pseudoknot domain (UPD) of the 3'UTR
+RF01082,Pseudoknot of upstream pseudoknot domain (UPD) of the 3'UTR
+RF01083,Pseudoknot of upstream pseudoknot domain (UPD) of the 3'UTR
+RF01084,Pseudoknot of tRNA-like structure
+RF01085,Pseudoknot of tRNA-like structure
+RF01086,Long range pseudoknot
+RF01087,Pseudoknot of the regulatory region of the repZ gene
+RF01088,Pseudoknot of tRNA-like structure
+RF01089,Pseudoknot of the regulatory region of the repBA gene
+RF01090,Edr gene ribosomal frameshift signal
+RF01091,3'-terminal pseudoknot in sweet potato chlorotic stunt virus
+RF01092,Gag/pol translational readthrough site
+RF01093,Ma3 gene ribosomal frameshift signal
+RF01094,Polymerase ribosomal frameshift site
+RF01095,3'-terminal pseudoknot of CuYV/BPYV
+RF01096,3'end pseudoknot of HepA virus
+RF01097,Gag/pro ribosomal frameshift site
+RF01098,Gag/pro ribosomal frameshift site
+RF01099,Pseudoknot of influenza A virus gene
+RF01100,3'-terminal pseudoknot in BYV
+RF01101,Pseudoknot of tRNA-like structure
+RF01102,5'-leader pseudoknot of TEV/CVMV
+RF01103,Pseudoknot of upstream pseudoknot domain (UPD) of the 3'UTR
+RF01104,Pseudoknot of upstream pseudoknot domain (UPD) of the 3'UTR
+RF01105,Pseudoknot of upstream pseudoknot domain (UPD) of the 3'UTR
+RF01106,Pseudoknot of upstream pseudoknot domain (UPD) of the 3'UTR
+RF01107,Pseudoknot of upstream pseudoknot domain (UPD) of the 3'UTR
+RF01108,Pseudoknot of upstream pseudoknot domain (UPD) of the 3'UTR
+RF01109,Pseudoknot of upstream pseudoknot domain (UPD) of the 3'UTR
+RF01110,Pseudoknot of upstream pseudoknot domain (UPD) of the 3'UTR
+RF01111,Pseudoknot of upstream pseudoknot domain (UPD) of the 3'UTR
+RF01112,Pseudoknot of upstream pseudoknot domain (UPD) of the 3'UTR
+RF01113,Pseudoknot of upstream pseudoknot domain (UPD) of the 3'UTR
+RF01114,Pseudoknot of upstream pseudoknot domain (UPD) of the 3'UTR,,
+RF01115,Pseudoknot of upstream pseudoknot domain (UPD) of the 3'UTR,,
+RF01116,Cyanobacterial functional RNA 1,,
+RF01117,Ciona microRNA mir-92,mir-92,MIPF0000509
+RF01118,Pseudoknot of the domain G(G12) of 23S ribosomal RNA,,
+RF01119,Small nucleolar RNA sR32,,
+RF01120,Small nucleolar RNA sR33,,
+RF01121,Small nucleolar RNA sR38,,
+RF01122,Small nucleolar RNA sR39,,
+RF01123,Small nucleolar RNA sR35,,
+RF01124,Small nucleolar RNA sR36,,
+RF01125,Small nucleolar RNA sR4,,
+RF01126,Small nucleolar RNA sR41,,
+RF01127,Small nucleolar RNA sR42,,
+RF01128,Small nucleolar RNA sR42,,
+RF01129,Small nucleolar RNA sR44,,
+RF01130,Small nucleolar RNA sR46
+RF01131,Small nucleolar RNA sR47
+RF01132,Small nucleolar RNA sR48
+RF01133,Small nucleolar RNA sR3
+RF01134,Small nucleolar RNA sR30
+RF01135,Small nucleolar RNA sR24
+RF01136,Small nucleolar RNA sR28
+RF01137,Small nucleolar RNA sR21
+RF01138,Small nucleolar RNA sR23
+RF01139,Small nucleolar RNA sR2
+RF01140,Small nucleolar RNA sR20
+RF01141,Small nucleolar RNA sR18
+RF01142,Small nucleolar RNA sR19
+RF01143,Small nucleolar RNA sR16
+RF01144,Small nucleolar RNA sR17
+RF01145,Small nucleolar RNA sR14
+RF01146,Small nucleolar RNA sR15,
+RF01147,Small nucleolar RNA sR12,
+RF01148,Small nucleolar RNA sR13,
+RF01149,Small nucleolar RNA sR10,
+RF01150,Small nucleolar RNA sR11,
+RF01151,Small nucleolar RNA U82P,
+RF01152,Small nucleolar RNA sR1,
+RF01153,Small nucleolar RNA sn3060,
+RF01154,Small nucleolar RNA U43C,
+RF01155,Small nucleolar RNA snoR101,
+RF01156,Small nucleolar RNA SNORD123,C/D
+RF01157,Small nucleolar RNA sn1185,
+RF01158,Small nucleolar RNA SNORD108,C/D
+RF01159,Small nucleolar RNA U18,
+RF01160,Small nucleolar RNA sn2841,
+RF01161,Small nucleolar RNA SNORD5,C/D
+RF01162,Small nucleolar RNA sn668,
+RF01163,Small nucleolar RNA snoR64a,
+RF01164,Small nucleolar RNA SNORD107,C/D
+RF01165,Small nucleolar RNA sn2317,
+RF01166,Small nucleolar RNA sn3071,
+RF01167,Small nucleolar RNA sn2429,
+RF01168,Small nucleolar RNA SNORD126,C/D
+RF01169,Small nucleolar RNA SNORD112,C/D
+RF01170,Small nucleolar RNA U61,
+RF01171,Small nucleolar RNA snoR4,
+RF01172,Small nucleolar RNA sn2343,
+RF01173,Small nucleolar RNA U105B,
+RF01174,Small nucleolar RNA U43,
+RF01175,Small nucleolar RNA U83,
+RF01176,Small nucleolar RNA snR78,
+RF01177,Small nucleolar RNA snR67,
+RF01178,Small nucleolar RNA snoR77Y,
+RF01179,Small nucleolar RNA U83,
+RF01180,Small nucleolar RNA snoR110,
+RF01181,Small nucleolar RNA snR77,
+RF01182,Small nucleolar RNA SNORD11,C/D
+RF01183,Small nucleolar RNA SNORD19B,C/D
+RF01184,Small nucleolar RNA snR79,
+RF01185,Small nucleolar RNA snR75,
+RF01186,Small nucleolar RNA SNORD127,C/D
+RF01187,Small nucleolar RNA U83C,
+RF01188,Small nucleolar RNA snR56,
+RF01189,Small nucleolar RNA sn1502,
+RF01190,Small nucleolar RNA snR50,
+RF01191,Small nucleolar RNA SNORD121A,C/D
+RF01192,Small nucleolar RNA SNORD11B,C/D
+RF01193,Small nucleolar RNA snoR20a,
+RF01194,Small nucleolar RNA sn2903,
+RF01195,Small nucleolar RNA snR52,
+RF01196,Small nucleolar RNA Z30a,
+RF01197,Small nucleolar RNA snR39,
+RF01198,Small nucleolar RNA snoR69Y,
+RF01199,Small nucleolar RNA snR58,
+RF01200,Small nucleolar RNA SNORD125,C/D
+RF01201,Small nucleolar RNA snR40,
+RF01202,Small nucleolar RNA sn2991,
+RF01203,Small nucleolar RNA snR47,
+RF01204,Small nucleolar RNA snR65,
+RF01205,Small nucleolar RNA snR62,
+RF01206,Small nucleolar RNA snoR109,
+RF01207,Small nucleolar RNA snR73,
+RF01208,Small nucleolar RNA snoR99,
+RF01209,Small nucleolar RNA snR76,
+RF01210,Small nucleolar RNA U13,
+RF01211,Small nucleolar RNA SNORD124,C/D
+RF01212,Small nucleolar RNA sn2524,
+RF01213,Small nucleolar RNA snoR103,
+RF01214,Small nucleolar RNA snR51,
+RF01215,Small nucleolar RNA snoR97,
+RF01216,Small nucleolar RNA snR87,
+RF01217,Small nucleolar RNA snoR72Y,
+RF01218,Small nucleolar RNA snR41,
+RF01219,Small nucleolar RNA snoR100,
+RF01220,Small nucleolar RNA snoR104,
+RF01221,Small nucleolar RNA U6-47,
+RF01222,Small nucleolar RNA sn2417,
+RF01223,Small nucleolar RNA snR13,
+RF01224,Small nucleolar RNA snoR80,
+RF01225,Small nucleolar RNA ACA64,
+RF01226,Small nucleolar RNA Z5,
+RF01227,Small nucleolar RNA snoR83,
+RF01228,Small nucleolar RNA snoR111,
+RF01229,Small nucleolar RNA SNORA84,H/ACA
+RF01230,Small nucleolar RNA snoR77,
+RF01231,Small nucleolar RNA snoR74,
+RF01232,Small nucleolar RNA U40,
+RF01233,Small nucleolar RNA U109,
+RF01234,Small nucleolar RNA SNORA47,H/ACA
+RF01235,Small nucleolar RNA snR68,
+RF01236,Small nucleolar RNA U19,
+RF01237,Small nucleolar RNA snR161,
+RF01238,Small nucleolar RNA snR70,
+RF01239,Small nucleolar RNA snR49,
+RF01240,Small nucleolar RNA snR85,
+RF01241,Small nucleolar RNA SNORA81,H/ACA
+RF01242,Small nucleolar RNA snR36
+RF01243,Small nucleolar RNA snR33
+RF01244,Small nucleolar RNA snR4
+RF01245,Small nucleolar RNA snR9
+RF01246,Small nucleolar RNA snR81
+RF01247,Small nucleolar RNA snR32
+RF01248,Small nucleolar RNA snR8
+RF01249,Small nucleolar RNA snR190
+RF01250,Small nucleolar RNA snR189
+RF01251,Small nucleolar RNA snR3
+RF01252,Small nucleolar RNA snR5
+RF01253,Small nucleolar RNA snR46
+RF01254,Small nucleolar RNA snR34
+RF01255,Small nucleolar RNA snR35
+RF01256,Small nucleolar RNA snR43
+RF01257,Small nucleolar RNA snR31
+RF01258,Small nucleolar RNA snR10
+RF01259,Small nucleolar RNA snR63
+RF01260,Small nucleolar RNA snR11
+RF01261,Small nucleolar RNA snR82
+RF01262,Small nucleolar RNA snR44
+RF01263,Small nucleolar RNA snR191
+RF01264,Small nucleolar RNA snR83
+RF01265,Small nucleolar RNA snR42
+RF01266,Small nucleolar RNA snR45
+RF01267,Small nucleolar RNA  snR37
+RF01268,Small nucleolar RNA U2-25
+RF01269,Small nucleolar RNA snR80
+RF01270,Small nucleolar RNA snR84
+RF01271,Small nucleolar RNA snR30
+RF01272,Small nucleolar RNA snR86
+RF01273,Small nucleolar RNA sR34
+RF01274,Small nucleolar RNA sR45,
+RF01275,Small nucleolar RNA sR22,
+RF01276,Small nucleolar RNA sR53,
+RF01277,Small nucleolar RNA U54,
+RF01278,Small nucleolar RNA SNORD109A,C/D
+RF01279,Small nucleolar RNA snoR53Y,
+RF01280,Small nucleolar RNA snoR14,
+RF01281,Small nucleolar RNA snoR35,
+RF01282,Small nucleolar RNA snoR21b,
+RF01283,Small nucleolar RNA U30,
+RF01284,Small nucleolar RNA snoR8a,
+RF01285,Small nucleolar RNA U31b,
+RF01286,Small nucleolar RNA snoR26,
+RF01287,Small nucleolar RNA snoR27,
+RF01288,Small nucleolar RNA snoR31,
+RF01289,Small nucleolar RNA snoR17,
+RF01290,Small nucleolar RNA U6-77
+RF01291,Small nucleolar RNA U97
+RF01292,Small nucleolar RNA snoR2/U65
+RF01293,Small nucleolar RNA ACA59
+RF01294,Small nucleolar RNA U89
+RF01295,Small nucleolar RNA U90
+RF01296,Small nucleolar RNA U85
+RF01297,Small nucleolar RNA sR40
+RF01298,Small nucleolar RNA U25
+RF01299,Small nucleolar RNA snR39B
+RF01300,Small nucleolar RNA U49
+RF01301,Small nucleolar RNA snoR4a
+RF01302,SnoRNA U36a
+RF01303,Small nucleolar RNA sR49
+RF01304,Small nucleolar RNA sR5
+RF01305,Small nucleolar RNA sR51
+RF01306,Small nucleolar RNA sR52,,
+RF01307,Small nucleolar RNA sR55,,
+RF01308,Small nucleolar RNA sR58,,
+RF01309,Small nucleolar RNA sR60,,
+RF01310,Small nucleolar RNA sR7,,
+RF01311,Small nucleolar RNA sR8,,
+RF01312,Small nucleolar RNA sR9,,
+RF01313,Heron HBV RNA encapsidation signal epsilon,,
+RF01314,microRNA mir-1227,mir-1227,MIPF0000454
+RF01315,CRISPR RNA direct repeat element,,
+RF01316,CRISPR RNA direct repeat element,,
+RF01317,CRISPR RNA direct repeat element,,
+RF01318,CRISPR RNA direct repeat element,,
+RF01319,CRISPR RNA direct repeat element,,
+RF01320,CRISPR RNA direct repeat element,,
+RF01321,CRISPR RNA direct repeat element,,
+RF01322,CRISPR RNA direct repeat element
+RF01323,CRISPR RNA direct repeat element
+RF01324,CRISPR RNA direct repeat element
+RF01325,CRISPR RNA direct repeat element
+RF01326,CRISPR RNA direct repeat element
+RF01327,CRISPR RNA direct repeat element
+RF01328,CRISPR RNA direct repeat element
+RF01329,CRISPR RNA direct repeat element
+RF01330,CRISPR RNA direct repeat element
+RF01331,CRISPR RNA direct repeat element
+RF01332,CRISPR RNA direct repeat element
+RF01333,CRISPR RNA direct repeat element
+RF01334,CRISPR RNA direct repeat element
+RF01335,CRISPR RNA direct repeat element
+RF01336,CRISPR RNA direct repeat element
+RF01337,CRISPR RNA direct repeat element
+RF01338,CRISPR RNA direct repeat element
+RF01339,CRISPR RNA direct repeat element
+RF01340,CRISPR RNA direct repeat element
+RF01341,CRISPR RNA direct repeat element
+RF01342,CRISPR RNA direct repeat element
+RF01343,CRISPR RNA direct repeat element
+RF01344,CRISPR RNA direct repeat element
+RF01345,CRISPR RNA direct repeat element
+RF01346,CRISPR RNA direct repeat element
+RF01347,CRISPR RNA direct repeat element
+RF01348,CRISPR RNA direct repeat element
+RF01349,CRISPR RNA direct repeat element
+RF01350,CRISPR RNA direct repeat element
+RF01351,CRISPR RNA direct repeat element
+RF01352,CRISPR RNA direct repeat element
+RF01353,CRISPR RNA direct repeat element
+RF01354,CRISPR RNA direct repeat element
+RF01355,CRISPR RNA direct repeat element
+RF01356,CRISPR RNA direct repeat element
+RF01357,CRISPR RNA direct repeat element
+RF01358,CRISPR RNA direct repeat element
+RF01359,CRISPR RNA direct repeat element
+RF01360,CRISPR RNA direct repeat element
+RF01361,CRISPR RNA direct repeat element
+RF01362,CRISPR RNA direct repeat element
+RF01363,CRISPR RNA direct repeat element
+RF01364,CRISPR RNA direct repeat element
+RF01365,CRISPR RNA direct repeat element
+RF01366,CRISPR RNA direct repeat element
+RF01367,CRISPR RNA direct repeat element
+RF01368,CRISPR RNA direct repeat element
+RF01369,CRISPR RNA direct repeat element
+RF01370,CRISPR RNA direct repeat element
+RF01371,CRISPR RNA direct repeat element
+RF01372,CRISPR RNA direct repeat element
+RF01373,CRISPR RNA direct repeat element
+RF01374,CRISPR RNA direct repeat element
+RF01375,CRISPR RNA direct repeat element
+RF01376,CRISPR RNA direct repeat element
+RF01377,CRISPR RNA direct repeat element
+RF01378,CRISPR RNA direct repeat element
+RF01379,CRISPR RNA direct repeat element
+RF01380,Human immunodeficiency virus type 1 major splice donor
+RF01381,HIV-1 stem-loop 3 Psi packaging signal
+RF01382,HIV-1 stem-loop 4 packaging signal
+RF01383,GRIK4 3 prime UTR element
+RF01384,Invasion gene-associated RNA
+RF01385,isrA Hfq binding RNA
+RF01386,isrB Hfq binding RNA
+RF01387,isrC Hfq binding RNA
+RF01388,isrD Hfq binding RNA
+RF01389,isrF Hfq binding RNA
+RF01390,isrG Hfq binding RNA
+RF01391,isrH Hfq binding RNA
+RF01392,isrI Hfq binding RNA
+RF01393,isrJ Hfq binding RNA
+RF01394,isrK Hfq binding RNA
+RF01395,isrL Hfq binding RNA
+RF01396,isrN Hfq binding RNA
+RF01397,isrO Hfq binding RNA
+RF01398,isrP Hfq binding RNA
+RF01399,isrQ Hfq binding RNA
+RF01400,istR Hfq binding RNA
+RF01401,rseX Hfq binding RNA
+RF01402,STnc150 Hfq binding RNA
+RF01403,STnc290 Hfq binding RNA
+RF01404,STnc440 Hfq binding RNA
+RF01405,STnc490k Hfq binding RNA
+RF01406,STnc500 Hfq binding RNA
+RF01407,STnc560 Hfq binding RNA
+RF01408,sraL Hfq binding RNA
+RF01409,STnc250 Hfq binding RNA
+RF01410,BsrC
+RF01411,BsrF
+RF01412,BsrG
+RF00001,5S ribosomal RNA

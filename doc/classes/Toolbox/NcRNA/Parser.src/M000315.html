@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>parse_dollo_output_for_sql (Toolbox::NcRNA::Parser)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/parser.rb, line 249</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">parse_dollo_output_for_sql</span>(<span class="ruby-identifier">type</span>)
+        
+        <span class="ruby-identifier">valid</span> = <span class="ruby-keyword kw">false</span>
+
+        <span class="ruby-ivar">@definition</span> = <span class="ruby-keyword kw">nil</span>
+        <span class="ruby-ivar">@dollo</span> = {}
+        
+        <span class="ruby-constant">IO</span>.<span class="ruby-identifier">readlines</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">infile</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+          
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/^[A-Za-z0-9_]+(\s+)[0-9]+(\s+)[yes]/</span>)  <span class="ruby-comment cmt"># a new node</span>
+            
+            <span class="ruby-identifier">valid</span> = <span class="ruby-keyword kw">true</span>
+            
+            <span class="ruby-identifier">this_line</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">strip</span>
+            <span class="ruby-ivar">@definition</span> = <span class="ruby-identifier">this_line</span>.<span class="ruby-identifier">slice!</span>(<span class="ruby-regexp re">/^[A-Za-z0-9_]+(\s+)[0-9]+(\s+)[A-Za-z0-9_]+/</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/(\s+)yes/</span>, <span class="ruby-value str">''</span>)
+            <span class="ruby-ivar">@dollo</span>[<span class="ruby-ivar">@definition</span>] = []
+            <span class="ruby-identifier">this_line</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/\s/</span>, <span class="ruby-value str">''</span>).<span class="ruby-identifier">split</span>(<span class="ruby-regexp re">//</span>).<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@dollo</span>[<span class="ruby-ivar">@definition</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">strip</span> }
+          <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/^$/</span>) <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">valid</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">true</span>
+            
+          <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/^[A-Za-z0-9_]+(\s+)[A-Za-z_]+(\s+)[yes]/</span>)
+            
+            <span class="ruby-identifier">valid</span> = <span class="ruby-keyword kw">false</span>
+            
+          <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">valid</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-value str">&quot;yes&quot;</span>) <span class="ruby-operator">==</span> <span class="ruby-keyword kw">false</span>
+            
+            <span class="ruby-identifier">line</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/\s/</span>, <span class="ruby-value str">''</span>).<span class="ruby-identifier">split</span>(<span class="ruby-regexp re">//</span>).<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@dollo</span>[<span class="ruby-ivar">@definition</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">strip</span> }
+            
+          <span class="ruby-keyword kw">end</span>
+            
+        <span class="ruby-keyword kw">end</span>
+       
+        <span class="ruby-comment cmt">#@dollo.each do |name,states|</span>
+        <span class="ruby-comment cmt">#  puts &quot;#{name}\t#{states.join(&quot;&lt;&gt;&quot;)}&quot;</span>
+        <span class="ruby-comment cmt">#end</span>
+        
+        <span class="ruby-constant">ToolDB</span><span class="ruby-operator">::</span><span class="ruby-constant">DBConnection</span>.<span class="ruby-identifier">connect</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">version</span>)
+        <span class="ruby-identifier">groups</span> = <span class="ruby-constant">ToolDB</span><span class="ruby-operator">::</span><span class="ruby-constant">Grouping</span>.<span class="ruby-identifier">find_all_by_biotype</span>(<span class="ruby-identifier">type</span>)
+        
+        <span class="ruby-identifier">groups</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">group</span><span class="ruby-operator">|</span>
+          
+          <span class="ruby-ivar">@dollo</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">node</span>,<span class="ruby-identifier">states</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">this_node</span> = <span class="ruby-identifier">node</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp re">/\s+/</span>)[<span class="ruby-value">1</span>]
+            <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;INSERT INTO xref_grouping_dollo_node (grouping_id,dollo_node_id,state) VALUES (#{group.id},(SELECT id FROM dollo_node WHERE node = '#{this_node.strip}'),'#{states.shift}');&quot;</span>
+            <span class="ruby-comment cmt">#puts &quot;\t#{node}: #{states.shift}&quot;</span>
+          <span class="ruby-keyword kw">end</span>
+          
+        <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>snorna_locations (Ensembl::Core::Translation)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/extensions.rb, line 544</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">snorna_locations</span>
+        
+        <span class="ruby-identifier">answer</span> = []
+        
+        <span class="ruby-identifier">snornas</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">transcript</span>.<span class="ruby-identifier">gene</span>.<span class="ruby-identifier">snornas</span>
+        
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">transcript</span>.<span class="ruby-identifier">introns</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">intron</span><span class="ruby-operator">|</span>
+          
+          <span class="ruby-identifier">snornas</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">snorna</span><span class="ruby-operator">|</span>
+            
+            <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">snorna</span>.<span class="ruby-identifier">slice</span>.<span class="ruby-identifier">within?</span>(<span class="ruby-identifier">intron</span>)
+              <span class="ruby-comment cmt">#puts &quot;#{intron.previous_exon.stable_id}|#{intron.previous_exon.stop} #{intron.start}/#{intron.stop} #{intron.next_exon.start}|#{intron.next_exon.stable_id}&quot;</span>
+              <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">intron</span>.<span class="ruby-identifier">previous_exon</span>.<span class="ruby-identifier">stop</span> <span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">transcript</span>.<span class="ruby-identifier">coding_region_genomic_end</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">transcript</span>.<span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value">-1</span>
+                <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;exon partly non-coding, using genomic_coding_region... (#{self.transcript.coding_region_genomic_end} instead of #{intron.previous_exon.stop}), direction is #{self.transcript.strand}&quot;</span>
+                <span class="ruby-identifier">answer</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">transcript</span>.<span class="ruby-identifier">coding_region_genomic_end</span>
+              <span class="ruby-keyword kw">else</span>
+                <span class="ruby-identifier">answer</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">intron</span>.<span class="ruby-identifier">previous_exon</span>.<span class="ruby-identifier">stop</span>
+              <span class="ruby-keyword kw">end</span>
+            <span class="ruby-keyword kw">end</span>
+            
+          <span class="ruby-keyword kw">end</span>
+          
+        <span class="ruby-keyword kw">end</span>
+        
+        <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">answer</span>
+        
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

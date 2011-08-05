@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>aligned_position (Toolbox::HomologDB::HomologyMember)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/homolog_db.rb, line 431</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">aligned_position</span>(<span class="ruby-identifier">feature</span>,<span class="ruby-identifier">verbose</span>=<span class="ruby-keyword kw">false</span>)
+                
+        <span class="ruby-identifier">answer</span> = []
+        
+        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;\tMapping feature onto: #{self.member.start}/#{self.member.stop}/#{self.member.strand}&quot;</span>  <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">verbose</span>
+              
+        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;\t&gt;Feature: #{feature.stable_id} (#{feature.start}/#{feature.stop}/#{feature.strand})&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">verbose</span>
+          
+        <span class="ruby-identifier">this_answer</span> = []
+          
+        <span class="ruby-identifier">cig</span> = <span class="ruby-node">&quot;#{self.nt_cigar_line}&quot;</span>
+        
+        <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;No nt cigar line found for #{self.member.stable_id}&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">cig</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+          
+        <span class="ruby-identifier">start</span> = <span class="ruby-identifier">feature</span>.<span class="ruby-identifier">start</span><span class="ruby-operator">-</span><span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">member</span>.<span class="ruby-identifier">start</span>
+        <span class="ruby-identifier">stop</span> = <span class="ruby-identifier">feature</span>.<span class="ruby-identifier">stop</span><span class="ruby-operator">-</span><span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">member</span>.<span class="ruby-identifier">start</span>
+          
+        <span class="ruby-identifier">gapped_pos</span> = <span class="ruby-value">0</span>
+        <span class="ruby-identifier">ungapped_pos</span> = <span class="ruby-value">0</span>
+          
+        <span class="ruby-keyword kw">until</span> <span class="ruby-identifier">ungapped_pos</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">stop</span>
+            
+                <span class="ruby-identifier">this_char</span> = <span class="ruby-identifier">cig</span>.<span class="ruby-identifier">slice!</span>(<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">0</span>)
+            
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">this_char</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;-&quot;</span>
+            <span class="ruby-identifier">gapped_pos</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+          <span class="ruby-keyword kw">else</span>
+            <span class="ruby-identifier">gapped_pos</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+            <span class="ruby-identifier">ungapped_pos</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+          <span class="ruby-keyword kw">end</span>
+            
+          <span class="ruby-identifier">this_answer</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">gapped_pos</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">ungapped_pos</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">start</span>
+            
+        <span class="ruby-keyword kw">end</span>
+          
+        <span class="ruby-identifier">this_answer</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">gapped_pos</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;\t&gt;&gt;Mapped to #{answer.join(&quot;..&quot;)}&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">verbose</span>
+        <span class="ruby-identifier">answer</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">this_answer</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;..&quot;</span>)
+          
+        <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">answer</span>
+        
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

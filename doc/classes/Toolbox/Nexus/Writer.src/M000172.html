@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>characters (Toolbox::Nexus::Writer)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/nexus.rb, line 44</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">characters</span>
+        
+        <span class="ruby-identifier">answer</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;BEGIN CHARACTERS;&quot;</span>)
+        <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;\tTITLE #{@title};&quot;</span>)
+        <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;\tDIMENSIONS NCHAR=#{@taxa.to_a[0][1].length};&quot;</span>)
+        
+        <span class="ruby-identifier">symbols</span> = <span class="ruby-value str">&quot;&quot;</span>
+        <span class="ruby-ivar">@taxa</span>.<span class="ruby-identifier">each_value</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">symbols</span> = <span class="ruby-identifier">symbols</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot;#{v}&quot;</span>}
+        <span class="ruby-identifier">symbols</span> = <span class="ruby-identifier">symbols</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp re">/./</span>).<span class="ruby-identifier">uniq</span>.<span class="ruby-identifier">sort!</span>
+        
+        <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;\tFORMAT DATATYPE = STANDARD GAP = ? MISSING = - SYMBOLS = \&quot; #{symbols.join(&quot; &quot;)}\&quot;;&quot;</span>)
+        <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;\tCHARSTATELABELS&quot;</span>)
+        <span class="ruby-identifier">tmp</span> = <span class="ruby-value str">&quot;&quot;</span>
+        <span class="ruby-identifier">counter</span> = <span class="ruby-value">0</span>
+        <span class="ruby-ivar">@taxa</span>.<span class="ruby-identifier">to_a</span>[<span class="ruby-value">0</span>][<span class="ruby-value">1</span>].<span class="ruby-identifier">length</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword kw">do</span>
+          <span class="ruby-identifier">counter</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+          <span class="ruby-identifier">tmp</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot; #{counter} group_#{counter},&quot;</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;\t\t#{tmp};&quot;</span>)
+        <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;\tMATRIX&quot;</span>)
+        <span class="ruby-ivar">@taxa</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;\t#{k.gsub(/\s/, '_')} #{v}&quot;</span>)}
+        <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;;&quot;</span>)
+        <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;\n&quot;</span>)
+        <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;END;&quot;</span>)
+        <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;\n&quot;</span>)
+        
+        <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;\n&quot;</span>)
+        
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

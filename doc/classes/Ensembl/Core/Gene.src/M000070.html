@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>fetch_noncoding (Ensembl::Core::Gene)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/extensions.rb, line 310</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">fetch_noncoding</span>
+        
+        <span class="ruby-identifier">ranges</span> = []
+        <span class="ruby-identifier">http</span><span class="ruby-identifier">:/</span><span class="ruby-regexp re">/www.spiegel.de/</span>
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">transcripts</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">transcript</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">transcript</span>.<span class="ruby-identifier">introns</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">intron</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">coords</span> = [ <span class="ruby-identifier">intron</span>.<span class="ruby-identifier">seq_region_start</span>,<span class="ruby-identifier">intron</span>.<span class="ruby-identifier">seq_region_end</span>].<span class="ruby-identifier">sort</span>
+            <span class="ruby-identifier">ranges</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Range</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">coords</span>.<span class="ruby-identifier">shift</span>,<span class="ruby-identifier">coords</span>.<span class="ruby-identifier">shift</span>)
+            
+          <span class="ruby-keyword kw">end</span>
+          
+        <span class="ruby-keyword kw">end</span>
+        
+        <span class="ruby-identifier">answer</span> = []
+        
+        <span class="ruby-keyword kw">until</span> <span class="ruby-identifier">ranges</span>.<span class="ruby-identifier">empty?</span>
+          <span class="ruby-identifier">this_range</span> = <span class="ruby-identifier">ranges</span>.<span class="ruby-identifier">shift</span>
+          <span class="ruby-identifier">add</span> = <span class="ruby-keyword kw">true</span>
+          
+          <span class="ruby-identifier">ranges</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">range</span><span class="ruby-operator">|</span>
+            <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">this_range</span>.<span class="ruby-identifier">eql?</span>(<span class="ruby-identifier">range</span>)   <span class="ruby-comment cmt"># the same intron is present in the remaining set, ignore the current one</span>
+              <span class="ruby-identifier">add</span> = <span class="ruby-keyword kw">false</span>
+            <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">this_range</span>.<span class="ruby-identifier">member?</span>(<span class="ruby-identifier">range</span>.<span class="ruby-identifier">first</span>) <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">this_range</span>.<span class="ruby-identifier">member?</span>(<span class="ruby-identifier">range</span>.<span class="ruby-identifier">end</span>) <span class="ruby-comment cmt"># this intron contains another intron - ignore it</span>
+              <span class="ruby-identifier">add</span> = <span class="ruby-keyword kw">false</span>
+            <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">this_range</span>.<span class="ruby-identifier">member?</span>(<span class="ruby-identifier">range</span>.<span class="ruby-identifier">first</span>) <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">this_range</span>.<span class="ruby-identifier">member?</span>(<span class="ruby-identifier">range</span>.<span class="ruby-identifier">end</span>) <span class="ruby-operator">==</span> <span class="ruby-keyword kw">false</span> <span class="ruby-comment cmt"># overlapping upstream, take the overlap only </span>
+              <span class="ruby-identifier">ranges</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">range</span>)
+              <span class="ruby-identifier">this_range</span> = <span class="ruby-constant">Range</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">range</span>.<span class="ruby-identifier">first</span>,<span class="ruby-identifier">this_range</span>.<span class="ruby-identifier">end</span>)
+            <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">this_range</span>.<span class="ruby-identifier">member?</span>(<span class="ruby-identifier">range</span>.<span class="ruby-identifier">first</span>) <span class="ruby-operator">==</span> <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">this_range</span>.<span class="ruby-identifier">member?</span>(<span class="ruby-identifier">range</span>.<span class="ruby-identifier">end</span>) <span class="ruby-comment cmt"># overlapping downstream, take the overlap only</span>
+              <span class="ruby-identifier">this_range</span> = <span class="ruby-constant">Range</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">this_range</span>.<span class="ruby-identifier">first</span>,<span class="ruby-identifier">range</span>.<span class="ruby-identifier">end</span>)
+              <span class="ruby-identifier">ranges</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">range</span>)
+            <span class="ruby-keyword kw">end</span>
+            
+          <span class="ruby-keyword kw">end</span>
+          
+          <span class="ruby-identifier">answer</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Ensembl</span><span class="ruby-operator">::</span><span class="ruby-constant">Core</span><span class="ruby-operator">::</span><span class="ruby-constant">Slice</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">seq_region</span>,<span class="ruby-identifier">this_range</span>.<span class="ruby-identifier">first</span>,<span class="ruby-identifier">this_range</span>.<span class="ruby-identifier">end</span>,<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">strand</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">add</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">true</span>
+          
+        <span class="ruby-keyword kw">end</span>
+       
+       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">answer</span>
+        
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

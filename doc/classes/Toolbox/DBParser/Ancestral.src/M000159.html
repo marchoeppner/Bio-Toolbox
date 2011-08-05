@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>hostgene_content (Toolbox::DBParser::Ancestral)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/database_pipeline.rb, line 1241</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">hostgene_content</span>
+        
+        <span class="ruby-constant">ToolDB</span><span class="ruby-operator">::</span><span class="ruby-constant">DBConnection</span>.<span class="ruby-identifier">connect</span>
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">type</span> = <span class="ruby-value str">&quot;snoRNA&quot;</span>
+        <span class="ruby-identifier">nodes</span> = <span class="ruby-constant">ToolDB</span><span class="ruby-operator">::</span><span class="ruby-constant">TreeNode</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:all</span>, <span class="ruby-identifier">:order</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;nr&quot;</span>)
+
+        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;,#{nodes.collect{|n| n.nr}.join(&quot;,&quot;)}&quot;</span>
+        <span class="ruby-identifier">counter_total</span> = { <span class="ruby-value str">&quot;1&quot;</span> =<span class="ruby-operator">&gt;</span> [] , <span class="ruby-value str">&quot;2&quot;</span> =<span class="ruby-operator">&gt;</span> [] , <span class="ruby-value str">&quot;3&quot;</span> =<span class="ruby-operator">&gt;</span> [] , <span class="ruby-value str">&quot;4&quot;</span> =<span class="ruby-operator">&gt;</span> [] , <span class="ruby-value str">&quot;5&quot;</span> =<span class="ruby-operator">&gt;</span> [] , <span class="ruby-value str">&quot;6&quot;</span> =<span class="ruby-operator">&gt;</span> [] , <span class="ruby-value str">&quot;7&quot;</span> =<span class="ruby-operator">&gt;</span> [] , <span class="ruby-value str">&quot;8&quot;</span> =<span class="ruby-operator">&gt;</span> [] }
+
+        <span class="ruby-identifier">nodes</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">node</span><span class="ruby-operator">|</span>
+
+          <span class="ruby-identifier">node_counter</span> = { <span class="ruby-value str">&quot;1&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> , <span class="ruby-value str">&quot;2&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> , <span class="ruby-value str">&quot;3&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> , <span class="ruby-value str">&quot;4&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> , <span class="ruby-value str">&quot;5&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> , <span class="ruby-value str">&quot;6&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> , <span class="ruby-value str">&quot;7&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> , <span class="ruby-value str">&quot;8&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> }
+
+          <span class="ruby-identifier">node</span>.<span class="ruby-identifier">fetch_hostgenes</span>(<span class="ruby-value">1</span>,<span class="ruby-node">&quot;#{type}&quot;</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">gene</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">count</span> = <span class="ruby-value">0</span>
+            <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">fetch_ncrnas</span>(<span class="ruby-identifier">type</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ncrna</span><span class="ruby-operator">|</span>
+              <span class="ruby-identifier">count</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+            <span class="ruby-keyword kw">end</span>
+            <span class="ruby-identifier">node_counter</span>[<span class="ruby-node">&quot;#{count}&quot;</span>] = <span class="ruby-identifier">node_counter</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-node">&quot;#{count}&quot;</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+          <span class="ruby-keyword kw">end</span>
+
+          <span class="ruby-identifier">node_counter</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>,<span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">counter_total</span>[<span class="ruby-node">&quot;#{key}&quot;</span>] = <span class="ruby-identifier">counter_total</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-node">&quot;#{key}&quot;</span>).<span class="ruby-identifier">push</span>(<span class="ruby-identifier">value</span>)
+          <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-identifier">counter_total</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>,<span class="ruby-identifier">values</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{key} ncRNA(s),#{values.join(&quot;,&quot;)}&quot;</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>run_search (Toolbox::NcRNA::Statistics)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/ncrna.rb, line 535</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run_search</span>
+        
+        <span class="ruby-constant">Ensembl</span><span class="ruby-operator">::</span><span class="ruby-constant">Compara</span><span class="ruby-operator">::</span><span class="ruby-constant">DBConnection</span>.<span class="ruby-identifier">connect</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">version</span>)
+
+        <span class="ruby-identifier">dataset</span> = <span class="ruby-constant">Ensembl</span><span class="ruby-operator">::</span><span class="ruby-constant">Compara</span><span class="ruby-operator">::</span><span class="ruby-constant">MethodLinkSpeciesSet</span>.<span class="ruby-identifier">find_by_method_link_species_set_id</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">dataset_id</span>)
+
+        <span class="ruby-identifier">organisms</span> = <span class="ruby-identifier">dataset</span>.<span class="ruby-identifier">fetch_organisms</span>
+        
+        <span class="ruby-identifier">output</span>(<span class="ruby-node">&quot;&lt;StatisticalOverview dataset_id='#{self.dataset_id}' type='#{self.type}'&gt;&quot;</span>)
+        
+        <span class="ruby-identifier">organisms</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">organism</span><span class="ruby-operator">|</span>
+          
+          <span class="ruby-constant">Ensembl</span><span class="ruby-operator">::</span><span class="ruby-constant">Compara</span><span class="ruby-operator">::</span><span class="ruby-constant">DBConnection</span>.<span class="ruby-identifier">connect</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">version</span>)
+          
+          <span class="ruby-identifier">output</span>(<span class="ruby-node">&quot;\s&lt;Organism name='#{organism.name}'&gt;&quot;</span>)
+          
+          <span class="ruby-identifier">organism_name</span> = <span class="ruby-node">&quot;#{organism.name.gsub(/\s/, '_').downcase}&quot;</span>
+          <span class="ruby-constant">Ensembl</span><span class="ruby-operator">::</span><span class="ruby-constant">Core</span><span class="ruby-operator">::</span><span class="ruby-constant">DBConnection</span>.<span class="ruby-identifier">connect</span>(<span class="ruby-node">&quot;#{organism_name}&quot;</span>,<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">version</span>)
+          
+          <span class="ruby-identifier">ncrnas</span> = <span class="ruby-constant">Ensembl</span><span class="ruby-operator">::</span><span class="ruby-constant">Core</span><span class="ruby-operator">::</span><span class="ruby-constant">Gene</span>.<span class="ruby-identifier">find_all_by_biotype</span>(<span class="ruby-node">&quot;#{@type}&quot;</span>)
+         
+          <span class="ruby-identifier">ncrnas</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ncrna</span><span class="ruby-operator">|</span>
+
+            <span class="ruby-constant">Ensembl</span><span class="ruby-operator">::</span><span class="ruby-constant">Core</span><span class="ruby-operator">::</span><span class="ruby-constant">DBConnection</span>.<span class="ruby-identifier">connect</span>(<span class="ruby-node">&quot;#{organism_name}&quot;</span>,<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">version</span>)
+            
+            <span class="ruby-identifier">f</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{type}_#{self.version}_all_sequences.sql&quot;</span>, <span class="ruby-value str">&quot;a&quot;</span>)
+            <span class="ruby-identifier">f</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;INSERT INTO ncrna_sequence(ensembl_ncrna_id,seq,strand) SELECT id,'#{ncrna.slice.seq}','#{ncrna.strand}' FROM ensembl_ncrna WHERE stable_id = '#{ncrna.stable_id}';&quot;</span>
+            <span class="ruby-identifier">f</span>.<span class="ruby-identifier">close</span>
+            
+            <span class="ruby-identifier">output</span>(<span class="ruby-node">&quot;\s\s&lt;NcRNA stable_id='#{ncrna.stable_id}' external_id='#{ncrna.ncrna_id(@external_db)}' intronic='#{ncrna.is_intronic?}'&gt;&quot;</span>)
+            
+            <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">ncrna</span>.<span class="ruby-identifier">is_intronic?</span>
+              
+              <span class="ruby-identifier">host_gene</span> = <span class="ruby-identifier">ncrna</span>.<span class="ruby-identifier">fetch_hostgene</span>
+              <span class="ruby-identifier">host_gene</span>.<span class="ruby-identifier">description</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-value">? </span><span class="ruby-identifier">description</span> = <span class="ruby-value str">&quot;&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">description</span> = <span class="ruby-identifier">host_gene</span>.<span class="ruby-identifier">description</span>.<span class="ruby-identifier">sql_compliant</span>
+             
+              <span class="ruby-identifier">output</span>(<span class="ruby-node">&quot;\s\s\s&lt;HostGene stable_id='#{host_gene.stable_id}' description='#{description}' &gt;&quot;</span>)
+              <span class="ruby-identifier">go_terms</span> = <span class="ruby-identifier">host_gene</span>.<span class="ruby-identifier">go_terms_with_evidence</span>
+
+              <span class="ruby-identifier">go_terms</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">go</span><span class="ruby-operator">|</span>
+                <span class="ruby-identifier">output</span>(<span class="ruby-node">&quot;\s\s\s\s&lt;GoId id='#{go.shift}' linkage='#{go.shift}' /&gt;&quot;</span>)
+              <span class="ruby-keyword kw">end</span>
+              <span class="ruby-identifier">output</span>(<span class="ruby-value str">&quot;\s\s\s&lt;/HostGene&gt;&quot;</span>)
+            <span class="ruby-keyword kw">end</span>
+
+            <span class="ruby-identifier">output</span>(<span class="ruby-value str">&quot;\s\s&lt;/NcRNA&gt;&quot;</span>)
+
+          <span class="ruby-keyword kw">end</span>
+          
+        <span class="ruby-identifier">output</span>(<span class="ruby-value str">&quot;\s&lt;/Organism&gt;&quot;</span>)
+
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-identifier">output</span>(<span class="ruby-value str">&quot;&lt;/StatisticalOverview&gt;&quot;</span>)
+      
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

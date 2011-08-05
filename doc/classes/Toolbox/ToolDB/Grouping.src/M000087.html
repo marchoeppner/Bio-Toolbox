@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>fetch_diff_scores (Toolbox::ToolDB::Grouping)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/tool_db.rb, line 726</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">fetch_diff_scores</span>(<span class="ruby-identifier">window_size</span>=<span class="ruby-value">1</span>,<span class="ruby-identifier">upstream</span>=<span class="ruby-value">0</span>,<span class="ruby-identifier">downstream</span>=<span class="ruby-value">0</span>)
+        
+        <span class="ruby-identifier">undefined</span> = <span class="ruby-value">0</span><span class="ruby-value">.0</span> <span class="ruby-comment cmt"># what to insert for columns without GERP scores</span>
+        
+        <span class="ruby-identifier">valid_windows</span> = [ <span class="ruby-value">1</span> , <span class="ruby-value">10</span>, <span class="ruby-value">100</span>, <span class="ruby-value">500</span> ]
+        <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot; Window size must be an integer and 1,10,100 or 500&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">valid_windows</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">window_size</span>)
+        
+        <span class="ruby-identifier">start</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">gal_start</span><span class="ruby-operator">-</span><span class="ruby-identifier">upstream</span>  <span class="ruby-comment cmt"># the position to be analyzed in alignment coordinates</span>
+        <span class="ruby-identifier">stop</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">gal_stop</span><span class="ruby-operator">+</span><span class="ruby-identifier">downstream</span>
+        
+        <span class="ruby-identifier">block</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">fetch_ensembl_genomic_align_block</span>
+        
+        <span class="ruby-identifier">answer</span> = [] <span class="ruby-comment cmt"># array of final scores</span>
+        <span class="ruby-identifier">bucket</span> = {} <span class="ruby-comment cmt"># bin all conservation_scores falling in the region</span>
+        
+        <span class="ruby-identifier">block</span>.<span class="ruby-identifier">conservation_scores</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">window_size</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">window_size</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">position</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">stop</span> }.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">score</span><span class="ruby-operator">|</span>
+          
+          <span class="ruby-identifier">diff_scores</span> = <span class="ruby-identifier">score</span>.<span class="ruby-identifier">get_diff_scores</span>
+          
+          <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">score</span>.<span class="ruby-identifier">position</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">start</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">score</span>.<span class="ruby-identifier">position</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">stop</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">start</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">score</span>.<span class="ruby-identifier">position</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">start</span> <span class="ruby-operator">&lt;</span> (<span class="ruby-identifier">score</span>.<span class="ruby-identifier">position</span><span class="ruby-operator">+</span>(<span class="ruby-identifier">diff_scores</span>.<span class="ruby-identifier">nitems</span><span class="ruby-operator">*</span><span class="ruby-identifier">window_size</span>))
+          
+          <span class="ruby-identifier">bucket</span>[<span class="ruby-identifier">score</span>.<span class="ruby-identifier">position</span>] = <span class="ruby-identifier">diff_scores</span>
+          
+        <span class="ruby-keyword kw">end</span>
+        
+        <span class="ruby-identifier">prev_pos</span> = <span class="ruby-keyword kw">nil</span> <span class="ruby-comment cmt"># keep track of the position in the reconstruction process and calculate gaps</span>
+        <span class="ruby-identifier">no_pos</span> = (<span class="ruby-identifier">stop</span><span class="ruby-operator">-</span><span class="ruby-identifier">start</span>)<span class="ruby-operator">/</span><span class="ruby-identifier">window_size</span> <span class="ruby-comment cmt"># number of items (window size dependent) in this region to cover (used to exit loop)</span>
+        
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-comment cmt"># if no GERP analysis was performed for this entire section...</span>
+          <span class="ruby-identifier">no_pos</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword kw">do</span> 
+            <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">undefined</span>)
+          <span class="ruby-keyword kw">end</span>
+          <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">answer</span>
+        <span class="ruby-keyword kw">end</span>
+        
+        <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">pos</span>,<span class="ruby-identifier">scores</span><span class="ruby-operator">|</span>
+          <span class="ruby-comment cmt"># subsequent scores in this position, added to the result - add 0.0 for gaps</span>
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">prev_pos</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">false</span>
+            ((<span class="ruby-identifier">pos</span><span class="ruby-operator">-</span><span class="ruby-identifier">prev_pos</span>)<span class="ruby-operator">/</span><span class="ruby-identifier">window_size</span>).<span class="ruby-identifier">times</span> <span class="ruby-keyword kw">do</span>
+              <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">undefined</span>)
+            <span class="ruby-keyword kw">end</span>
+            <span class="ruby-identifier">scores</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+              <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">s</span>)
+              <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">answer</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">nitems</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">no_pos</span>
+            <span class="ruby-keyword kw">end</span>
+            <span class="ruby-identifier">prev_pos</span> = (<span class="ruby-identifier">start</span><span class="ruby-operator">+</span>(<span class="ruby-identifier">answer</span>.<span class="ruby-identifier">nitems</span><span class="ruby-operator">*</span><span class="ruby-identifier">window_size</span>)) 
+          <span class="ruby-keyword kw">else</span>
+            <span class="ruby-comment cmt"># beginning of the score string - remove trailing scores and add to results</span>
+            <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">pos</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">start</span>
+              ((<span class="ruby-identifier">start</span><span class="ruby-operator">-</span><span class="ruby-identifier">pos</span>)<span class="ruby-operator">/</span><span class="ruby-identifier">window_size</span>).<span class="ruby-identifier">times</span> <span class="ruby-keyword kw">do</span> 
+                <span class="ruby-identifier">scores</span>.<span class="ruby-identifier">shift</span>
+              <span class="ruby-keyword kw">end</span>
+            <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">pos</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">start</span>
+              ((<span class="ruby-identifier">pos</span><span class="ruby-operator">-</span><span class="ruby-identifier">start</span>)<span class="ruby-operator">/</span><span class="ruby-identifier">window_size</span>).<span class="ruby-identifier">times</span> <span class="ruby-keyword kw">do</span> 
+                <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">undefined</span>)
+              <span class="ruby-keyword kw">end</span>
+            <span class="ruby-keyword kw">end</span>
+            <span class="ruby-identifier">scores</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+              <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">s</span>)
+              <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">answer</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">nitems</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">no_pos</span>
+            <span class="ruby-keyword kw">end</span>
+            <span class="ruby-identifier">prev_pos</span> = (<span class="ruby-identifier">start</span><span class="ruby-operator">+</span>(<span class="ruby-identifier">answer</span>.<span class="ruby-identifier">nitems</span><span class="ruby-operator">*</span><span class="ruby-identifier">window_size</span>))
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-comment cmt"># if the number of scores is smaller then expected, fill up the remaining slots with 0</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">nitems</span> <span class="ruby-operator">&lt;</span> ((<span class="ruby-identifier">stop</span><span class="ruby-operator">-</span><span class="ruby-identifier">start</span>)<span class="ruby-operator">/</span><span class="ruby-identifier">window_size</span>) 
+          (((<span class="ruby-identifier">stop</span><span class="ruby-operator">-</span><span class="ruby-identifier">start</span>)<span class="ruby-operator">-</span><span class="ruby-identifier">answer</span>.<span class="ruby-identifier">nitems</span>)<span class="ruby-operator">/</span><span class="ruby-identifier">window_size</span>).<span class="ruby-identifier">times</span> <span class="ruby-keyword kw">do</span>
+            <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">undefined</span>)
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span> 
+        
+        <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">answer</span>
+        
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

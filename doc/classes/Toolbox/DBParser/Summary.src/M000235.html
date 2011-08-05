@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>summarize (Toolbox::DBParser::Summary)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/database_pipeline.rb, line 33</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">summarize</span>
+        
+        <span class="ruby-identifier">ncrnas</span> = <span class="ruby-constant">ToolDB</span><span class="ruby-operator">::</span><span class="ruby-constant">EnsemblNcrna</span>.<span class="ruby-identifier">find_all_by_biotype</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">type</span>)
+        
+        <span class="ruby-identifier">ncrnas</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ncrna</span><span class="ruby-operator">|</span>
+          
+          <span class="ruby-identifier">organism</span> = <span class="ruby-identifier">ncrna</span>.<span class="ruby-identifier">organism</span>
+          <span class="ruby-identifier">data</span> = <span class="ruby-ivar">@organisms</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">organism</span>.<span class="ruby-identifier">name</span>)
+          
+          <span class="ruby-identifier">full</span> = <span class="ruby-value">1</span>
+          <span class="ruby-identifier">full_intronic</span> = <span class="ruby-value">0</span>
+          <span class="ruby-identifier">conserved</span> = <span class="ruby-value">0</span>
+          <span class="ruby-identifier">conserved_intronic</span> = <span class="ruby-value">0</span>
+          
+          <span class="ruby-identifier">full_intronic</span> = <span class="ruby-value">1</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">ncrna</span>.<span class="ruby-identifier">has_hostgene?</span>
+          <span class="ruby-identifier">conserved</span> = <span class="ruby-value">1</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">ncrna</span>.<span class="ruby-identifier">has_group?</span>
+          <span class="ruby-identifier">conserved_intronic</span> = <span class="ruby-identifier">full_intronic</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">ncrna</span>.<span class="ruby-identifier">has_group?</span>
+          <span class="ruby-ivar">@organisms</span>[<span class="ruby-identifier">organism</span>.<span class="ruby-identifier">name</span>] = [ <span class="ruby-identifier">data</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">+=</span> <span class="ruby-identifier">full</span> , <span class="ruby-identifier">data</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">+=</span> <span class="ruby-identifier">full_intronic</span> , <span class="ruby-identifier">data</span>[<span class="ruby-value">2</span>] <span class="ruby-operator">+=</span> <span class="ruby-identifier">conserved</span> , <span class="ruby-identifier">data</span>[<span class="ruby-value">3</span>] <span class="ruby-operator">+=</span> <span class="ruby-identifier">conserved_intronic</span> ]
+          
+        <span class="ruby-keyword kw">end</span>
+        
+        <span class="ruby-identifier">o</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;ensembl_52_12_vertebrates_#{self.type}_summary.csv&quot;</span>, <span class="ruby-value str">&quot;a&quot;</span>)
+        <span class="ruby-identifier">o</span>.<span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Organism,Total,Intronic,Conserved,Conserved Intronic&quot;</span>
+        <span class="ruby-ivar">@organisms</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">organism</span>,<span class="ruby-identifier">counts</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">o</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{organism},#{counts[0]},#{counts[1]},#{counts[2]},#{counts[3]}&quot;</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-identifier">o</span>.<span class="ruby-identifier">close</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

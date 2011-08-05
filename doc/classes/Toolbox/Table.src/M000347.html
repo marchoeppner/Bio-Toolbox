@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>draw_table (Toolbox::Table)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/graphics.rb, line 16</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">draw_table</span>
+      
+      <span class="ruby-identifier">answer</span> = []
+      <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;&lt;html&gt;&quot;</span>)
+      <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;&lt;head&gt;Some table&quot;</span>)
+      <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;&lt;/head&gt;&quot;</span>)
+      <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;&lt;style type='text/css'&gt;&quot;</span>)
+      <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;table.sample { border-width: 1px 1px 1px 1px;border-spacing: 2px;border-style: outset outset outset outset;border-color: gray gray gray gray;border-collapse: separate;background-color: white;font-size:8px;}&quot;</span>)
+      <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;&lt;/style&gt;&quot;</span>)
+      <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;&lt;body&gt;&quot;</span>)
+      <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">create_table</span>)
+      <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;&lt;/body&gt;&quot;</span>)
+      <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">&quot;&lt;/html&gt;&quot;</span>)
+      
+      <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">answer</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;\n&quot;</span>)
+      
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

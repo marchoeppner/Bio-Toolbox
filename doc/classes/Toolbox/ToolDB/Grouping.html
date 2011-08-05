@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: Toolbox::ToolDB::Grouping</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">Toolbox::ToolDB::Grouping</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../../files/lib/tool_db_rb.html">
+                lib/tool_db.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                <a href="DBConnection.html">
+                DBConnection
+               </a>
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000145">do_align</a>&nbsp;&nbsp;
+      <a href="#M000125">dollo_state_at_node</a>&nbsp;&nbsp;
+      <a href="#M000142">fetch_diff_scores</a>&nbsp;&nbsp;
+      <a href="#M000141">fetch_ensembl_genomic_align_block</a>&nbsp;&nbsp;
+      <a href="#M000127">fetch_hostgenes</a>&nbsp;&nbsp;
+      <a href="#M000134">fetch_ncrna_group</a>&nbsp;&nbsp;
+      <a href="#M000133">fetch_ncrna_plain_name</a>&nbsp;&nbsp;
+      <a href="#M000126">fetch_ncrnas</a>&nbsp;&nbsp;
+      <a href="#M000140">fetch_organisms</a>&nbsp;&nbsp;
+      <a href="#M000137">fetch_unique_goterms</a>&nbsp;&nbsp;
+      <a href="#M000143">gal_start</a>&nbsp;&nbsp;
+      <a href="#M000144">gal_stop</a>&nbsp;&nbsp;
+      <a href="#M000131">gerp_mean</a>&nbsp;&nbsp;
+      <a href="#M000132">gerp_median</a>&nbsp;&nbsp;
+      <a href="#M000130">gerp_scores</a>&nbsp;&nbsp;
+      <a href="#M000138">get_genomic_align_block</a>&nbsp;&nbsp;
+      <a href="#M000139">get_genomic_align_block_id</a>&nbsp;&nbsp;
+      <a href="#M000128">is_intronic?</a>&nbsp;&nbsp;
+      <a href="#M000129">is_sense?</a>&nbsp;&nbsp;
+      <a href="#M000135">node_values</a>&nbsp;&nbsp;
+      <a href="#M000136">present_at?</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000145" class="method-detail">
+        <a name="M000145"></a>
+
+        <div class="method-heading">
+          <a href="Grouping.src/M000145.html" target="Code" class="method-signature"
+            onclick="popupCode('Grouping.src/M000145.html');return false;">
+          <span class="method-name">do_align</span><span class="method-args">(type=&quot;fasta&quot;)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h1>DESCRIPTION</h1>
+<p>
+Returns a <a href="../../Bio/Alignment.html">Bio::Alignment</a> object of
+aligned ncRNA sequences Can be &quot;fasta&quot; or &quot;clustalw&quot;
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000125" class="method-detail">
+        <a name="M000125"></a>
+
+        <div class="method-heading">
+          <a href="Grouping.src/M000125.html" target="Code" class="method-signature"
+            onclick="popupCode('Grouping.src/M000125.html');return false;">
+          <span class="method-name">dollo_state_at_node</span><span class="method-args">(node)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h1>DESCRIPTION</h1>
+<p>
+Returns the ancestral state from the dollo reconstruction
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000142" class="method-detail">
+        <a name="M000142"></a>
+
+        <div class="method-heading">
+          <a href="Grouping.src/M000142.html" target="Code" class="method-signature"
+            onclick="popupCode('Grouping.src/M000142.html');return false;">
+          <span class="method-name">fetch_diff_scores</span><span class="method-args">(window_size=1,upstream=0,downstream=0)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h1>DESCRIPTION</h1>
+<p>
+Returns an array of diff_score for this piece of the genomic alignment.
+Requires a window size (1,10,100, or 500)
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000141" class="method-detail">
+        <a name="M000141"></a>
+
+        <div class="method-heading">
+          <a href="Grouping.src/M000141.html" target="Code" class="method-signature"
+            onclick="popupCode('Grouping.src/M000141.html');return false;">
+          <span class="method-name">fetch_ensembl_genomic_align_block</span><span class="method-args">(version=54)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h1>DESCRIPTION</h1>
+<p>
+Returns the correspoing <a
+href="../../Ensembl/Compara/GenomicAlignBlock.html">Ensembl::Compara::GenomicAlignBlock</a>
+object
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000127" class="method-detail">
+        <a name="M000127"></a>
+
+        <div class="method-heading">
+          <a href="Grouping.src/M000127.html" target="Code" class="method-signature"
+            onclick="popupCode('Grouping.src/M000127.html');return false;">
+          <span class="method-name">fetch_hostgenes</span><span class="method-args">(organism_id=nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h1>DESCRIPTION</h1>
+<p>
+FInds the host genes of all member ncRNAs
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000134" class="method-detail">
+        <a name="M000134"></a>
+
+        <div class="method-heading">
+          <a href="Grouping.src/M000134.html" target="Code" class="method-signature"
+            onclick="popupCode('Grouping.src/M000134.html');return false;">
+          <span class="method-name">fetch_ncrna_group</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000133" class="method-detail">
+        <a name="M000133"></a>
+
+        <div class="method-heading">
+          <a href="Grouping.src/M000133.html" target="Code" class="method-signature"
+            onclick="popupCode('Grouping.src/M000133.html');return false;">
+          <span class="method-name">fetch_ncrna_plain_name</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000126" class="method-detail">
+        <a name="M000126"></a>
+
+        <div class="method-heading">
+          <a href="Grouping.src/M000126.html" target="Code" class="method-signature"
+            onclick="popupCode('Grouping.src/M000126.html');return false;">
+          <span class="method-name">fetch_ncrnas</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h1>DESCRIPTION</h1>
+<p>
+Collects all ncRNAs belonging to a given group and returns them as an <a
+href="../../Array.html">Array</a> of <a
+href="EnsemblNcrna.html">ToolDB::EnsemblNcrna</a> objects.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000140" class="method-detail">
+        <a name="M000140"></a>
+
+        <div class="method-heading">
+          <a href="Grouping.src/M000140.html" target="Code" class="method-signature"
+            onclick="popupCode('Grouping.src/M000140.html');return false;">
+          <span class="method-name">fetch_organisms</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h1>DESCRIPTION</h1>
+<p>
+Returns all organisms that are part of this group through their ncRNAs
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000137" class="method-detail">
+        <a name="M000137"></a>
+
+        <div class="method-heading">
+          <a href="Grouping.src/M000137.html" target="Code" class="method-signature"
+            onclick="popupCode('Grouping.src/M000137.html');return false;">
+          <span class="method-name">fetch_unique_goterms</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h1>DESCRIPTTION</h1>
+<p>
+Finds all GO terms associated with any host genes belonging to all ncRNAs
+that are children to this group
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000143" class="method-detail">
+        <a name="M000143"></a>
+
+        <div class="method-heading">
+          <a href="Grouping.src/M000143.html" target="Code" class="method-signature"
+            onclick="popupCode('Grouping.src/M000143.html');return false;">
+          <span class="method-name">gal_start</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000144" class="method-detail">
+        <a name="M000144"></a>
+
+        <div class="method-heading">
+          <a href="Grouping.src/M000144.html" target="Code" class="method-signature"
+            onclick="popupCode('Grouping.src/M000144.html');return false;">
+          <span class="method-name">gal_stop</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000131" class="method-detail">
+        <a name="M000131"></a>
+
+        <div class="method-heading">
+          <a href="Grouping.src/M000131.html" target="Code" class="method-signature"
+            onclick="popupCode('Grouping.src/M000131.html');return false;">
+          <span class="method-name">gerp_mean</span><span class="method-args">(window_size)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h1>DESCRIPTION</h1>
+<p>
+Calculates the mean of the gerp scores for a given window size
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000132" class="method-detail">
+        <a name="M000132"></a>
+
+        <div class="method-heading">
+          <a href="Grouping.src/M000132.html" target="Code" class="method-signature"
+            onclick="popupCode('Grouping.src/M000132.html');return false;">
+          <span class="method-name">gerp_median</span><span class="method-args">(window_size)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h1>DESCRIPTION</h1>
+<p>
+Calculates the median of gerp scores for a given window size
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000130" class="method-detail">
+        <a name="M000130"></a>
+
+        <div class="method-heading">
+          <a href="Grouping.src/M000130.html" target="Code" class="method-signature"
+            onclick="popupCode('Grouping.src/M000130.html');return false;">
+          <span class="method-name">gerp_scores</span><span class="method-args">(window_size)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+DESCRIPTION Returns the gerp scores for this section of the alignment
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000138" class="method-detail">
+        <a name="M000138"></a>
+
+        <div class="method-heading">
+          <a href="Grouping.src/M000138.html" target="Code" class="method-signature"
+            onclick="popupCode('Grouping.src/M000138.html');return false;">
+          <span class="method-name">get_genomic_align_block</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h1>DESCRIPTION</h1>
+<p>
+Returns the genomic align block this group was retrieved from
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000139" class="method-detail">
+        <a name="M000139"></a>
+
+        <div class="method-heading">
+          <a href="Grouping.src/M000139.html" target="Code" class="method-signature"
+            onclick="popupCode('Grouping.src/M000139.html');return false;">
+          <span class="method-name">get_genomic_align_block_id</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000128" class="method-detail">
+        <a name="M000128"></a>
+
+        <div class="method-heading">
+          <a href="Grouping.src/M000128.html" target="Code" class="method-signature"
+            onclick="popupCode('Grouping.src/M000128.html');return false;">
+          <span class="method-name">is_intronic?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h1>Description</h1>
+<p>
+Checks if the group can be classified as intronic, based on any of the
+member ncRNAs
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000129" class="method-detail">
+        <a name="M000129"></a>
+
+        <div class="method-heading">
+          <a href="Grouping.src/M000129.html" target="Code" class="method-signature"
+            onclick="popupCode('Grouping.src/M000129.html');return false;">
+          <span class="method-name">is_sense?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h1>DESCRIPTION</h1>
+<p>
+Checks whether this ncRNA is transcribed sense or anti-sense to the host
+gene
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000135" class="method-detail">
+        <a name="M000135"></a>
+
+        <div class="method-heading">
+          <a href="Grouping.src/M000135.html" target="Code" class="method-signature"
+            onclick="popupCode('Grouping.src/M000135.html');return false;">
+          <span class="method-name">node_values</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h1>DESCRIPTION</h1>
+<p>
+Creates and returns a hash of nodes and the corresponding values for a
+given group.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000136" class="method-detail">
+        <a name="M000136"></a>
+
+        <div class="method-heading">
+          <a href="Grouping.src/M000136.html" target="Code" class="method-signature"
+            onclick="popupCode('Grouping.src/M000136.html');return false;">
+          <span class="method-name">present_at?</span><span class="method-args">(node)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h1>DESCRIPTION</h1>
+<p>
+Checks whether a group (<a href="Grouping.html">ToolDB::Grouping</a>
+object) is <a href="Grouping.html#M000136">present_at?</a> at a given node
+(<a href="TreeNode.html">ToolDB::TreeNode</a> object) returns true or false
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

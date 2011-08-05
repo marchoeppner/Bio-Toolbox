@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>gene_alignment (Toolbox::NcRNA::Selection)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/ncrna.rb, line 161</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">gene_alignment</span>(<span class="ruby-identifier">start</span>,<span class="ruby-identifier">stop</span>,<span class="ruby-identifier">group</span>,<span class="ruby-identifier">entries</span>)
+        
+        <span class="ruby-identifier">answer</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+        
+        <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;A gene alignment...&quot;</span>
+        
+        <span class="ruby-ivar">@exon_groups</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-ivar">@intron_groups</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-ivar">@ranges</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+        
+        <span class="ruby-identifier">entries</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">entry</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">connect_to_genome</span>
+          <span class="ruby-identifier">puts</span> <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">gene</span>.<span class="ruby-identifier">stable_id</span>
+          <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Number of non-coding regions: #{entry.gene.introns.nitems}&quot;</span>
+          <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Number of transcripts: #{entry.gene.transcripts.nitems}&quot;</span>
+          <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">gene</span>.<span class="ruby-identifier">transcripts</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">transcript</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot; #{transcript.stable_id},#{transcript.start},#{transcript.stop}&quot;</span>
+            <span class="ruby-identifier">transcript</span>.<span class="ruby-identifier">exons</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">exon</span><span class="ruby-operator">|</span>
+              <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{exon.stable_id}|#{exon.start}|#{exon.stop}&quot;</span>
+              <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Rel. position: #{exon.aligned_positions.join(&quot;&lt;-&gt;&quot;)}&quot;</span>
+            <span class="ruby-keyword kw">end</span>
+          <span class="ruby-keyword kw">end</span>
+          
+        <span class="ruby-keyword kw">end</span>
+        
+        <span class="ruby-keyword kw">return</span> <span class="ruby-value str">&quot;Done..&quot;</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>
