@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.summary           = "A toolbox for bioinformatics"
   s.description       = "See above..."
 
-  s.required_rubygems_version = ">= 1.3.6"
+  s.required_rubygems_version = ">= 1.3.5"
 
   # If you have runtime dependencies, add them here
   # s.add_runtime_dependency "other", "~> 1.2"
