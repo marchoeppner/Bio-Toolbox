@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   # s.add_development_dependency "another", "= 0.9"
   s.add_development_dependency "ruby-ensembl-api", "~>1.0"
   s.add_development_dependency "composite_primary_keys", "~>3.0"
-  s.add:development_dependency "mysql2", "~>0.1"
+  s.add_development_dependency "mysql2", "~>0.1"
 
   # The list of files to be contained in the gem
   s.files         = `git ls-files`.split("\n")
