@@ -13,3 +13,4 @@ require File.dirname(__FILE__) + '/files/ensembl_compara.rb'
 
 require File.dirname(__FILE__) + '/files/bioruby_extensions.rb'
 require File.dirname(__FILE__) + '/files/ensembl_mixin.rb'
+require File.dirname(__FILE__) + '/files/misc_mixin.rb'
