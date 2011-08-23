@@ -66,7 +66,7 @@ module Ensembl
       # fragment = Ensembl::Compara::Dnafrag.find(1)
       # fragment_slice = fragment.slice
       def slice(start=0,stop=self.length,strand=1)        
-        self.genome_db.connect_to_genome
+        self.genome_db.connect_to_genome_new
         seq_region = Ensembl::Core::SeqRegion.find_by_name(self.name)
         return Ensembl::Core::Slice.new(seq_region, start, stop, strand)        
       end
@@ -140,12 +140,13 @@ module Ensembl
       	return args
      	end
      	     
-      def connect_to_genome_new(release)
+      def connect_to_genome_new
 
         # new rules...let's play
         
         # Figure out where this bug lives..,
         # 1. Ensembl
+        release = self.connection.instance_variable_get(:@config)[:database].split('/').last.split("_")[-1]
         name = self.name.gsub(/\s/, '_').downcase
         dummy_db = Ensembl::DummyDBConnection.connect({:port => 5306})
         dummy_connection = dummy_db.connection
@@ -496,83 +497,6 @@ module Ensembl
         raise "Finished cigar line (#{count_gapped},#{count_ungapped}) without reaching coordinates (#{start}>#{stop})"
       
       end
-        
-      # = DESCRIPTION
-      # Maps a Ensembl::Core::Slice object onto the alignment (genomic_align and slice must overlap!)
-      # and returns an array containing the start and stop of the object relative to the 
-      # alignment (upstream,downstream).
-      # = USAGE
-      # positions = contig.get_mapper(gene) 
-      def get_mapper_old(slice,verbose=false)
-        
-        slice = slice.slice unless slice.kind_of?(Ensembl::Core::Slice)
-        
-        raise "Slice is not within/overlapping contig, aborting! (#{slice.start}/#{slice.stop} vs #{self.get_slice.start}/#{self.get_slice.stop})" unless slice.within?(self.get_slice) or slice.overlaps?(self.get_slice)
-        
-        # Return the whole thing if the slice is larger than the aligned fragment..
-        return [0,self.dnafrag_end-self.dnafrag_start] if slice.start <= self.dnafrag_start and slice.stop >= self.dnafrag_end
-        
-        gene_coordinates = [ slice.start , slice.stop ].sort!
-        fragment_coordinates = [ self.dnafrag_start , self.dnafrag_end ].sort!
-        
-        puts "Sorted gene coords: #{gene_coordinates.join(',')}]" if verbose
-        puts "Sorted fragment coords: #{fragment_coordinates.join(',')}" if verbose
-        
-        offset_upstream = gene_coordinates[0] - fragment_coordinates[0]
-        offset_upstream = 0 if offset_upstream < 0  # if a slice is overlapping, truncate
-        offset_downstream = fragment_coordinates[1] - gene_coordinates[1]
-        offset_downstream = 0 if offset_downstream < 0 # if a slice is overlapping, truncate
-        
-        if "#{self.dnafrag_strand}" == "1"
-          start = offset_upstream
-          stop = offset_upstream + (slice.stop-slice.start)
-        else
-          start = offset_downstream
-          stop = offset_downstream + (slice.stop-slice.start)
-        end
-        
-        puts "Start: #{start}, Stop: #{stop}" if verbose
-        
-        counter_ungapped , counter_total, gapped_start = 0, 0 , 0  # The number of nucleotides in the dnafragment and the number of nucleotides in the dnafragement + gaps
-
-        cigar_line = "#{self.cigar_line}"
-
-        until counter_ungapped == stop # decode and count until the designated end of the slice in the original dnafragment is reached
-
-          x = cigar_line.slice!(/^[0-9]*/)
-          x = 1 if x == "" #if x.nil? or x.to_i == 0 or x.length == 0
-          char = cigar_line.slice!(/^[A-Z]/)
-          if char == "" or char.nil?
-            raise "Prematurely terminated at total count #{counter_ungapped} - expected #{self.dnafrag_end-self.dnafrag_start}, with stop at #{stop}"
-          end
-          
-          x.to_i.times do
-            if char == "M"
-              counter_ungapped += 1
-              counter_total += 1
-              gapped_start = counter_total if counter_ungapped == start # Where the gene starts within the alignment
-            else
-              counter_total += 1
-            end
-            return [ gapped_start , counter_total] if counter_ungapped == stop
-          end
-          
-        end
-          
-        return  [ gapped_start , counter_total ]
-      end
-      
-      def covers?(position) #checks whether an alignment object covers a certain position in the aligment (for fragmented genome sequences)
-        
-        aln_position = self.aligned_position
-        
-        if aln_position[0] < position and aln_position[1] > position
-          return true
-        else
-          return false
-        end
-        
-      end
       
       # = DESCRIPTION
       # Not all sequences in a given alignment cover the full length.
@@ -689,39 +613,7 @@ module Ensembl
     # identifier - used in the method_link_species_set
     # class (joining organisms and alingment method information). 
     class SpeciesSet < DBConnection
-     set_primary_keys :species_set_id, :genome_db_id
-     has_many :method_link_species_sets
-     belongs_to :genome_db, :foreign_key => "genome_db_id"
-     
-      # = DESCRIPTION
-      # returns an Array with all organisms belonging to a particular species set as
-      # Ensembl::Compara::GenomeDb objects.
-      def fetch_organisms      
-        answer = Array.new
-        sets = SpeciesSet.find_all_by_species_set_id(self.species_set_id)
-        sets.each do |set|
-          answer.push(set.genome_db)
-        end        
-        return answer        
-      end
-      
-      def self.fetch_all_by_genome_dbs(dbs)
-        answer = []
-        dbs.each do |db|
-          raise "Arguments must be an Array of Ensembl::Compara::GenomeDbs!" unless db.kind_of?(Ensembl::Compara::GenomeDb)
-        end
-        sets = Ensembl::Compara::SpeciesSet.find_all_by_genome_db_id(dbs[0].genome_db_id)
-        sets.each do |set|
-          s = Ensembl::Compara::SpeciesSet.find_all_by_species_set_id(set.species_set_id)
-          next unless s.nitems == dbs.nitems
-          add = true
-          dbs.each do |db|
-            add = false unless s.collect{|i| i.genome_db_id}.include?(db.genome_db_id)
-          end
-          answer << set if add
-        end
-        return answer
-      end
+
      
     end
     
