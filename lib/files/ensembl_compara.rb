@@ -140,7 +140,7 @@ module Ensembl
       	return args
      	end
      	     
-      def connect_to_genome_new
+      def connect_to_genome
 
         # new rules...let's play
         
@@ -153,7 +153,7 @@ module Ensembl
         db_name = dummy_connection.select_values("SHOW DATABASES LIKE '%#{name}_core_#{release}%'").select{|e| e.include?("#{release}")}[0]
         
         if db_name
-          Ensembl::Core::DBConnection.connect(name,release)
+          Ensembl::Core::DBConnection.connect(name,release.to_i)
         else # 2. Ok, not EnsEMBL - try EBI
           dummy_db.disconnect!
           dummy_db = Ensembl::DummyDBConnection.connect({:host => "mysql.ebi.ac.uk", :port => 4157})
@@ -613,7 +613,8 @@ module Ensembl
     # identifier - used in the method_link_species_set
     # class (joining organisms and alingment method information). 
     class SpeciesSet < DBConnection
-
+	set_primary_keys :genome_db_id, :species_set_id
+	belongs_to :genome_db, :foreign_key => 'genome_db_id'
      
     end
     

@@ -13,41 +13,7 @@ module Ensembl
       end
             
     end
-   
-    class Xref < DBConnection
-      has_many :object_xrefs
-      
-      def self.gene_by_dbprimary_acc(acc)
-        xref = self.find_by_dbprimary_acc(acc)
-        xref.nil? ? answer = nil : answer = xref.genes[0]
-      end  
-        
-      def genes        
-        answer = []   
-        self.object_xrefs.each do |ox|
-          if ox.ensembl_object_type == "Gene"
-            answer << Ensembl::Core::Gene.find(ox.ensembl_id) 
-          elsif ox.ensembl_object_type == "Translation"
-            answer << Ensembl::Core::Translation.find(ox.ensembl_id).transcript.gene
-          elsif ox.ensembl_object_type == "Transcript"
-            answer << Ensembl::Core::Transcript.find(ox.ensembl_id).gene
-          end
-        end        
-        return answer        
-      end
-      
-      def self.gene_by_embl_acc(acc)
-        xref = self.find_by_dbprimary_acc_and_external_db_id(acc,700)
-        return nil if xref.nil?        
-        return xref.genes[0]       
-      end
-      
-    end
-    
-    class ObjectXref < DBConnection
-      belongs_to :xref, :foreign_key => "xref_id"
-   	end
-   	
+
     class Gene < DBConnection
       
       def display_details
